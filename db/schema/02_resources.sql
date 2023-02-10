@@ -2,9 +2,9 @@ DROP TABLE IF EXISTS resource CASCADE;
 CREATE TABLE resource (
   id SERIAL PRIMARY KEY NOT NULL,
   owner_id INTEGER NOT NULL REFERENCES user(id) DELETE ON CASCADE,
-  title VARCHAR(255),
+  title VARCHAR(255) NOT NULL,
   description TEXT,
-  created_date NOW(),
+  created_date DATETIME NOT NULL DEFAULT NOW(),
   cover_image_url TEXT
 );
 
