@@ -47,7 +47,7 @@ app.use('/users', usersRoutes);
 app.get('/', (req, res) => {
   res.render('index');
 });
-
+console.log("hello midterm project");
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
