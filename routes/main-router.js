@@ -13,7 +13,14 @@ router.use((req, res, next) => {
 
 // GET /
 router.get('/', (req, res) => {
-  client.query('SELECT * FROM resources;')
+  client.query(`SELECT title,
+                  description,
+                  users.name,
+                  ROUND(AVG(ratings.rating), 1)
+                    FROM resources
+                    JOIN users ON users.id = owner_id
+                    JOIN ratings ON resources.id = ratings.resource_id
+                    GROUP BY title, description, users.name;`)
     .then((response) => {
       res.json(response.rows);
 
