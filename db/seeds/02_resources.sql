@@ -8,7 +8,7 @@ VALUES (1, 'vestibulum sed arcu non odio euismod lacinia at quis risus', 'morbi 
 (9, 'phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet enim', 'vivamus arcu felis bibendum ut tristique et egestas quis ipsum', 'https://www.incimages.com/uploaded_files/image/1920x1080/getty_655998316_2000149920009280207_354374.jpg', 'https://www.microsoft.com/en-ca'),
 (7, 'imperdiet dui accumsan sit amet nulla facilisi morbi tempus iaculis', 'erat velit scelerisque in dictum non consectetur a erat nam', 'https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'https://www.reddit.com/'),
 (1, 'non diam phasellus vestibulum lorem sed risus ultricies tristique nulla', 'quis enim lobortis scelerisque fermentum dui faucibus in ornare quam', 'https://cdn-bdfbc.nitrocdn.com/mpQHUpeCagYMmyclYzWrEuJOvwEOajTJ/assets/static/optimized/rev-33edbce/wp-content/uploads/2022/12/cover7-1080x675.jpg', 'https://www.reddit.com/'),
-(1, 'id leo in vitae turpis massa sed elementum tempus egestas', 'dui faucibus in ornare quam viverra orci sagittis eu volutpat', 'https://www.gardendesign.com/pictures/images/675x529Max/site_3/helianthus-yellow-flower-pixabay_11863.jpg', 'https://www.youtube.com/'), ,
+(1, 'id leo in vitae turpis massa sed elementum tempus egestas', 'dui faucibus in ornare quam viverra orci sagittis eu volutpat', 'https://www.gardendesign.com/pictures/images/675x529Max/site_3/helianthus-yellow-flower-pixabay_11863.jpg', 'https://www.youtube.com/'),
 (13, 'commodo sed egestas egestas fringilla phasellus faucibus scelerisque eleifend donec', 'quis vel eros donec ac odio tempor orci dapibus ultrices', 'https://www.incimages.com/uploaded_files/image/1920x1080/getty_655998316_2000149920009280207_354374.jpg', 'https://www.youtube.com/'),
 (12, 'mauris pellentesque pulvinar pellentesque habitant morbi tristique senectus et netus', 'gravida neque convallis a cras semper auctor neque vitae tempus', 'https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','https://www.amazon.ca/'),
 (10, 'massa id neque aliquam vestibulum morbi blandit cursus risus at', 'pharetra magna ac placerat vestibulum lectus mauris ultrices eros in', 'https://www.gardendesign.com/pictures/images/675x529Max/site_3/helianthus-yellow-flower-pixabay_11863.jpg', 'https://www.amazon.ca/'),
@@ -46,7 +46,7 @@ VALUES (1, 'programming'),
 (11, 'university'),
 (5, 'resumes');
 
-INSERT into favourites (resource_id, user_id, liked) 
+INSERT into favourites (resource_id, user_id, liked)
 VALUES (1 , 3, true),
 (1, 5, true),
 (2, 1, true),

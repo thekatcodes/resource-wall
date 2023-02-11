@@ -13,12 +13,11 @@ router.use((req, res, next) => {
 
 // GET /
 router.get('/', (req, res) => {
-//   client.query('SELECT * FROM blogposts;')
-//     .then((response) => {
-//       res.json(response.rows);
-//                                  TODO Show all posts by querying db
-//     });
-  res.send('<h1> This is the main page<h1>')
+  client.query('SELECT * FROM resources;')
+    .then((response) => {
+      res.json(response.rows);
+
+    });
 });
 
 module.exports = router;
