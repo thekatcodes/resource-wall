@@ -31,4 +31,14 @@ router.post('/', (req, res) => {
     });
 });
 
+router.post('/account', (req, res) => {
+  addUsers(req.body.username, req.body.email, req.body.password)
+    .then((res) => {
+      console.log("redirect to main page with resources and headers loaded");
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
 module.exports = router;
