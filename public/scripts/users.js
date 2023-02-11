@@ -5,12 +5,12 @@ const loadLoginForm = () => {
     <div>
       <h3>Log in</h3>
       <h3>Please fill in fields</h3>
-      <form action="hello" method="get" class="login">
+      <form action="/login" method="POST" class="login">
           <label for="email">Email</label>
           <input type="email" name="email" class="email-form">
           <label for="password">Password</label>
           <input type="password" name="password" class="password-form">
-        <button type="button" onclick="somefunction()" class="btn btn-info" id="login" disabled="disabled">Submit</button>
+        <button type="submit" class="btn btn-info" id="login" disabled="disabled">Submit</button>
       </form>
     </div>
   `;
@@ -38,9 +38,10 @@ const loadRegisterForm = () => {
   `;
   $("#content").append(formObject);
 };
+
 $(() => {
-  loadRegisterForm();
-});
+  loadLoginForm();
+})
 
 $(() => {
   $('.login').on('keyup', () => {
