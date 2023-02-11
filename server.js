@@ -51,3 +51,13 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+// require routers
+const mainRouter = require('/routes/main-router');
+const loginRouter = require('/routes/login-router');
+
+
+// pass the routers to the Express app as middleware
+app.use('/routes/main', mainRouter);
+app.use('/routes/login-router', loginRouter);
+// app.use('*', productRouter);
