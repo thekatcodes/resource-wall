@@ -5,12 +5,12 @@ const loadLoginForm = () => {
     <div>
       <h3>Log in</h3>
       <h3>Please fill in fields</h3>
-      <form action="hello" method="get" class="login>
+      <form action="hello" method="get" class="login">
           <label for="email">Email</label>
-          <input type="email" name="email">
+          <input type="email" name="email" class="email-form">
           <label for="password">Password</label>
-          <input type="password" name="password">
-        <button type="button" class="btn btn-info" id="login" disabled="disabled">Submit</button>
+          <input type="password" name="password" class="password-form">
+        <button type="button" onclick="somefunction()" class="btn btn-info" id="login" disabled="disabled">Submit</button>
       </form>
     </div>
   `;
@@ -25,9 +25,9 @@ const loadRegisterForm = () => {
       <h3>Please fill in fields</h3>
       <form action="hello" method="get" class="register">
           <label for="username">Username</label>
-          <input type="text" name="username">
+          <input type="text" name="username" class="username-form">
           <label for="email">Email</label>
-          <input type="email" name="email">
+          <input type="email" name="email" class="email-form">
           <label for="password">Password</label>
           <input type="password" name="password" class="password">
           <label for="confirm-password">Confirm Password</label>
@@ -39,8 +39,15 @@ const loadRegisterForm = () => {
   $("#content").append(formObject);
 };
 $(() => {
-  loadLoginForm();
   loadRegisterForm();
+});
+
+$(() => {
+  $('.login').on('keyup', () => {
+    if ($('.email-form')[0].value && $('.password-form')[0].value) {
+      $('#login').removeAttr('disabled');
+    }
+  });
 });
 
 $(() => {
@@ -48,10 +55,13 @@ $(() => {
     const firstPassword = $('.password')[0].value;
     const secondPassword = $('.password-checker')[0].value;
     if (firstPassword === secondPassword) {
-      $('#register').removeAttr('disabled');
+      $(".error-message").empty();
     } else {
       $(".error-message").empty();
-      $(".error-message").prepend("<h1>wrong passwords</h1>");
+      $(".error-message").prepend("<h1>password doesn't match</h1>");
+    }
+    if (firstPassword === secondPassword && $('.email-form')[0].value && $('.username-form')[0].value) {
+      $('#register').removeAttr('disabled');
     }
   });
 });
