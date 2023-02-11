@@ -5,7 +5,8 @@ CREATE TABLE resources (
   title VARCHAR(255) NOT NULL,
   description TEXT,
   created_date DATE NOT NULL DEFAULT NOW(),
-  cover_image_url TEXT
+  cover_image_url TEXT,
+  external_url TEXT NOT NULL
 );
 
 DROP TABLE IF EXISTS tags CASCADE;
