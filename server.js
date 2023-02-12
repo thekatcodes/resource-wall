@@ -6,7 +6,7 @@ const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
 const cookieSession = require('cookie-session');
-
+const path = require('path');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -52,6 +52,7 @@ app.use('/users', usersRoutes);
 
 app.use('/', mainRouter);
 app.use('/login', loginRouter);
+app.use(express.static(path.join(__dirname, '../public')));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
