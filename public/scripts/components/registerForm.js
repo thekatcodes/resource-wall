@@ -31,6 +31,7 @@ $(() => {
         }
       });
   });
+  
   $('.register').on('keyup', () => {
     const firstPassword = $('.password')[0].value;
     const secondPassword = $('.password-checker')[0].value;
@@ -43,4 +44,5 @@ $(() => {
     if (firstPassword === secondPassword && $('.email-form')[0].value && $('.username-form')[0].value) {
       $('#register').removeAttr('disabled');
     }
+  });
 });
