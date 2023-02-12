@@ -25,9 +25,6 @@ router.post('/', (req, res) => {
       } else {
         res.send("");
       }
-    })
-    .catch((err) => {
-      res.send("");
     });
 });
 
