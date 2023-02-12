@@ -13,7 +13,7 @@ const getUsersFromEmail = (email) => {
 
 const addUsers = (name, email, password) => {
   const queryString = `
-  INSERT into users
+  INSERT into users (name, email, password)
   VALUES ($1, $2, $3)
   RETURNING *
   `;

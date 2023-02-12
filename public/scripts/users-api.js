@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const salt = 12;
+
 const hashPassword = function(password) {
   const hashedPass = bcrypt.hash(password, salt);
   return hashedPass;

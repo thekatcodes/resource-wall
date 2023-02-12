@@ -1,5 +1,6 @@
-// Client facing scripts here
-// Client facing scripts here
+/* Adds the form to the div with id content, can be changed to whatever container we use
+ * Needs css for both login and register form
+ */
 const loadLoginForm = () => {
   const formObject = `
     <div>
@@ -33,7 +34,7 @@ const loadRegisterForm = () => {
           <input type="password" name="password" class="password">
           <label for="confirm-password">Confirm Password</label>
           <input type="password" name="confirm-password" class="password-checker">
-        <button type="button" class="btn btn-info" id="register" disabled="disabled">Submit</button>
+        <button type="submit" class="btn btn-info" id="register" disabled="disabled">Submit</button>
       </form>
     </div>
   `;
@@ -41,18 +42,22 @@ const loadRegisterForm = () => {
 };
 
 $(() => {
-  loadLoginForm();
-})
+  loadRegisterForm();
+});
 
 $(() => {
-  $('form').on('submit', () => {
+  $('.login').on('submit', () => {
     event.preventDefault();
     $.post("/api/login", {email : $('.email-form')[0].value, password : $('.password-form')[0].value})
       .done((response) => {
         if (!response) {
           $(".error-message").empty();
           $(".error-message").append("<h1>Wrong Password</h1>");
+          // error message if the post response fails with incorrect pass/email
         } else {
+          /* this is just a placeholder
+           * function can be replaced with a function that populates shows resources and empties the currrent container
+           */
           loadRegisterForm();
         }
       });
@@ -62,9 +67,15 @@ $(() => {
 $(() => {
   $('.register').on('submit', () => {
     event.preventDefault();
-    $.post("api/login/account", {email : $('.email-form')[0].value, password : $('.password-form')[0].value, username: $('.username-form')[0].value})
+    $.post("/api/login/account", {email : $('.email-form')[0].value, password : $('.password')[0].value, username: $('.username-form')[0].value})
       .done((response) => {
-        console.log("load something");
+        if (response === "") {
+          $(".error-message").empty();
+          $(".error-message").append("<h1>Duplicate Email</h1>");
+        } else {
+        // this could be replaced with whatever function shows resources
+          console.log("load something");
+        }
       });
   });
 });
