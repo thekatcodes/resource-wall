@@ -3,6 +3,7 @@
 const loadLoginForm = () => {
   const formObject = `
     <div>
+      <div class="error-message"></div>
       <h3>Log in</h3>
       <h3>Please fill in fields</h3>
       <form action="/login" method="POST" class="login">
@@ -46,9 +47,14 @@ $(() => {
 $(() => {
   $('form').on('submit', () => {
     event.preventDefault();
-    $.post("login", {email : $('.email-form')[0].value})
+    $.post("/login", {email : $('.email-form')[0].value, password : $('.password-form')[0].value})
       .done((response) => {
-        loadRegisterForm();
+        if (!response) {
+          $(".error-message").empty();
+          $(".error-message").append("<h1>Wrong Password</h1>");
+        } else {
+          loadRegisterForm();
+        }
       });
   });
 });
