@@ -1,5 +1,4 @@
 const express = require('express');
-
 const router = express.Router();
 const client = require('../db/connection.js');
 
@@ -13,7 +12,8 @@ router.use((req, res, next) => {
 
 // GET /
 router.get('/', (req, res) => {
-  res.send('<h1>This is the login page<h1>')
+  res.send('<div id="content"></div>');
 });
 
 module.exports = router;
+
