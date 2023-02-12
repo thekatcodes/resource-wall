@@ -23,7 +23,7 @@ const loadRegisterForm = () => {
       <div class="error-message"></div>
       <h3>Register</h3>
       <h3>Please fill in fields</h3>
-      <form action="hello" method="get" class="register">
+      <form action="/login/account" method="post" class="register">
           <label for="username">Username</label>
           <input type="text" name="username" class="username-form">
           <label for="email">Email</label>
@@ -42,6 +42,26 @@ const loadRegisterForm = () => {
 $(() => {
   loadLoginForm();
 })
+
+$(() => {
+  $('form').on('submit', () => {
+    event.preventDefault();
+    $.post("login", {email : $('.email-form')[0].value})
+      .done((response) => {
+        loadRegisterForm();
+      });
+  });
+});
+
+$(() => {
+  $('.register').on('submit', () => {
+    event.preventDefault();
+    $.post("login/account", {email : $('.email-form')[0].value, password : $('.password-form')[0].value, username: $('.username-form')[0].value})
+      .done((response) => {
+        console.log("load something");
+      });
+  });
+});
 
 $(() => {
   $('.login').on('keyup', () => {
