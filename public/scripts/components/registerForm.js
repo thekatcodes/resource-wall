@@ -1,5 +1,5 @@
-const loadRegisterForm = () => {
-  const formObject = `
+$(() => {
+  const $registerForm = $(`
     <div>
       <div class="error-message"></div>
       <h3>Register</h3>
@@ -16,12 +16,8 @@ const loadRegisterForm = () => {
         <button type="submit" class="btn btn-info" id="register" disabled="disabled">Submit</button>
       </form>
     </div>
-  `;
-  $("#content").append(formObject);
-};
-
-
-$(() => {
+  `);
+  window.$registerForm = $registerForm;
   $('.register').on('submit', () => {
     event.preventDefault();
     $.post("/api/login/account", {email : $('.email-form')[0].value, password : $('.password')[0].value, username: $('.username-form')[0].value})
@@ -35,10 +31,6 @@ $(() => {
         }
       });
   });
-});
-
-
-$(() => {
   $('.register').on('keyup', () => {
     const firstPassword = $('.password')[0].value;
     const secondPassword = $('.password-checker')[0].value;
@@ -51,5 +43,4 @@ $(() => {
     if (firstPassword === secondPassword && $('.email-form')[0].value && $('.username-form')[0].value) {
       $('#register').removeAttr('disabled');
     }
-  });
 });
