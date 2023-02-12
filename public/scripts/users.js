@@ -6,7 +6,7 @@ const loadLoginForm = () => {
       <div class="error-message"></div>
       <h3>Log in</h3>
       <h3>Please fill in fields</h3>
-      <form action="/login" method="POST" class="login">
+      <form action="/api/login" method="POST" class="login">
           <label for="email">Email</label>
           <input type="email" name="email" class="email-form">
           <label for="password">Password</label>
@@ -24,7 +24,7 @@ const loadRegisterForm = () => {
       <div class="error-message"></div>
       <h3>Register</h3>
       <h3>Please fill in fields</h3>
-      <form action="/login/account" method="post" class="register">
+      <form action="/api/login/account" method="post" class="register">
           <label for="username">Username</label>
           <input type="text" name="username" class="username-form">
           <label for="email">Email</label>
@@ -47,7 +47,7 @@ $(() => {
 $(() => {
   $('form').on('submit', () => {
     event.preventDefault();
-    $.post("/login", {email : $('.email-form')[0].value, password : $('.password-form')[0].value})
+    $.post("/api/login", {email : $('.email-form')[0].value, password : $('.password-form')[0].value})
       .done((response) => {
         if (!response) {
           $(".error-message").empty();
@@ -62,7 +62,7 @@ $(() => {
 $(() => {
   $('.register').on('submit', () => {
     event.preventDefault();
-    $.post("login/account", {email : $('.email-form')[0].value, password : $('.password-form')[0].value, username: $('.username-form')[0].value})
+    $.post("api/login/account", {email : $('.email-form')[0].value, password : $('.password-form')[0].value, username: $('.username-form')[0].value})
       .done((response) => {
         console.log("load something");
       });
