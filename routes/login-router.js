@@ -12,7 +12,7 @@ router.use((req, res, next) => {
 
 // GET /
 router.get('/', (req, res) => {
-  res.render('../views/index.ejs');
+  res.send('<div id="content"></div>');
 });
 
 module.exports = router;
