@@ -10,7 +10,9 @@ const pool = new Pool({
 });
 
 //Get resources from searching a keyword
-const getResources = function (keyword) {
+const getResources = function(keyword) {
+  //console.log(keyword); -> confirming keyword is being passed
+    
   //Array to hold any parameters that may be available for the query
   const queryParams = [];
 
@@ -23,7 +25,7 @@ const getResources = function (keyword) {
   //If keyword has been passed in, add the keyword to the queryParams array and create a WHERE clause for the keyword
   if (keyword) {
     queryParams.push(`%${keyword}%`);
-    queryString += `WHERE city LIKE $${queryParams.length} `;
+    queryString += `WHERE tags.topic LIKE $${queryParams.length} `;
   }
 
   //Add any query that comes after the WHERE clause
@@ -32,7 +34,13 @@ const getResources = function (keyword) {
     ORDER BY resource_id;`;
 
   //Run the query
-  return pool.query(queryString, queryParams).then((res) => res.rows);
+    return pool.query(queryString, queryParams).then((res) => res.rows);
+/* ^^^ returns the following for keyword = coding 
+[
+  { resource_id: 1, tags: 'coding' },
+  { resource_id: 2, tags: 'coding' }
+] 
+*/
 };
 
 exports.getResources = getResources;
