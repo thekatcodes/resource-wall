@@ -54,7 +54,7 @@ VALUES (1 , 3, true),
 (2, 6, true),
 (3, 1, true),
 (3, 4, true),
-(4, 1, true)
+(4, 1, true),
 (10, 5, true),
 (11, 9, true),
 (12, 10, true),
