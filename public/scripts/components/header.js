@@ -39,8 +39,9 @@ $(() => {
   updateHeader();
 
   $("#search-resource-form").on("submit", function(e) {
-    e.preventDefault();
-
+      e.preventDefault();
+      
+    //Retrieves search input value 
     const keywordSearch = $(e.currentTarget).find(".js-keyword-search");
 
     //Make an ajax GET call giving the keyword (search input value)
@@ -60,9 +61,8 @@ $(() => {
       //failure code here
       console.log("failed");
     });
-
-    //keyword (search input value as a param)
-    //TO DO: in search-router, go through db and get the resources corresponding to the keyword using search-queries
-    //TO DO:  add on click events for navbar options which allows for views_manager.show('component')
+      
+    //TO DO: methods to display all resource cards based database info from keyword 
+    //TO DO: add on click events for navbar options which allows for views_manager.show('component')
   });
 });
