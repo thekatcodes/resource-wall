@@ -1,5 +1,8 @@
-const getAllResources = require("../../db/queries/getAllResources");
+//const getAllResources = require("../../db/queries/getAllResources");
 
 $(() =>
-  getAllResources().then((response) => {res.send({response}) })
+  getAllResources().then(function(json) {
+      resources.addResources(json.resources);
+      views_manager.show('resources');
+    })
 )
