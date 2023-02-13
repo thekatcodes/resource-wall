@@ -13,7 +13,7 @@ $(() => {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link create_resources_button">Create resource <span class="sr-only">(current)</span></a>
+                        <a id="create-resource-btn"class="nav-link">Create resource <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">My resources</a>
@@ -65,11 +65,19 @@ $(() => {
   //   });
 
     
-  //   //keyword (search input value as a param)
-  //   //TO DO: in search-router, go through db and get the resources corresponding to the keyword using search-queries
-  //   //TO DO:  add on click events for navbar options which allows for views_manager.show('component')
-  // });
-  $('header').on('click', '.create_resources_button', () => {
-    views_manager.show('submissionForm');
-  });
+});
+//TO DO: add on click events for navbar options which allows for views_manager.show('component')
+/* If NO user logged in*/
+    //Render Log in page on click
+    //Render register on click
+
+/* If user logged in*/
+//Render Home page (main content) on Logo click
+//Render Create resource page on click
+//Render My resources page on click
+//Render Logout on click
+//Render Profile page on click
+    $('#create-resource-btn').on('click', () => {
+        views_manager.show('submissionForm');
+    });
 });
