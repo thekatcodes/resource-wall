@@ -16,9 +16,11 @@ router.use((req, res, next) => {
 // GET /
 router.get('/', (req, res) => {
   getAllResources()
-    .then((response) => {
-      console.log(response)
-      res.send({response}) });
+    .then((response) => {res.send({response}) })
+    .catch(e => {
+      console.lerror(e);
+      res.send(e);
+    })
 });
 
 
