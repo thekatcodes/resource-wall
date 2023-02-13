@@ -3,6 +3,10 @@ const express = require('express');
 const router = express.Router();
 const client = require('../db/connection.js');
 const getAllResources = require('../db/queries/getAllResources.js')
+const {
+  createResourceElement,
+  renderResources,
+} = require ('../public/scripts/main-helpers.js')
 
 router.use((req, res, next) => {
   // if (!req.session.userId) {
@@ -16,7 +20,8 @@ router.use((req, res, next) => {
 router.get('/', (req, res) => {
   getAllResources()
     .then((response) => {
-      res.json(response.rows);
+      renderResources(response)
+     // res.json(response.rows);
 
     });
 });

@@ -14,4 +14,5 @@ const getAllResources = function() {
   return allUsers;
 }
 
+
 module.exports = getAllResources;

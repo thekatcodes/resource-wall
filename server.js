@@ -1,4 +1,7 @@
 // load .env data into process.env
+
+
+
 require('dotenv').config();
 
 // Web server config
@@ -41,11 +44,9 @@ const loginRouter = require('./routes/login-router.js');
 app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
-
+// Note: mount other resources here, using the same pattern above
 app.use('/', mainRouter);
 app.use('/login', loginRouter);
-// Note: mount other resources here, using the same pattern above
-
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
@@ -53,5 +54,3 @@ app.use('/login', loginRouter);
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
-
-
