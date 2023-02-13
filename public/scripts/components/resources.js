@@ -2,7 +2,6 @@ $(() => {
   const $newResources = $(`<section class ="resource-list">
     <p>Loading...</p>
     </section>`);
-
   window.$newResources = $newResources;
   window.newResources = {}
 
