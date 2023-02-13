@@ -6,39 +6,40 @@
  */
 const { getUsersFromEmail, addUsers } = require('../db/queries/users');
 const { hashPassword, comparePass } = require('../public/scripts/users-api');
+const { serializeIntoObject } = require('../public/scripts/users-api');
+
 
 const express = require('express');
 const router  = express.Router();
 
 router.post('/', (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
-  getUsersFromEmail(email)
+  let info = serializeIntoObject(req.body.info);
+  getUsersFromEmail(info.email)
     .then(jRes => {
-      if (comparePass(password, jRes.password)) {
+      if (jRes && comparePass(info.password, jRes.password)) {
         /* compares the password using bcrypt
          * assigns the user a email cookie with the value using their email
          * sends the user data to the document if the password and email matches
          */
-        req.session.email = email;
+        req.session.email = info.email;
         res.json(jRes);
       } else {
         res.send("");
       }
-    });
+    })
+    .catch((e) => res.send(""));
 });
 
 router.post('/account', (req, res) => {
-  const email = req.body.email;
-  const username = req.body.username;
-  const password = hashPassword(req.body.password);
-  getUsersFromEmail(email)
+  const info = serializeIntoObject(req.body.info);
+  const password = hashPassword(info.password);
+  getUsersFromEmail(info.email)
     .then((dataRes) => {
       if (!dataRes) {
-        addUsers(username, email, password)
+        addUsers(info.username, info.email, password)
           .then((jRes) => {
             // adds the user then sends user back to the document
-            req.session.email = req.body.email;
+            req.session.email = info.email;
             return res.json(jRes);
           });
       } else {

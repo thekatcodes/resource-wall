@@ -1,6 +1,16 @@
 const bcrypt = require('bcrypt');
 const salt = 12;
 
+const serializeIntoObject = (string) => {
+  let obj = {};
+  const splitString = string.split('&');
+  const seperateValues = splitString.map((string) => string.split('='));
+  for (const keyPair of seperateValues) {
+    obj[keyPair[0]] = decodeURIComponent(keyPair[1]);
+  }
+  return obj;
+};
+
 const hashPassword = function(password) {
   const hashedPass = bcrypt.hash(password, salt);
   return hashedPass;
@@ -11,4 +21,4 @@ const comparePass = function(password, databasePass) {
   return compare;
 };
 
-module.exports = {hashPassword, comparePass};
+module.exports = {hashPassword, comparePass, serializeIntoObject};

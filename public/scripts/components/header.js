@@ -13,7 +13,7 @@ $(() => {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Create resource <span class="sr-only">(current)</span></a>
+                        <a class="nav-link create_resources_button">Create resource <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">My resources</a>
@@ -38,31 +38,38 @@ $(() => {
 
   updateHeader();
 
+
   $("#search-resource-form").on("submit", function(e) {
       e.preventDefault();
       
     //Retrieves search input value 
     const keywordSearch = $(e.currentTarget).find(".js-keyword-search");
 
-    //Make an ajax GET call giving the keyword (search input value)
-    const request = $.ajax({
-      url: "/search",
-      type: "GET",
-      data: { keyword: keywordSearch.val() },
-      contentType: "application/json; charset=utf-8",
-    });
 
-    request.done(function (data) {
-      //success code here
-      console.log("success");
-    });
+  //   //Make an ajax GET call giving the keyword (search input value)
+  //   const request = $.ajax({
+  //     url: "/search",
+  //     type: "GET",
+  //     data: { keyword: keywordSearch.val() },
+  //     contentType: "application/json; charset=utf-8",
+  //   });
 
-    request.fail(function (error) {
-      //failure code here
-      console.log("failed");
-    });
-      
-    //TO DO: methods to display all resource cards based database info from keyword 
-    //TO DO: add on click events for navbar options which allows for views_manager.show('component')
+  //   request.done(function (data) {
+  //     //success code here
+  //     console.log("success");
+  //   });
+
+  //   request.fail(function (error) {
+  //     //failure code here
+  //     console.log("failed");
+  //   });
+
+    
+  //   //keyword (search input value as a param)
+  //   //TO DO: in search-router, go through db and get the resources corresponding to the keyword using search-queries
+  //   //TO DO:  add on click events for navbar options which allows for views_manager.show('component')
+  // });
+  $('header').on('click', '.create_resources_button', () => {
+    views_manager.show('submissionForm');
   });
 });

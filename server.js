@@ -37,7 +37,7 @@ app.use(express.static('public'));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const loginApiRoutes = require('./routes/login-api');
-const widgetApiRoutes = require('./routes/widgets-api');
+const resourceApiRoutes = require('./routes/resource-api');
 const usersRoutes = require('./routes/users');
 
 const mainRouter = require('./routes/main-router.js');
@@ -49,13 +49,13 @@ const searchRouter = require('./routes/search-router.js');
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use('/api/login', loginApiRoutes);
-app.use('/api/widgets', widgetApiRoutes);
+app.use('/api/resource', resourceApiRoutes);
 app.use('/users', usersRoutes);
 
 app.use('/', mainRouter);
 app.use('/login', loginRouter);
 app.use('/search', searchRouter);
-app.use(express.static(path.join(__dirname, '../public')));
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page
