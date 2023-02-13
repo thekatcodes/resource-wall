@@ -13,7 +13,6 @@ const getAllResources = function() {
                     GROUP BY title, description, users.name;`)
                       .then((result) => {
                         console.log(result);
-                        console.log('hi')
                         return result.rows
                       })
                       .catch((err) => {
