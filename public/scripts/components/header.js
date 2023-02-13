@@ -38,10 +38,13 @@ $(() => {
 
   updateHeader();
 
-  // $("#search-resource-form").on("submit", function(e) {
-  //   e.preventDefault();
 
-  //   const keywordSearch = $(e.currentTarget).find(".js-keyword-search");
+  $("#search-resource-form").on("submit", function(e) {
+      e.preventDefault();
+      
+    //Retrieves search input value 
+    const keywordSearch = $(e.currentTarget).find(".js-keyword-search");
+
 
   //   //Make an ajax GET call giving the keyword (search input value)
   //   const request = $.ajax({

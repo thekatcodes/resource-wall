@@ -42,6 +42,8 @@ const usersRoutes = require('./routes/users');
 
 const mainRouter = require('./routes/main-router.js');
 const loginRouter = require('./routes/login-router.js');
+const searchRouter = require('./routes/search-router.js');
+
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -52,6 +54,8 @@ app.use('/users', usersRoutes);
 
 app.use('/', mainRouter);
 app.use('/login', loginRouter);
+app.use('/search', searchRouter);
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page
