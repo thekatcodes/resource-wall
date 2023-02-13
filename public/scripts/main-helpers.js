@@ -35,4 +35,4 @@ const renderResources = (data) => {
 // };
 
 
-module.exports = { createResourceElement, renderResources}
+//module.exports = renderResources;

@@ -3,10 +3,7 @@ const express = require('express');
 const router = express.Router();
 const client = require('../db/connection.js');
 const getAllResources = require('../db/queries/getAllResources.js')
-const {
-  createResourceElement,
-  renderResources,
-} = require ('../public/scripts/main-helpers.js')
+const renderResources = require ('../public/scripts/main-helpers.js')
 
 router.use((req, res, next) => {
   // if (!req.session.userId) {
@@ -18,11 +15,11 @@ router.use((req, res, next) => {
 
 // GET /
 router.get('/', (req, res) => {
+  console.log('hi')
   getAllResources()
     .then((response) => {
-      renderResources(response)
-     // res.json(response.rows);
-
+      res.json(response.rows);
+      //renderResources(response)
     });
 });
 

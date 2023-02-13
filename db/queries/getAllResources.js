@@ -12,7 +12,7 @@ const getAllResources = function() {
                     LEFT JOIN favourites ON resources.id = favourites.resource_id
                     GROUP BY title, description, users.name;`)
   return allUsers;
-}
+};
 
 
 module.exports = getAllResources;
