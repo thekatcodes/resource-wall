@@ -18,9 +18,12 @@ router.get('/', (req, res) => {
   console.log('hi')
   getAllResources()
     .then((response) => {
+
       res.json(response.rows);
       //renderResources(response)
     });
 });
 
+
 module.exports = router;
+

@@ -6,6 +6,7 @@ const createResourceElement = (resource) => {
         <span>&nbsp;&nbsp;${resource.title}</span>
       </div>
     </header>
+     ${safeHTML}
     <footer>
       <div>
         ${resource.round}
@@ -19,7 +20,7 @@ const createResourceElement = (resource) => {
 };
 
 
-const renderResources = (data) => {
+const renderResource = (data) => {
   $("#resources-container").empty();
   data.forEach((resource) => {
     const $resource = createResourceElement(resource);
@@ -30,9 +31,9 @@ const renderResources = (data) => {
 
 // const loadResources = () => {
 //   const $tweets = $.get("/", (allResources) => {
-//     renderResources(allResources);
+//     renderResources(allResources);c
 //   });
 // };
 
 
-//module.exports = renderResources;
+module.exports = renderResource;
