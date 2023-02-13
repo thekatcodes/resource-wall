@@ -3,8 +3,8 @@ $(() => {
 
   window.views_manager = {};
 
-  window.views_manager.show = function (item) {
-    $searchPropertyForm.detach();
+  window.views_manager.show = function(item) {
+    // $searchPropertyForm.detach();
     $loginForm.detach();
     $registerForm.detach();
     $submissionForm.detach();
