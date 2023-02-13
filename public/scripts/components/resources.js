@@ -14,13 +14,13 @@ $(() => {
     $newResources.empty(resource)
   }
 
-  window.newResources.clearResource = clearResources;
+  window.newResources.clearResources = clearResources;
  //puts resources in object
   function addResources(resources) {
     clearResources();
-    for (const resourceID in resources) {
-      const resource = resources[resourceID];
-      const card = newResource.createCard(resource);
+    for (const resourceId in resources) {
+      const resource = resources[resourceId];
+      const card = newResource.createResource(resource);
       addResource(card)
     }
   }

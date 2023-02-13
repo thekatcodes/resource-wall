@@ -1,5 +1,5 @@
 $(() => {
-  window.resources = {};
+  window.resource = {};
   function createResource(resource) {
   return $`<article class="resource">
     <header>
@@ -20,5 +20,5 @@ $(() => {
     </footer>
   </article>`;
   }
-  window.resources.createResource = createResource;
+  window.resource.createResource = createResource;
 });

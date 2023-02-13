@@ -72,4 +72,5 @@ $(() => {
   $('header').on('click', '.create_resources_button', () => {
     views_manager.show('submissionForm');
   });
+  }
 });

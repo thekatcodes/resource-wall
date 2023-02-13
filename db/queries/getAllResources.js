@@ -2,7 +2,7 @@ const pool = require('../connection.js');
 
 const getAllResources = function() {
   console.log('test')
-  return pool.query(`SELECT title,
+  return pool.query(`SELECT resources.id, title,
                   description,
                   cover_image_url,
                   users.name,
@@ -12,7 +12,7 @@ const getAllResources = function() {
                     JOIN users ON users.id = owner_id
                     LEFT JOIN ratings ON resources.id = ratings.resource_id
                     LEFT JOIN favourites ON resources.id = favourites.resource_id
-                    GROUP BY title, description, cover_image_url, users.name;`)
+                    GROUP BY resources.id, title, description, cover_image_url, users.name;`)
                       .then((result) => {
                         console.log(result);
                         return result.rows
