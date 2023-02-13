@@ -8,11 +8,19 @@ require('dotenv').config();
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
+const cookieSession = require('cookie-session');
+const path = require('path');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
 
 app.set('view engine', 'ejs');
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1'],
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}));
+
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -31,12 +39,13 @@ app.use(express.static('public'));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const userApiRoutes = require('./routes/users-api');
-const widgetApiRoutes = require('./routes/widgets-api');
-const usersRoutes = require('./routes/users');
+const loginApiRoutes = require('./routes/login-api');
+const resourceApiRoutes = require('./routes/resource-api');
 
 const resourcesApiRoutes = require('./routes/resources-api.js'); //resource router
 const loginRouter = require('./routes/login-router.js');
+const searchRouter = require('./routes/search-router.js');
+
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -47,9 +56,10 @@ const loginRouter = require('./routes/login-router.js');
 app.use('/api/resources', resourcesApiRoutes);
 
 
-app.use('/api/users', userApiRoutes);
-app.use('/api/widgets', widgetApiRoutes);
-app.use('/users', usersRoutes);
+app.use('/api/login', loginApiRoutes);
+app.use('/api/resource', resourceApiRoutes);
+app.use('/search', searchRouter);
+
 // Note: mount other resources here, using the same pattern above
 
 app.use('/login', loginRouter);
