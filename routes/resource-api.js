@@ -2,18 +2,26 @@ const express = require('express');
 const router  = express.Router();
 const { addResource, addTag } = require('../db/queries/submission');
 const { getUsersFromEmail } = require('../db/queries/users');
+const { serializeIntoObject } = require('../public/scripts/users-api');
 
 router.post('/submission', (req, res) => {
-  const title = req.body.title;
-  const description = req.body.description;
-  const coverImageURL = req.body.coverImageURL;
-  const externalURL = req.body.externalURL;
-  const tags = req.body.tags;
+  const info = serializeIntoObject(req.body.info);
+  // for loop to check for bad values since '' does not count as NULL
+  for (const key in info) {
+    if (!info[key]) {
+      return res.send("");
+    }
+  }
   getUsersFromEmail(req.session.email)
-    .then((data) => addResource(data.id, title, description, coverImageURL, externalURL))
-    .then((dataRes) => addTag(dataRes.id, tags))
-    .then((data) => res.json(data))
+    .then((data) => addResource(data.id, info.title, info.description, info.imageURL, info.externalURL))
+    .then((dataRes) => addTag(dataRes.id, info.tags))
+    .then((tagData) => {
+      console.log(tagData);
+      return res.json(tagData);
+    })
     .catch((e) => {
-      res.send("error");
+      return res.send("");
     });
 });
+
+module.exports = router;
