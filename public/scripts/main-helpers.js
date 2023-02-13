@@ -6,7 +6,6 @@ const createResourceElement = (resource) => {
         <span>&nbsp;&nbsp;${resource.title}</span>
       </div>
     </header>
-     ${safeHTML}
     <footer>
       <div>
         ${resource.round}
