@@ -4,7 +4,7 @@
  *   these routes are mounted onto /api/users
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
-const { getUsersFromEmail, addUsers } = require('../db/queries/users');
+const { getUsersFromEmail, addUsers, updateUserDetails } = require('../db/queries/users');
 const { hashPassword, comparePass } = require('../public/scripts/users-api');
 const { serializeIntoObject } = require('../public/scripts/users-api');
 
@@ -46,6 +46,22 @@ router.post('/account', (req, res) => {
         res.send("");
       }
     });
+});
+
+router.post('/update', (req, res) => {
+  const formData = serializeIntoObject(req.body.info);
+  getUsersFromEmail(req.session.email)
+    .then((data) => {
+      if (comparePass(formData.password, data.password)) {
+        const newUser = updateUserDetails(formData, data.id);
+        return newUser;
+      }
+    })
+    .then((newUserData) => {
+      req.session.email = newUserData.email;
+      return res.send(newUserData);
+    })
+    .catch((e) => res.send(""));
 });
 
 module.exports = router;

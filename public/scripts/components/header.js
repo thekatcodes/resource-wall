@@ -26,7 +26,7 @@ $(() => {
                         <a class="nav-link active" href="#">Log out</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Profile</a>
+                        <a class="nav-link active profileButton">Profile</a>
                     </li>
                     </ul>
                 </div>
@@ -46,30 +46,35 @@ $(() => {
     const keywordSearch = $(e.currentTarget).find(".js-keyword-search");
 
 
-  //   //Make an ajax GET call giving the keyword (search input value)
-  //   const request = $.ajax({
-  //     url: "/search",
-  //     type: "GET",
-  //     data: { keyword: keywordSearch.val() },
-  //     contentType: "application/json; charset=utf-8",
-  //   });
+    //Make an ajax GET call giving the keyword (search input value)
+    const request = $.ajax({
+      url: "/search",
+      type: "GET",
+      data: { keyword: keywordSearch.val() },
+      contentType: "application/json; charset=utf-8",
+    });
 
-  //   request.done(function (data) {
-  //     //success code here
-  //     console.log("success");
-  //   });
+    request.done(function (data) {
+      //success code here
+      console.log("success");
+    });
 
-  //   request.fail(function (error) {
-  //     //failure code here
-  //     console.log("failed");
-  //   });
+    request.fail(function (error) {
+      //failure code here
+      console.log("failed");
+    });
 
     
   //   //keyword (search input value as a param)
   //   //TO DO: in search-router, go through db and get the resources corresponding to the keyword using search-queries
   //   //TO DO:  add on click events for navbar options which allows for views_manager.show('component')
   // });
+    });
   $('header').on('click', '.create_resources_button', () => {
     views_manager.show('submissionForm');
+  });
+
+  $('header').on('click', '.profileButton', () => {
+    views_manager.show('updateProfile');
   });
 });

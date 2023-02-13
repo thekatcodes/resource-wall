@@ -14,10 +14,10 @@ $(() => {
       <input type="password" name="confirm-password" class="password-checker">
       <button type="submit" class="btn btn-info" id="register" disabled="disabled">Submit</button>
       </form>
-    </div>
   `);
   
   window.$registerForm = $registerForm;
+  
   $registerForm.on('submit', function(event) {
     event.preventDefault();
     $.post("/api/login/account", {info : $(this).serialize()})
