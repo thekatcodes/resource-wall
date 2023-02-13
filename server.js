@@ -41,7 +41,12 @@ const loginRouter = require('./routes/login-router.js');
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
+
+//all resources endpoint
+
 app.use('/api/resources', resourcesApiRoutes);
+
+
 app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);

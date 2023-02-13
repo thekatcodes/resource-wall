@@ -1,7 +1,7 @@
-const client = require('../connection.js');
+const pool = require('../connection.js');
 
 const getAllResources = function() {
-  const allUsers = client.query(`SELECT title,
+  return pool.query(`SELECT title,
                   description,
                   users.name,
                   ROUND(AVG(ratings.rating), 1),
@@ -11,7 +11,14 @@ const getAllResources = function() {
                     LEFT JOIN ratings ON resources.id = ratings.resource_id
                     LEFT JOIN favourites ON resources.id = favourites.resource_id
                     GROUP BY title, description, users.name;`)
-  return allUsers;
+                      .then((result) => {
+                        console.log(result);
+                        console.log('hi')
+                        return result.rows
+                      })
+                      .catch((err) => {
+                        console.log(err.message)
+                      });
 };
 
 
