@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
   getAllResources()
     .then((response) => {res.send({response}) })
     .catch(e => {
-      console.lerror(e);
+      console.error(e);
       res.send(e);
     })
 });
