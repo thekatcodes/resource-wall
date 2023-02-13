@@ -15,7 +15,6 @@ $(() => {
 
   $loginForm.on('submit', function(event) {
     const data = $(this).serialize();
-    console.log(data);
     event.preventDefault();
     $.post("/api/login", {info : $(this).serialize()})
       .done((response) => {

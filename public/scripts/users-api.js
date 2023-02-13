@@ -7,6 +7,9 @@ const serializeIntoObject = (string) => {
   const seperateValues = splitString.map((string) => string.split('='));
   for (const keyPair of seperateValues) {
     obj[keyPair[0]] = decodeURIComponent(keyPair[1]);
+    if (obj[keyPair[0]] === '') {
+      obj[keyPair[0]] = null;
+    }
   }
   return obj;
 };
