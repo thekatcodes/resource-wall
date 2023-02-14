@@ -4,7 +4,7 @@ $(() => {
   const $pageHeader = $("#page-header");
 
   function updateHeader(isLoggedIn) {
-    console.log("test header");
+    // console.log("test header");
     let header;
 
     if (!isLoggedIn) {
@@ -76,7 +76,7 @@ $(() => {
   isLoggedIn.done(function (response) {
     //success code here
     console.log("success");
-    const isLoggedIn = response.email;
+    const isLoggedIn = response;
     updateHeader(isLoggedIn);
   });
 
@@ -88,10 +88,10 @@ $(() => {
 
   /* Search for keyword */
   $("header").on("submit", "#search-resource-form", function (e) {
-      e.preventDefault();
+    e.preventDefault();
     //Retrieves search input value
-      const keywordSearch = $(e.currentTarget).find(".js-keyword-search");
-      console.log("keywordSearch:", keywordSearch)
+    const keywordSearch = $(e.currentTarget).find(".js-keyword-search");
+    console.log("keywordSearch:", keywordSearch.val());
 
     //Make an ajax GET call giving the keyword (search input value)
     const request = $.ajax({
@@ -103,44 +103,45 @@ $(() => {
 
     request.done(function (data) {
       //success code here
-      console.log("success");
+      console.log("data from search-queries:", data);
+      console.log("get data from search-queries success!");
     });
 
     request.fail(function (error) {
       //failure code here
-      console.log("failed");
+      console.log("get data from search-queries failed");
     });
   });
 
-    //TO DO: add on click events for navbar options which allows for views_manager.show('component')
+  //TO DO: add on click events for navbar options which allows for views_manager.show('component')
 
-    /* If user is NOT logged in*/
-    //Render Log in page on click
-    $("header").on("click", "#login-btn", function () {
-      views_manager.show("loginForm");
-    });
-    //Render register on click
-    $("header").on("click", "#register-btn", function () {
-      views_manager.show("registerForm");
-    });
+  /* If user is NOT logged in*/
+  //Render Log in page on click
+  $("header").on("click", "#login-btn", function () {
+    views_manager.show("loginForm");
+  });
+  //Render register on click
+  $("header").on("click", "#register-btn", function () {
+    views_manager.show("registerForm");
+  });
 
-    /* If user is logged in*/
-    //Render Home page (main content) on Logo click
-    $("header").on("click", "#logo-btn", function () {
-      views_manager.show("resources");
-    });
+  /* If user is logged in*/
+  //Render Home page (main content) on Logo click
+  $("header").on("click", "#logo-btn", function () {
+    views_manager.show("resources");
+  });
 
-    //Render Create resource page on click
-    $("header").on("click", "#create-resource-btn", () => {
-      views_manager.show("submissionForm");
-    });
+  //Render Create resource page on click
+  $("header").on("click", "#create-resource-btn", () => {
+    views_manager.show("submissionForm");
+  });
 
-    //Render My resources page on click
+  //Render My resources page on click
 
-    //Render Logout on click
+  //Render Logout on click
 
-    //Render Profile page on click
-    $("header").on("click", "#profile-btn", () => {
-      views_manager.show("updateProfile");
-    });
+  //Render Profile page on click
+  $("header").on("click", "#profile-btn", () => {
+    views_manager.show("updateProfile");
+  });
 });
