@@ -9,7 +9,7 @@ $(() => {
       </div>
     </header>
     <div>
-      ${resource.cover_image_url}
+    <img src="${resource.cover_image_url}">
     </div>
     <footer>
       <div>
