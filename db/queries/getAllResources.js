@@ -5,8 +5,8 @@ const getAllResources = function() {
                   description,
                   cover_image_url,
                   users.name,
-                  ROUND(AVG(ratings.rating), 1),
-                  SUM(CASE WHEN favourites.liked THEN 1 ELSE 0 END)
+                  ROUND(AVG(ratings.rating), 1) AS rating,
+                  SUM(CASE WHEN favourites.liked THEN 1 ELSE 0 END) AS likes
                     FROM resources
                     JOIN users ON users.id = owner_id
                     LEFT JOIN ratings ON resources.id = ratings.resource_id

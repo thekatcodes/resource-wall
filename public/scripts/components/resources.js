@@ -1,5 +1,5 @@
 $(() => {
-  const $newResources = $(`<section class ="resource-list">
+  const $newResources = $(`<section>
     <p>Loading...</p>
     </section>`);
   window.$newResources = $newResources;
@@ -20,7 +20,7 @@ $(() => {
     for (const resourceId in resources) {
       const resource = resources[resourceId];
       const card = window.resource.createResourceElement(resource);
-      console.log(card)
+      console.log(card);
       addResource(card)
       console.log(window.newResources)
     }

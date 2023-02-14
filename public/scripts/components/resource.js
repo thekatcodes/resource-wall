@@ -2,21 +2,19 @@ $(() => {
   window.resource = {};
   function createResourceElement(resource) {
 
-  return `<article class="resource">
-    <header>
+  return `<article class="card">
       <div>
-        <span>${resource.title}</span>
+       <img "card-img-top" src='${resource.cover_image_url}'>
       </div>
-    </header>
-    <div>
-      ${resource.cover_image_url}
+    <div class="card-body" >
+      ${resource.title}
     </div>
     <footer>
       <div>
-        ${resource.round}
+        ${resource.likes}
       </div>
-      <div>
-        ${resource.sum}
+      <div class="text-muted">
+        ${resource.rating}
       </div>
     </footer>
   </article>`;
