@@ -1,4 +1,7 @@
 // load .env data into process.env
+
+
+
 require('dotenv').config();
 
 // Web server config
@@ -39,7 +42,7 @@ app.use(express.static('public'));
 const loginApiRoutes = require('./routes/login-api');
 const resourceApiRoutes = require('./routes/resource-api');
 
-const mainRouter = require('./routes/main-router.js');
+const resourcesApiRoutes = require('./routes/resources-api.js'); //resource router
 const loginRouter = require('./routes/login-router.js');
 const searchRouter = require('./routes/search-router.js');
 
@@ -47,15 +50,18 @@ const searchRouter = require('./routes/search-router.js');
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
+//all resources endpoint
+
+app.use('/api/resources', resourcesApiRoutes);
+
+
 app.use('/api/login', loginApiRoutes);
 app.use('/api/resource', resourceApiRoutes);
-
-app.use('/', mainRouter);
-app.use('/login', loginRouter);
 app.use('/search', searchRouter);
 
 // Note: mount other resources here, using the same pattern above
 
+app.use('/login', loginRouter);
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
@@ -63,5 +69,3 @@ app.use('/search', searchRouter);
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
-
-

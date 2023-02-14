@@ -46,7 +46,7 @@ VALUES (1, 'programming'),
 (11, 'university'),
 (5, 'resumes');
 
-INSERT into favourites (resource_id, user_id, liked) 
+INSERT into favourites (resource_id, user_id, liked)
 VALUES (1 , 3, true),
 (1, 5, true),
 (2, 1, true),

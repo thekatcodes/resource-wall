@@ -7,7 +7,8 @@ $(() => {
 
     $loginForm.detach();
     $registerForm.detach();
-    $submissionForm.detach();
+    $newResources.detach();
+    $updateProfile.detach();
 
     // Add other components to append to the main content (index.html)
     switch (item) {
