@@ -64,27 +64,27 @@ $(() => {
 
     $pageHeader.append(header);
   }
-    
-    window.header.update = updateHeader;
-  
-    //Check whether or not the user is logged in
-    const isLoggedIn = $.ajax({
-      url: "/",
-      type: "GET",
-    });
-  
-    isLoggedIn.done(function (response) {
-      //success code here
-      console.log("success");
-      const isLoggedIn = response.email;
-      updateHeader(isLoggedIn);
-    });
-  
-    isLoggedIn.fail(function (error) {
-      //failure code here
-      console.log("failed");
-      updateHeader(isLoggedIn);
-    });
+
+  window.header.update = updateHeader;
+
+  //Check whether or not the user is logged in
+  const isLoggedIn = $.ajax({
+    url: "/",
+    type: "GET",
+  });
+
+  isLoggedIn.done(function (response) {
+    //success code here
+    console.log("success");
+    const isLoggedIn = response.email;
+    updateHeader(isLoggedIn);
+  });
+
+  isLoggedIn.fail(function (error) {
+    //failure code here
+    console.log("failed");
+    updateHeader(isLoggedIn);
+  });
 
   $("#search-resource-form").on("submit", function (e) {
     e.preventDefault();
@@ -92,44 +92,49 @@ $(() => {
     //Retrieves search input value
     const keywordSearch = $(e.currentTarget).find(".js-keyword-search");
 
-    //   //Make an ajax GET call giving the keyword (search input value)
-    //   const request = $.ajax({
-    //     url: "/search",
-    //     type: "GET",
-    //     data: { keyword: keywordSearch.val() },
-    //     contentType: "application/json; charset=utf-8",
-    //   });
+    //Make an ajax GET call giving the keyword (search input value)
+    const request = $.ajax({
+      url: "/search",
+      type: "GET",
+      data: { keyword: keywordSearch.val() },
+      contentType: "application/json; charset=utf-8",
+    });
 
-    //   request.done(function (data) {
-    //     //success code here
-    //     console.log("success");
-    //   });
+    request.done(function (data) {
+      //success code here
+      console.log("success");
+    });
 
-    //   request.fail(function (error) {
-    //     //failure code here
-    //     console.log("failed");
-    //   });
+    request.fail(function (error) {
+      //failure code here
+      console.log("failed");
+    });
   });
+
   //TO DO: add on click events for navbar options which allows for views_manager.show('component')
+
   /* If user is NOT logged in*/
   //Render Log in page on click
-  //Render register on click
-
-  $("#login-btn").on("click", function () {
+  $("header").on("click", "#login-btn", function () {
     views_manager.show("loginForm");
   });
-    
-  $("#register-btn").on("click", function () {
+  //Render register on click
+  $("header").on("click", "#register-btn", function () {
     views_manager.show("registerForm");
   });
 
-  /* If user logged in*/
+  /* If user is logged in*/
   //Render Home page (main content) on Logo click
+
   //Render Create resource page on click
-  //Render My resources page on click
-  //Render Logout on click
-  //Render Profile page on click
-  $("#create-resource-btn").on("click", () => {
+  $("header").on("click", "#create-resource-btn", () => {
     views_manager.show("submissionForm");
   });
+    
+  //Render My resources page on click
+
+  //Render Logout on click
+
+  //Render Profile page on click
+    
 });
