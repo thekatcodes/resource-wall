@@ -14,3 +14,14 @@ function getResourceById (id) {
     url,
   });
 }
+
+
+function getCommentsForResource (id) {
+  let url = "/api/comments";
+  if (params) {
+    url += "/" + params
+  }
+  return $.ajax({
+    url,
+  });
+}

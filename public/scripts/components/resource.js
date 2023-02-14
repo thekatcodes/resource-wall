@@ -21,7 +21,7 @@ $(() => {
         ${checkIfRating(resource.rating)}
       </div>
     </footer>
-  </div`;
+  </div>`;
   }
   window.resource.createResourceElement = createResourceElement;
 });

@@ -1,7 +1,14 @@
 const pool = require('../connection.js');
 
 const getCommentsForResource = function() {
-  return pool.query(`SELECT * FROM comments`)
+  return pool.query(`SELECT resources.id,
+                      user.id,
+                      comments.id,
+                      comments.text
+    FROM resources
+    JOIN users ON users.id = owner_id
+    JOIN comments ON resources.id = resource_id
+    WHERE resources.id = $1`, [id])
                       .then((result) => {
                         return result.rows;
                       })
@@ -11,13 +18,3 @@ const getCommentsForResource = function() {
 };
 
 module.exports = getCommentsForResource;
-
-
-// SELECT comments.id AS id,
-//                       message,
-//                       users.name AS name,
-//                       users.id,
-//                       resource.id,
-//                       FROM comments
-//                         JOIN users ON users.id = user_id
-//                         JOIN resources ON resources.id = resource_id

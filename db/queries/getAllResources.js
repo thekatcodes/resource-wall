@@ -21,7 +21,6 @@ const getAllResources = function() {
 };
 
 const getResourceById = function(id) {
-  console.log('hey')
   return pool.query(`SELECT resources.id, title,
                   description,
                   cover_image_url,
