@@ -43,8 +43,9 @@ $(() => {
   //appends resource to dom
 
   $(document).on("click", ".resource-card", function (event) {
-    getResourceById(2).then(function (resource) {
-      console.log(resource.id)
+    const resourceId = $(this).attr('id');
+    console.log(resourceId)
+    getResourceById(resourceId).then(function (resource) {
       clearResource();
       article = window.viewResource.createResourceArticle(resource);
       addResource(article);
