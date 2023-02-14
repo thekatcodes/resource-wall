@@ -7,3 +7,24 @@ function getAllResources (keyword) {
     url,
   });
 }
+
+function getResourceById (id) {
+  let url = "/api/resources";
+  if (params) {
+    url += "/" + params
+  }
+  return $.ajax({
+    url,
+  });
+}
+
+
+// function getCommentsForResource (id) {
+//   let url = "/api/comments";
+//   if (params) {
+//     url += "/" + params
+//   }
+//   return $.ajax({
+//     url,
+//   });
+// }

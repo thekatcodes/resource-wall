@@ -1,25 +1,27 @@
 $(() => {
   window.resource = {};
+  const checkIfRating = (value) => {
+    return value === null ? 'Not Rated' : value;
+  }
+
   function createResourceElement(resource) {
 
-  return `<article class="resource">
-    <header>
+  return `<div class="card">
       <div>
-        <span>${resource.title}</span>
+       <img class="card-img-top" src='${resource.cover_image_url}'>
       </div>
-    </header>
-    <div>
-    <img src="${resource.cover_image_url}">
+    <div class="card-body">
+      ${resource.title}
     </div>
-    <footer>
-      <div>
-        ${resource.round}
+    <footer class="card-footer">
+      <div class="card-text">
+        ${resource.likes}
       </div>
-      <div>
-        ${resource.sum}
+      <div class="card-text">
+        ${checkIfRating(resource.rating)}
       </div>
     </footer>
-  </article>`;
+  </div>`;
   }
   window.resource.createResourceElement = createResourceElement;
 });
