@@ -1,4 +1,5 @@
 const db = require('../connection');
+const { hashPassword } = require('../../public/scripts/users-api');
 
 const getUsersFromEmail = (email) => {
   const queryString = `
@@ -23,5 +24,34 @@ const addUsers = (name, email, password) => {
     });
 };
 
-module.exports = { getUsersFromEmail, addUsers };
+const updateUserDetails = (options, id) => {
+  let queryParams = [];
+  let queryString = `
+  UPDATE users
+  SET `;
+
+  if (options.email) {
+    queryParams.push(`${options.email}`);
+    queryString += `email = $${queryParams.length} `;
+  }
+
+  if (options.username) {
+    queryParams.push(`${options.username}`);
+    queryString += `name = $${queryParams.length} `;
+  }
+  
+  if (options.newPassword) {
+    queryParams.push(`${hashPassword(options.newPassword)}`);
+    queryString += `password = $${queryParams.length} `;
+  }
+
+  queryString += `WHERE id = ${id} RETURNING *;`;
+
+  return db.query(queryString, queryParams)
+    .then((data) => {
+      return data.rows[0];
+    });
+};
+
+module.exports = { getUsersFromEmail, addUsers, updateUserDetails};
 

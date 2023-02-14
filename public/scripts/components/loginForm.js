@@ -15,10 +15,12 @@ $(() => {
 
   $loginForm.on('submit', function(event) {
     const data = $(this).serialize();
-    console.log(data);
     event.preventDefault();
     $.post("/api/login", {info : $(this).serialize()})
-      .done((response) => {
+        .done((response) => {
+            // Stops navbar duplication on form submit
+            $("#page-header").empty();
+            header.update(response);
         if (!response) {
           $(".error-message").empty();
           $(".error-message").append("<h1>Wrong Password</h1>");

@@ -6,12 +6,6 @@ const { serializeIntoObject } = require('../public/scripts/users-api');
 
 router.post('/submission', (req, res) => {
   const info = serializeIntoObject(req.body.info);
-  // for loop to check for bad values since '' does not count as NULL
-  for (const key in info) {
-    if (!info[key]) {
-      return res.send("");
-    }
-  }
   getUsersFromEmail(req.session.email)
     .then((data) => addResource(data.id, info.title, info.description, info.imageURL, info.externalURL))
     .then((dataRes) => addTag(dataRes.id, info.tags))
