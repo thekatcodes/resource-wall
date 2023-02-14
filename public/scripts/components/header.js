@@ -130,11 +130,4 @@ $(() => {
   $("header").on("click", "#create-resource-btn", () => {
     views_manager.show("submissionForm");
   });
-
-  //Render My resources page on click
-
-  //Render Logout on click
-
-  //Render Profile page on click
-
 });
