@@ -4,3 +4,13 @@ function getAllResources () {
     url,
   });
 }
+
+function getResourceById (id) {
+  let url = "/api/resources";
+  if (params) {
+    url += "/" + params
+  }
+  return $.ajax({
+    url,
+  });
+}

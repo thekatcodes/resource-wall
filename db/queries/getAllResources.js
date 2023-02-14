@@ -29,10 +29,11 @@ const getResourceById = function(id) {
                   ROUND(AVG(ratings.rating), 1) AS rating,
                   SUM(CASE WHEN favourites.liked THEN 1 ELSE 0 END) AS likes
                     FROM resources
-                    WHERE resources.id = $1
                     JOIN users ON users.id = owner_id
                     LEFT JOIN ratings ON resources.id = ratings.resource_id
-                    LEFT JOIN favourites ON resources.id = favourites.resource_id;`, [id])
+                    LEFT JOIN favourites ON resources.id = favourites.resource_id
+                    WHERE resources.id = $1
+                    GROUP BY resources.id, title, description, cover_image_url, users.name`, [id])
                       .then((result) => {
                         return result.rows[0];
                       })
