@@ -34,7 +34,7 @@ const getResourceById = function(id) {
                     LEFT JOIN ratings ON resources.id = ratings.resource_id
                     LEFT JOIN favourites ON resources.id = favourites.resource_id;`, [id])
                       .then((result) => {
-                        return result.rows;
+                        return result.rows[0];
                       })
                       .catch((err) => {
                         console.log(err.message)

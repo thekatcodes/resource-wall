@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   console.log('test')
-  const resourceId = req.params.body;
+  const resourceId = req.params.id;
   getResourceById(resourceId)
     .then((response) => {
       console.log('hey')
