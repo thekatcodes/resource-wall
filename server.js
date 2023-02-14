@@ -41,7 +41,7 @@ app.use(express.static('public'));
 // Note: Feel free to replace the example routes below with your own
 const loginApiRoutes = require('./routes/login-api');
 const resourceApiRoutes = require('./routes/resource-api');
-
+const commentsApiRoutes =  require('./routes/comments-api');
 const resourcesApiRoutes = require('./routes/resources-api.js'); //resource router
 const loginRouter = require('./routes/login-router.js');
 const searchRouter = require('./routes/search-router.js');
@@ -53,7 +53,7 @@ const searchRouter = require('./routes/search-router.js');
 //all resources endpoint
 
 app.use('/api/resources', resourcesApiRoutes);
-
+app.use('api/comments', commentsApiRoutes);
 
 app.use('/api/login', loginApiRoutes);
 app.use('/api/resource', resourceApiRoutes);
