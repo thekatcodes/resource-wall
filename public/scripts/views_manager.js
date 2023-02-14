@@ -8,6 +8,8 @@ $(() => {
     $loginForm.detach();
     $registerForm.detach();
     $newResources.detach();
+    $updateProfile.detach();
+    $newResources.detach();
 
     switch (item) {
       case "searchResources":
@@ -22,8 +24,6 @@ $(() => {
       case "submissionForm":
         $submissionForm.appendTo($main);
         break;
-      case "resources":
-        $newResources.appendTo($main);
       // Add other components to append to the main content (index.html)
 
       break;

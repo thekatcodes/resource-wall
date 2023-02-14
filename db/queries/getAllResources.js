@@ -1,7 +1,6 @@
 const pool = require('../connection.js');
 
 const getAllResources = function() {
-  console.log('test')
   return pool.query(`SELECT resources.id, title,
                   description,
                   cover_image_url,
@@ -14,8 +13,7 @@ const getAllResources = function() {
                     LEFT JOIN favourites ON resources.id = favourites.resource_id
                     GROUP BY resources.id, title, description, cover_image_url, users.name;`)
                       .then((result) => {
-                        console.log(result);
-                        return result.rows
+                        return result.rows;
                       })
                       .catch((err) => {
                         console.log(err.message)
