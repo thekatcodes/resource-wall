@@ -9,7 +9,6 @@ $(() => {
     $registerForm.detach();
     $newResources.detach();
     $updateProfile.detach();
-    $newResources.detach();
 
     // Add other components to append to the main content (index.html)
     switch (item) {
@@ -27,8 +26,8 @@ $(() => {
         break;
       case "resources":
         $newResources.appendTo($main);
-      // Add other components to append to the main content (index.html)
-
+      case "updateProfile":
+        $updateProfile.appendTo($main);
       break;
     }
   };
