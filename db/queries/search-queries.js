@@ -10,17 +10,26 @@ const pool = new Pool({
 });
 
 //Get resources from searching a keyword
-const getResources = function(keyword) {
+const getSearchResources = function (keyword) {
   //console.log(keyword); -> confirming keyword is being passed
-    
+
   //Array to hold any parameters that may be available for the query
   const queryParams = [];
 
   //Start the query with all information that comes before the WHERE clause
   let queryString = `
-    SELECT resources.id as resource_id, tags.topic as tags
-    FROM tags
-    JOIN resources ON resources.id = resource_id `;
+  SELECT resources.id, title,
+  description,
+  cover_image_url,
+  users.name,
+  ROUND(AVG(ratings.rating), 1),
+  SUM(CASE WHEN favourites.liked THEN 1 ELSE 0 END),
+  tags.topic as tags
+    FROM resources
+    JOIN users ON users.id = owner_id
+    LEFT JOIN ratings ON resources.id = ratings.resource_id
+    LEFT JOIN favourites ON resources.id = favourites.resource_id
+    LEFT JOIN tags ON resources.id = tags.resource_id `;
 
   //If keyword has been passed in, add the keyword to the queryParams array and create a WHERE clause for the keyword
   if (keyword) {
@@ -30,17 +39,15 @@ const getResources = function(keyword) {
 
   //Add any query that comes after the WHERE clause
   queryString += `
-    GROUP BY resources.id, tags.topic
-    ORDER BY resource_id;`;
+  GROUP BY resources.id, title, description, cover_image_url, users.name, tags;`;
 
   //Run the query
-    return pool.query(queryString, queryParams).then((res) => res.rows);
-/* ^^^ returns the following for keyword = coding 
-[
-  { resource_id: 1, tags: 'coding' },
-  { resource_id: 2, tags: 'coding' }
-] 
-*/
+  return pool
+    .query(queryString, queryParams)
+    .then((result) => result.rows)
+    .catch((err) => {
+      console.log("error message:", err.message);
+    });
 };
 
-exports.getResources = getResources;
+exports.getSearchResources = getSearchResources;
