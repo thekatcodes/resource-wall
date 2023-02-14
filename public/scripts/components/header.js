@@ -41,8 +41,8 @@ $(() => {
 
   $("#search-resource-form").on("submit", function(e) {
       e.preventDefault();
-      
-    //Retrieves search input value 
+
+    //Retrieves search input value
     const keywordSearch = $(e.currentTarget).find(".js-keyword-search");
 
 
@@ -64,7 +64,7 @@ $(() => {
       console.log("failed");
     });
 
-    
+
   //   //keyword (search input value as a param)
   //   //TO DO: in search-router, go through db and get the resources corresponding to the keyword using search-queries
   //   //TO DO:  add on click events for navbar options which allows for views_manager.show('component')
@@ -73,8 +73,5 @@ $(() => {
   $('header').on('click', '.create_resources_button', () => {
     views_manager.show('submissionForm');
   });
-
-  $('header').on('click', '.profileButton', () => {
-    views_manager.show('updateProfile');
-  });
+  }
 });
