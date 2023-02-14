@@ -64,8 +64,27 @@ $(() => {
 
     $pageHeader.append(header);
   }
-
-  updateHeader();
+    
+    window.header.update = updateHeader;
+  
+    //Check whether or not the user is logged in
+    const isLoggedIn = $.ajax({
+      url: "/",
+      type: "GET",
+    });
+  
+    isLoggedIn.done(function (response) {
+      //success code here
+      console.log("success");
+      const isLoggedIn = response.email;
+      updateHeader(isLoggedIn);
+    });
+  
+    isLoggedIn.fail(function (error) {
+      //failure code here
+      console.log("failed");
+      updateHeader(isLoggedIn);
+    });
 
   $("#search-resource-form").on("submit", function (e) {
     e.preventDefault();
