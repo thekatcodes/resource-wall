@@ -2,22 +2,22 @@ $(() => {
   window.resource = {};
   function createResourceElement(resource) {
 
-  return `<article class="card">
+  return `<div class="card">
       <div>
-       <img "card-img-top" src='${resource.cover_image_url}'>
+       <img class="card-img-top" src='${resource.cover_image_url}'>
       </div>
-    <div class="card-body" >
+    <div class="card-body">
       ${resource.title}
     </div>
-    <footer>
-      <div>
+    <footer class="card-footer">
+      <div class="card-text">
         ${resource.likes}
       </div>
-      <div class="text-muted">
+      <div class="card-text">
         ${resource.rating}
       </div>
     </footer>
-  </article>`;
+  </div`;
   }
   window.resource.createResourceElement = createResourceElement;
 });
