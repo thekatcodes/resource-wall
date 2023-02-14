@@ -26,6 +26,7 @@ $(() => {
         break;
       case "resources":
         $newResources.appendTo($main);
+        break;
       case "updateProfile":
         $updateProfile.appendTo($main);
         break;
