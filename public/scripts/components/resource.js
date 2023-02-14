@@ -1,6 +1,11 @@
 $(() => {
   window.resource = {};
+  const checkIfRating = (value) => {
+    return value === null ? 'Not Rated' : value;
+  }
+
   function createResourceElement(resource) {
+    console.log(typeof resource.rating)
 
   return `<div class="card">
       <div>
@@ -14,7 +19,7 @@ $(() => {
         ${resource.likes}
       </div>
       <div class="card-text">
-        ${resource.rating}
+        ${checkIfRating(resource.rating)}
       </div>
     </footer>
   </div`;

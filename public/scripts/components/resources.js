@@ -20,9 +20,7 @@ $(() => {
     for (const resourceId in resources) {
       const resource = resources[resourceId];
       const card = window.resource.createResourceElement(resource);
-      console.log(card);
       addResource(card)
-      console.log(window.newResources)
     }
   }
   window.newResources.addResources = addResources;
