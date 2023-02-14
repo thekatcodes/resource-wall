@@ -4,11 +4,11 @@ $(() => {
   window.views_manager = {};
 
   window.views_manager.show = function (item) {
-
     $loginForm.detach();
     $registerForm.detach();
     $newResources.detach();
     $updateProfile.detach();
+    $submissionForm.detach();
 
     // Add other components to append to the main content (index.html)
     switch (item) {
@@ -28,7 +28,7 @@ $(() => {
         $newResources.appendTo($main);
       case "updateProfile":
         $updateProfile.appendTo($main);
-      break;
+        break;
     }
   };
 });
