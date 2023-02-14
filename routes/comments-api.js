@@ -10,6 +10,7 @@ router.use((req, res, next) => {
 
 router.get('/:id', (req, res) => {
   const resourceId = req.params.id;
+  console.log('test')
   getCommentsForResource(resourceId)
     .then((response) => {
       return res.json(response)
@@ -19,6 +20,7 @@ router.get('/:id', (req, res) => {
       res.send(e);
     })
 });
+
 
 
 module.exports = router;

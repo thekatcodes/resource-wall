@@ -30,7 +30,6 @@ $(() => {
   }
   window.viewResource.createResourceArticle = createResourceArticle;
 
-  console.log(window.viewResource);
 
   function addResource(resource) {
     $viewResource.append(resource);
@@ -41,7 +40,6 @@ $(() => {
   }
   window.viewResource.clearResource = clearResource;
   //appends resource to dom
-
   $(document).on("click", ".resource-card", function (event) {
     const resourceId = $(this).attr("id");
     console.log(resourceId);
