@@ -5,8 +5,7 @@ $(() => {
   }
 
   function createResourceElement(resource) {
-
-  return `<div class="card">
+  return `<div class="card resource-card">
       <div>
        <img class="card-img-top" src='${resource.cover_image_url}'>
       </div>

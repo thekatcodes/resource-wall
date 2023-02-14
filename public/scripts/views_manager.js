@@ -8,7 +8,7 @@ $(() => {
     $loginForm.detach();
     $registerForm.detach();
     $updateProfile.detach();
-    //$viewResource.detach();
+    $viewResource.detach();
     $newResources.detach();
 
     // Add other components to append to the main content (index.html)

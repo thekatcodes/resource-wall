@@ -7,8 +7,8 @@ function getAllResources () {
 
 function getResourceById (id) {
   let url = "/api/resources";
-  if (params) {
-    url += "/" + params
+  if (id) {
+    url += "/" + id
   }
   return $.ajax({
     url,

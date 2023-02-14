@@ -12,7 +12,6 @@ $(() => {
   function clearResources(resource) {
     $newResources.empty(resource)
   }
-
   window.newResources.clearResources = clearResources;
  //puts resources in object
   function addResources(resources) {
@@ -30,4 +29,5 @@ $(() => {
     window.newResources.addResources(json)
     views_manager.show('resources')
   })
+
 });
