@@ -1,7 +1,8 @@
 $(() => {
   window.resource = {};
-  function createResource(resource) {
-  return $`<article class="resource">
+  function createResourceElement(resource) {
+
+  return `<article class="resource">
     <header>
       <div>
         <span>${resource.title}</span>
@@ -20,5 +21,5 @@ $(() => {
     </footer>
   </article>`;
   }
-  window.resource.createResource = createResource;
+  window.resource.createResourceElement = createResourceElement;
 });
