@@ -5,7 +5,6 @@ $(() => {
   }
 
   function createResourceElement(resource) {
-    console.log(typeof resource.rating)
 
   return `<div class="card">
       <div>

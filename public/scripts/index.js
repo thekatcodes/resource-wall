@@ -1,6 +1,6 @@
 $(() => {
   getAllResources().then(function(json) {
-    window.newResources.addResources(json.response)
+    window.newResources.addResources(json)
     views_manager.show('resources')
   })
 });
