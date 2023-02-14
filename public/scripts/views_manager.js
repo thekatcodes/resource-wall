@@ -9,6 +9,7 @@ $(() => {
     $registerForm.detach();
     $newResources.detach();
     $updateProfile.detach();
+    $
 
     switch (item) {
       case "searchResources":
