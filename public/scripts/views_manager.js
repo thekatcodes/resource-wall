@@ -25,6 +25,9 @@ $(() => {
       case "submissionForm":
         $submissionForm.appendTo($main);
         break;
+      case "resouces":
+        $newResources.appendTo($mail);
+        break;
       // Add other components to append to the main content (index.html)
 
       break;
