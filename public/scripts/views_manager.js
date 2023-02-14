@@ -7,8 +7,8 @@ $(() => {
 
     $loginForm.detach();
     $registerForm.detach();
-    $newResources.detach();
     $updateProfile.detach();
+    //$viewResource.detach();
     $newResources.detach();
 
     // Add other components to append to the main content (index.html)
@@ -25,8 +25,11 @@ $(() => {
       case "submissionForm":
         $submissionForm.appendTo($main);
         break;
-      case "resouces":
-        $newResources.appendTo($mail);
+      case "resources":
+        $newResources.appendTo($main);
+        break;
+      case "resource":
+        $viewResource.appendTo($main);
         break;
       // Add other components to append to the main content (index.html)
 
