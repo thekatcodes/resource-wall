@@ -22,8 +22,8 @@ const getSearchResources = function (keyword) {
   description,
   cover_image_url,
   users.name,
-  ROUND(AVG(ratings.rating), 1),
-  SUM(CASE WHEN favourites.liked THEN 1 ELSE 0 END),
+  ROUND(AVG(ratings.rating), 1) AS rating,
+  SUM(CASE WHEN favourites.liked THEN 1 ELSE 0 END) AS likes,
   tags.topic as tags
     FROM resources
     JOIN users ON users.id = owner_id
@@ -44,7 +44,10 @@ const getSearchResources = function (keyword) {
   //Run the query
   return pool
     .query(queryString, queryParams)
-    .then((result) => result.rows)
+    .then((result) => {
+    //   console.log("this is query result.rows:", result.rows);
+      return result.rows;
+    })
     .catch((err) => {
       console.log("error message:", err.message);
     });
