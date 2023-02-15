@@ -67,15 +67,15 @@ $(() => {
 
   window.header.update = updateHeader;
 
-  //Check whether or not the user is logged in
+//   Check whether or not the user is logged in
   const isLoggedIn = $.ajax({
-    url: "/",
+    url: "/login",
     type: "GET",
   });
 
   isLoggedIn.done(function (response) {
     //success code here
-    console.log("success");
+    console.log("TEST IS LOGGED IN");
     const isLoggedIn = response;
     updateHeader(isLoggedIn);
   });
@@ -151,8 +151,9 @@ $(() => {
     $.get('/login/logout')
       .then(() => {
         $("#page-header").empty();
-        updateHeader(false);
-      })
+          updateHeader(false);
+          views_manager.show("loginForm");
+        })
   })
 
   //Render Profile page on click
