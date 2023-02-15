@@ -10,9 +10,17 @@ $(() => {
 
   window.$commentForm = $commentForm;
 
+
+  let commentPostresourceId;
+  $(document).on("click", ".resource-card", function (event) {
+    commentPostresourceId = $(this).attr("id");
+  });
+
   $commentForm.on('submit', function(event) {
     event.preventDefault();
-    $.post("/api/comments/submission", {info : $(this).serialize()})
+    const formData = $(this).serialize();
+    const resourceID = commentPostresourceId;
+    $.post("/api/comments/submission", {info : { formData , resourceID }})
       .then((res) => {
         if (res === "") {
           $(".error-message").append("<h1>Details need to be filled out</h1>");

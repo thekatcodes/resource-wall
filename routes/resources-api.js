@@ -5,6 +5,8 @@ const client = require('../db/connection.js');
 const { getUsersFromEmail ,userLike } = require('../db/queries/users');
 const { addLiked, updateLiked } = require('../db/queries/submission');
 const { getAllResources , getResourceById } = require("../db/queries/getAllResources.js");
+const { serializeIntoObject } = require('../public/scripts/users-api');
+
 
 router.use((req, res, next) => {
   console.log("inside the resources router");
