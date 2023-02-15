@@ -7,9 +7,9 @@ $(() => {
   window.viewResource = {};
 
   function createResourceArticle(resource) {
-    return `<article class='view-resources'>
+    return `<div id=${resource.id} class='card mb-3'>
               <div class='article-image'>
-                <img src='${resource.cover_image_url}'>
+                <img class='card-img' src='${resource.cover_image_url}'>
               </div>
               <div>
                 <div>
@@ -26,7 +26,7 @@ $(() => {
                 <span>Resource Link:<span>
                 <a href='${resource.url}'>${resource.url}</a>
               </footer>
-            </article>`;
+            </div>`;
   }
   window.viewResource.createResourceArticle = createResourceArticle;
 

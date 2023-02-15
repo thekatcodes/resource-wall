@@ -22,9 +22,11 @@ $(() => {
     const resourceID = commentPostresourceId;
     $.post("/api/comments/submission", {info : { formData , resourceID }})
       .then((res) => {
+        console.log(res.body)
         if (res === "") {
-          $(".error-message").append("<h1>Details need to be filled out</h1>");
+          $(".error-message").append("<h1>Please don't leave the comment blank</h1>");
         } else {
+          views_manager.show("resource")
           console.log("Show current page");
         }
       });

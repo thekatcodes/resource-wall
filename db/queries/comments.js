@@ -25,7 +25,7 @@ const addComment= (resourceID, userID, message) => {
   VALUES ($1, $2, $3)
   RETURNING *;
   `
-  return db.query(queryString, [resourceID, userID, message])
+  return pool.query(queryString, [resourceID, userID, message])
     .then(data => {
       return data.rows[0];
     });

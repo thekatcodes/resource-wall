@@ -1,7 +1,7 @@
-function getAllResources (keyword) {
+function getAllResources (id) {
     let url = "/api/resources";
-    if (keyword) {
-            url += "?" + keyword;
+    if (id) {
+            url += "?" + id;
           }
   return $.ajax({
     url,
