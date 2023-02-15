@@ -51,7 +51,7 @@ $(() => {
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Log out</a>
+                    <a id="logout-btn" class="nav-link active" href="#">Log out</a>
                 </li>
                 <li class="nav-item">
                     <a id="profile-btn" class="nav-link active" href="#">Profile</a>
@@ -147,6 +147,13 @@ $(() => {
   //Render My resources page on click
 
   //Render Logout on click
+    $("header").on("click", "#logout-btn", () => {
+    $.get('/login/logout')
+      .then(() => {
+        $("#page-header").empty();
+        updateHeader(false);
+      })
+  })
 
   //Render Profile page on click
   $("header").on("click", "#profile-btn", () => {
