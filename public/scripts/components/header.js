@@ -135,8 +135,8 @@ $(() => {
   $("header").on("click", "#logout-btn", () => {
     $.get("/login/logout").then(() => {
       $("#page-header").empty();
-      $(".card-columns").remove();
       updateHeader(false);
+      $(".card-columns").remove();
       views_manager.show("loginForm");
     });
   });
