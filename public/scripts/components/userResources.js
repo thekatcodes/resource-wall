@@ -1,52 +1,68 @@
 $(() => {
-  function addResource(resource) {
-    $newResources.append(resource);
+
+  const $newUserResources = $(`<section class="card-columns">
+  <p>Loading...</p>
+  </section>`);
+  window.$newUserResources = $newUserResources;
+  window.newUserResources = {};
+
+  const $newUserLikes = $(`<section class="card-columns">
+  <p>Loading...</p>
+  </section>`);
+  window.$newUserLikes = $newUserLikes;
+  window.newUserLikes = {};
+
+  function addResource(resource, appendage) {
+    appendage.append(resource);
   }
 
-  function clearResources(resource) {
-    $newResources.empty(resource);
+  function clearResources(appendage) {
+    appendage.empty();
   }
+
+  window.newUserResources.clearResources = clearResources;
 
   function addUserResources() {
-    clearResources();
-    $newResources.append(`<h2>Your created resources<h2>`);
+    clearUserResources($newUserResources);
+    $newUserResources.append(`<h2>Your created resources<h2>`)
     $.get("/api/resources/user", (resources) => {
       for (const resourceId in resources) {
         const resource = resources[resourceId];
-        $.get("/api/resources/like", { resources: resource.id }).then(
-          (data) => {
-            const card = window.resource.createResourceElement(resource, data);
-            console.log(card);
-            addResource(card);
-          }
-        );
+        $.get("/api/resources/like", {resources : resource.id})
+        .then((data) => {
+          const card = window.resource.createResourceElement(resource, data);
+          addResource(card, $newUserResources)
+        })
       }
-    });
-  }
+    })
+    .done(addUserLikes())
+   }
 
   function addUserLikes() {
+    $newUserResources.append(`<h2>Your liked resources<h2>`)
     $.get("/api/resources/user/likes", (resources) => {
       for (const resourceId in resources) {
         const resource = resources[resourceId];
-        $.get("/api/resources/like", { resources: resource.id }).then(
-          (data) => {
-            const card = window.resource.createResourceElement(resource, data);
-            console.log(card);
-            addResource(card);
-          }
-        );
+        $.get("/api/resources/like", {resources : resource.id})
+        .then((data) => {
+          const card = window.resource.createResourceElement(resource, data);
+          addResource(card, $newUserLikes)
+        })
       }
-    });
+      return
+    })
   }
 
-  window.newResources.addUserResources = addUserResources;
-  window.newResources.addUserLikes = addUserLikes;
+  window.newUserResources.addUserResources = addUserResources;
+  window.newUserResources.addUserLikes = addUserLikes;
+
 
   $(document).on("click", "#user-resources", function () {
-    newResources
-      .addUserResources()
-      .then($newResources.append(`<h2>Your liked resources<h2>`));
-    newResources.addUserLikes();
-    views_manager.show("resources");
+
+    newUserResources.addUserResources()
+    newUserResources.addUserLikes()
+    //newUserResources.addUserLikes();
+    views_manager.show("userResources")
+
   });
 });

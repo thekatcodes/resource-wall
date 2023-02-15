@@ -30,7 +30,6 @@ router.get("/user", (req, res) => {
   console.log(userId)
   getResourcesFromUserEmail(userId)
     .then((response) => {
-      console.log(response)
       return res.json(response);
     })
     .catch((e) => {
@@ -76,7 +75,6 @@ router.get('/user/likes', (req, res) => {
   getUsersFromEmail(req.session.email)
     .then((data) => getLikesFromUserid(data.id))
     .then((response) => {
-      console.log(response)
       return res.json(response);
     })
     .catch((e) => {
