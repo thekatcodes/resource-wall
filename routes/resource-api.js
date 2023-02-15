@@ -4,6 +4,7 @@ const { addResource, addTag } = require('../db/queries/submission');
 const { getUsersFromEmail } = require('../db/queries/users');
 const { serializeIntoObject } = require('../public/scripts/users-api');
 
+
 router.post('/submission', (req, res) => {
   const info = serializeIntoObject(req.body.info);
   getUsersFromEmail(req.session.email)
@@ -17,5 +18,6 @@ router.post('/submission', (req, res) => {
       return res.send("");
     });
 });
+
 
 module.exports = router;

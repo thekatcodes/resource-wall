@@ -4,7 +4,7 @@ $(() => {
   const $pageHeader = $("#page-header");
 
   function updateHeader(isLoggedIn) {
-    console.log("test header");
+    // console.log("test header");
     let header;
 
     if (!isLoggedIn) {
@@ -32,7 +32,7 @@ $(() => {
       // IF USER LOGGED IN NAVBAR
       header = `
         <nav id="header-user-links" class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">
+            <a id="logo-btn" class="navbar-brand" href="#">
                 Logo
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +54,7 @@ $(() => {
                     <a class="nav-link active" href="#">Log out</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Profile</a>
+                    <a id="profile-btn" class="nav-link active" href="#">Profile</a>
                 </li>
                 </ul>
             </div>
@@ -76,7 +76,7 @@ $(() => {
   isLoggedIn.done(function (response) {
     //success code here
     console.log("success");
-    const isLoggedIn = response.email;
+    const isLoggedIn = response;
     updateHeader(isLoggedIn);
   });
 
@@ -86,11 +86,12 @@ $(() => {
     updateHeader(isLoggedIn);
   });
 
-  $("#search-resource-form").on("submit", function (e) {
+  /* Search for keyword */
+  $("header").on("submit", "#search-resource-form", function (e) {
     e.preventDefault();
-
     //Retrieves search input value
     const keywordSearch = $(e.currentTarget).find(".js-keyword-search");
+    console.log("keywordSearch:", keywordSearch.val());
 
     //Make an ajax GET call giving the keyword (search input value)
     const request = $.ajax({
@@ -102,12 +103,13 @@ $(() => {
 
     request.done(function (data) {
       //success code here
-      console.log("success");
+      console.log("data from search-queries:", data);
+      console.log("get data from search-queries success!");
     });
 
     request.fail(function (error) {
       //failure code here
-      console.log("failed");
+      console.log("get data from search-queries failed");
     });
   });
 
@@ -125,6 +127,9 @@ $(() => {
 
   /* If user is logged in*/
   //Render Home page (main content) on Logo click
+  $("header").on("click", "#logo-btn", function () {
+    views_manager.show("resources");
+  });
 
   //Render Create resource page on click
   $("header").on("click", "#create-resource-btn", () => {
@@ -136,5 +141,7 @@ $(() => {
   //Render Logout on click
 
   //Render Profile page on click
-
+  $("header").on("click", "#profile-btn", () => {
+    views_manager.show("updateProfile");
+  });
 });

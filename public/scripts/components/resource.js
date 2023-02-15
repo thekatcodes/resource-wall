@@ -1,5 +1,10 @@
 $(() => {
   window.resource = {};
+
+const checkIfRating = (value) => {
+    return value === null ? 'Not Rated' : value;
+  }
+
   function createResourceElement(resource, like) {
     let heartIcon;
     if (like.liked) {
@@ -7,30 +12,28 @@ $(() => {
     } else {
       heartIcon = `<i class="fa-regular fa-heart"></i>`
     }
-    return `<article class="resource">
-      <header>
-        <div>
+  return `<div id=${resource.id} class="card resource-card">
+       <div>
           <span class="resource-post">${resource.id}</span>
-        </div>
-        <div>
-          <span>${resource.title}</span>
-        </div>
-      </header>
-      <div>
-        ${resource.cover_image_url}
       </div>
-      <footer>
-        <div>
-          ${heartIcon}
-        </div>
-        <div>
-          ${resource.round}
-        </div>
-        <div>
-          ${resource.sum}
-        </div>
-      </footer>
-    </article>`;
+      <div>
+       <img class="card-img-top" src='${resource.cover_image_url}'>
+      </div>
+    <div class="card-body">
+      ${resource.title}
+    </div>
+    <footer class="card-footer">
+      <div>
+        ${heartIcon}
+      </div>
+      <div class="card-text">
+        ${resource.likes}
+      </div>
+      <div class="card-text">
+        ${checkIfRating(resource.rating)}
+      </div>
+    </footer>
+  </div>`;
   }
   
 
