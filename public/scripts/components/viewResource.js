@@ -7,10 +7,10 @@ $(() => {
   window.viewResource = {};
 
   function createResourceArticle(resource) {
-    return `<article>
-              <header>
+    return `<article class='view-resources'>
+              <div class='article-image'>
                 <img src='${resource.cover_image_url}'>
-              </header>
+              </div>
               <div>
                 <div>
                   <span>${resource.author}</span>

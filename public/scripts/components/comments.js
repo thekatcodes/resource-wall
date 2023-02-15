@@ -5,8 +5,13 @@ $(() => {
 
 
   function createCommentElement(comment) {
-    return`<div>
-              ${comment.message}
+    return`<div class = <comment-conainer">
+              <div>
+                ${comment.user}
+              </div>
+              <div>
+                ${comment.message}
+              </div>
             </div>`;
   }
   window.comment.createCommentElement = createCommentElement;
