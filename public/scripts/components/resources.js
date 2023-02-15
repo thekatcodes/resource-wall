@@ -19,15 +19,14 @@ $(() => {
     for (const resourceId in resources) {
       const resource = resources[resourceId];
       const card = window.resource.createResourceElement(resource);
-      addResource(card)
+      addResource(card);
     }
   }
 
   window.newResources.addResources = addResources;
 
-  getAllResources().then(function(json) {
-    window.newResources.addResources(json)
-    views_manager.show('resources')
-  })
-
+  getAllResources().then(function (json) {
+    window.newResources.addResources(json);
+    views_manager.show("resources");
+  });
 });
