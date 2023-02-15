@@ -24,18 +24,6 @@ router.get("/", (req, res) => {
     });
 });
 
-router.get("/:id", (req, res) => {
-  const resourceId = req.params.id;
-  getResourceById(resourceId)
-    .then((response) => {
-      return res.json(response);
-    })
-    .catch((e) => {
-      console.error(e);
-      res.send(e);
-    });
-});
-
 router.get('/like', (req, res) => {
   getUsersFromEmail(req.session.email)
     .then((data) => userLike(data.id, req.query.resources))
@@ -65,29 +53,42 @@ router.post('/like', (req, res) => {
         })
         .catch((e) => {
           return res.send("");
-        })
+        });
+    });
+});
+
+router.post('/submission', (req, res) => {
+  const info = serializeIntoObject(req.body.info);
+  getUsersFromEmail(req.session.email)
+    .then((data) => addResource(data.id, info.title, info.description, info.imageURL, info.externalURL))
+    .then((dataRes) => addTag(dataRes.id, info.tags))
+    .then((tagData) => {
+      console.log(tagData);
+      return res.json(tagData);
     })
-
-})
-
-// router.post('/submission', (req, res) => {
-//   const info = serializeIntoObject(req.body.info);
-//   getUsersFromEmail(req.session.email)
-//     .then((data) => addResource(data.id, info.title, info.description, info.imageURL, info.externalURL))
-//     .then((dataRes) => addTag(dataRes.id, info.tags))
-//     .then((tagData) => {
-//       console.log(tagData);
-//       return res.json(tagData);
-//     })
-//     .catch((e) => {
-//       return res.send("");
-//     });
+    .catch((e) => {
+      return res.send("");
+    });
+});
 
 // GET /resources for search queries
+
 router.get("/resources", (req, res) => {
   database
     .getSearchResources(req.query)
     .then((resources) => res.send({ resources }))
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
+});
+
+router.get("/:id", (req, res) => {
+  const resourceId = req.params.id;
+  getResourceById(resourceId)
+    .then((response) => {
+      return res.json(response);
+    })
     .catch((e) => {
       console.error(e);
       res.send(e);

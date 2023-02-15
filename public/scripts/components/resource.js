@@ -1,7 +1,7 @@
 $(() => {
   window.resource = {};
 
-const checkIfRating = (value) => {
+  const checkIfRating = (value) => {
     return value === null ? 'Not Rated' : value;
   }
 
