@@ -40,7 +40,6 @@ app.use(express.static('public'));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const loginApiRoutes = require('./routes/login-api');
-const resourceApiRoutes = require('./routes/resource-api.js');
 const commentsApiRoutes =  require('./routes/comments-api.js');
 const resourcesApiRoutes = require('./routes/resources-api.js'); //resource router
 const loginRouter = require('./routes/login-router.js');
