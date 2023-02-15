@@ -4,7 +4,7 @@ const router = express.Router();
 const client = require('../db/connection.js');
 const { getUsersFromEmail ,userLike } = require('../db/queries/users');
 const { addLiked, updateLiked } = require('../db/queries/submission');
-const { getAllResources , getResourceById } = require("../db/queries/getAllResources.js");
+const { getAllResources , getResourceById, getResourcesFromUserID } = require("../db/queries/getAllResources.js");
 const { serializeIntoObject } = require('../public/scripts/users-api');
 
 
@@ -17,6 +17,20 @@ router.use((req, res, next) => {
 router.get("/", (req, res) => {
   getAllResources()
     .then((response) => {
+      return res.json(response);
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
+});
+
+router.get("/user", (req, res) => {
+  const userId = req.session.email;
+  console.log(userId)
+  getResourcesFromUserID(userId)
+    .then((response) => {
+      console.log(response)
       return res.json(response);
     })
     .catch((e) => {

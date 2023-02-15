@@ -44,7 +44,7 @@ $(() => {
                     <a id="create-resource-btn" class="nav-link">Create resource</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">My resources</a>
+                    <a id="user-resources" class="nav-link" href="#">My resources</a>
                 </li>
                 <form action="/search" method="GET" id="search-resource-form" class="form-inline my-2 my-lg-0">
                     <input class="js-keyword-search form-control mr-sm-2" type="search" placeholder="Search resource" aria-label="Search">
@@ -109,8 +109,8 @@ $(() => {
               window.newResources.addResources(data[item]);
           }
           views_manager.show('resources');
-    
-    
+
+
         // console.log("data from search-queries:", data);
         // console.log("get data from search-queries success!");
     });

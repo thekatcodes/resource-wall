@@ -1,3 +1,4 @@
+
 function getAllResources (id) {
     let url = "/api/resources";
     if (id) {

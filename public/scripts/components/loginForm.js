@@ -27,7 +27,7 @@ $(() => {
         }
       });
   });
-  
+
   $loginForm.on('keyup', () => {
     if ($('.email-form')[0].value && $('.password-form')[0].value) {
       $('#login').removeAttr('disabled');

@@ -49,22 +49,22 @@ const getResourceById = function (id) {
     });
 };
 
-const getResourcesFromUserID =function (id) {
+const getResourcesFromUserID =function (email) {
   return pool
     .query(
       `SELECT resources.id, title,
                   description,
                   cover_image_url,
                   users.name,
-                  user.id,
+                  users.email,
                   ROUND(AVG(ratings.rating), 1) AS rating,
                   SUM(CASE WHEN favourites.liked THEN 1 ELSE 0 END) AS likes
                     FROM resources
                     JOIN users ON users.id = owner_id
                     LEFT JOIN ratings ON resources.id = ratings.resource_id
                     LEFT JOIN favourites ON resources.id = favourites.resource_id
-                    WHERE user.id = $1
-                    GROUP BY resources.id, title, description, cover_image_url, users.name, user.id;`, [id]
+                    WHERE users.email = $1
+                    GROUP BY resources.id, title, description, cover_image_url, users.name, users.email;`, [email]
     )
     .then((result) => {
       return result.rows;
