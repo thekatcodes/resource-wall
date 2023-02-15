@@ -61,4 +61,56 @@ const resourceAverageRating = (resourceID) => {
       return data.rows[0];
     });
 };
-module.exports = { getAllResources, getResourceById, resourceAverageRating };
+
+const getResourcesFromUserEmail =function (email) {
+  return pool
+    .query(
+      `SELECT resources.id, title,
+                  description,
+                  cover_image_url,
+                  users.name,
+                  users.email,
+                  ROUND(AVG(ratings.rating), 1) AS rating,
+                  SUM(CASE WHEN favourites.liked THEN 1 ELSE 0 END) AS likes
+                    FROM resources
+                    JOIN users ON users.id = owner_id
+                    LEFT JOIN ratings ON resources.id = ratings.resource_id
+                    LEFT JOIN favourites ON resources.id = favourites.resource_id
+                    WHERE users.email = $1
+                    GROUP BY resources.id, title, description, cover_image_url, users.name, users.email;`, [email]
+    )
+    .then((result) => {
+      return result.rows;
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+const getLikesFromUserid =function (id) {
+  return pool
+    .query(
+      `SELECT resources.id, title,
+                  description,
+                  cover_image_url,
+                  users.name,
+                  users.email,
+                  ROUND(AVG(ratings.rating), 1) AS rating,
+                  SUM(CASE WHEN favourites.liked THEN 1 ELSE 0 END) AS likes
+                    FROM resources
+                    JOIN users ON users.id = owner_id
+                    LEFT JOIN ratings ON resources.id = ratings.resource_id
+                    LEFT JOIN favourites ON resources.id = favourites.resource_id
+                    WHERE favourites.user_id = $1
+                    GROUP BY resources.id, title, description, cover_image_url, users.name, users.email;`, [id]
+    )
+    .then((result) => {
+      return result.rows;
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+module.exports = { getAllResources, getResourceById, getResourcesFromUserEmail, getLikesFromUserid, resourceAverageRating };
+

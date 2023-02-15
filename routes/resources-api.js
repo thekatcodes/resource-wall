@@ -2,9 +2,11 @@ const express = require("express");
 
 const router = express.Router();
 const client = require('../db/connection.js');
+
 const { getUsersFromEmail ,userLike, userRating } = require('../db/queries/users');
 const { addLiked, updateLiked, addResource, addTag, updateRating, addRating } = require('../db/queries/submission');
-const { getAllResources , getResourceById, resourceAverageRating } = require("../db/queries/getAllResources.js");
+const { getAllResources , getResourceById, getResourcesFromUserEmail, getLikesFromUserid, resourceAverageRating } = require("../db/queries/getAllResources.js");
+
 const { serializeIntoObject } = require('../public/scripts/users-api');
 const getCommentsForResource = require("../db/queries/comments");
 
@@ -17,6 +19,19 @@ router.use((req, res, next) => {
 // GET /
 router.get("/", (req, res) => {
   getAllResources()
+    .then((response) => {
+      return res.json(response);
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
+});
+
+router.get("/user", (req, res) => {
+  const userId = req.session.email;
+  console.log(userId)
+  getResourcesFromUserEmail(userId)
     .then((response) => {
       return res.json(response);
     })
@@ -53,6 +68,18 @@ router.post('/like', (req, res) => {
         .catch((e) => {
           return res.send("");
         });
+    });
+});
+
+router.get('/user/likes', (req, res) => {
+  getUsersFromEmail(req.session.email)
+    .then((data) => getLikesFromUserid(data.id))
+    .then((response) => {
+      return res.json(response);
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
     });
 });
 
