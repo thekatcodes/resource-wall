@@ -9,6 +9,7 @@ $(() => {
     $updateProfile.detach();
     $viewResource.detach();
     $newResources.detach();
+    $submissionForm.detach();
 
     // Add other components to append to the main content (index.html)
     switch (item) {
