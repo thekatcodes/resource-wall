@@ -50,15 +50,17 @@ router.get("/:id", (req, res) => {
 //       return res.send("");
 //     });
 
+/* MIGHT DELETE LATER IF THERE'S NO USE FOR IT */
 // GET /resources for search queries
-router.get("/resources", (req, res) => {
-  database
-    .getSearchResources(req.query)
-    .then((resources) => res.send({ resources }))
-    .catch((e) => {
-      console.error(e);
-      res.send(e);
-    });
-});
+// router.get("/resources", (req, res) => {
+//     console.log('is this thing working')
+
+//   database.getSearchResources(req.query)
+//     .then((resources) => res.send({ resources }))
+//     .catch((e) => {
+//       console.error(e);
+//       res.send(e);
+//     });
+// });
 
 module.exports = router;
