@@ -21,7 +21,7 @@ $(() => {
 
   $submissionForm.on('submit', function(event) {
     event.preventDefault();
-    $.post("/api/resource/submission", {info : $(this).serialize()})
+    $.get("/api/resources/submission", {info : $(this).serialize()})
       .then((res) => {
         if (res === "") {
           $(".error-message").append("<h1>Details need to be filled out</h1>");

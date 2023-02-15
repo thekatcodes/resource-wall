@@ -40,8 +40,7 @@ app.use(express.static('public'));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const loginApiRoutes = require('./routes/login-api');
-const resourceApiRoutes = require('./routes/resource-api');
-
+const commentsApiRoutes =  require('./routes/comments-api.js');
 const resourcesApiRoutes = require('./routes/resources-api.js'); //resource router
 const loginRouter = require('./routes/login-router.js');
 const searchRouter = require('./routes/search-router.js');
@@ -56,8 +55,8 @@ app.use('/api/resources', resourcesApiRoutes);
 
 
 app.use('/api/login', loginApiRoutes);
-app.use('/api/resource', resourceApiRoutes);
 app.use('/search', searchRouter);
+app.use('/api/comments', commentsApiRoutes);
 
 // Note: mount other resources here, using the same pattern above
 

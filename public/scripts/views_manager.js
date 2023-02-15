@@ -10,6 +10,7 @@ $(() => {
     $viewResource.detach();
     $newResources.detach();
     $submissionForm.detach();
+    $newComments.detach();
 
     // Add other components to append to the main content (index.html)
     switch (item) {
@@ -33,6 +34,7 @@ $(() => {
         break;
       case "resource":
         $viewResource.appendTo($main);
+        $newComments.appendTo($main);
         break;
     }
   };
