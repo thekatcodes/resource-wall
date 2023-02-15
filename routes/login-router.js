@@ -16,5 +16,10 @@ router.get('/logout', (req, res) => {
   res.send("logout");
 });
 
+// GET login status 
+router.get('/loginStatus', (req, res) => {
+    res.send(req.session.email);
+  });
+
 module.exports = router;
 
