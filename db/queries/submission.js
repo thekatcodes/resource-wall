@@ -24,4 +24,31 @@ const addTag = (resourceID, tag) => {
     });
 };
 
-module.exports = { addResource, addTag };
+const addLiked = (resourceID, userID) => {
+  const queryString = `
+  INSERT into favourites (resource_id, user_id, liked)
+  VALUES ($1, $2, true)
+  RETURNING *;
+  `;
+  return db.query(queryString, [resourceID, userID])
+    .then((data) => {
+      return data.rows[0];
+    });
+};
+
+const updateLiked = (likeObject) => {
+  let queryString = `UPDATE favourites `;
+  if (likeObject.liked) {
+    queryString += `SET liked = false `;
+  } else {
+    queryString += `SET liked = true `;
+  }
+  queryString += `WHERE id = $1 RETURNING *;`;
+
+  return db.query(queryString, [likeObject.id])
+    .then((data) => {
+      return data.rows[0];
+    });
+};
+
+module.exports = { addResource, addTag, addLiked, updateLiked };

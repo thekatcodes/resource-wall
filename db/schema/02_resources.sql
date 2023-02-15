@@ -37,5 +37,6 @@ CREATE TABLE comments (
   id SERIAL PRIMARY KEY NOT NULL,
   resource_id INTEGER NOT NULL REFERENCES resources(id) ON DELETE CASCADE,
   user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-  message TEXT
+  message TEXT,
+  created_date DATE NOT NULL DEFAULT NOW()
 );
