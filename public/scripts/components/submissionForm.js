@@ -16,7 +16,7 @@ $(() => {
     <button type="submit" class="btn btn-info">Submit</button>
     </form>
   `);
-  
+
   window.$submissionForm = $submissionForm;
 
   $submissionForm.on('submit', function(event) {

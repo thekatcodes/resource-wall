@@ -1,6 +1,6 @@
 const pool = require('../connection.js');
 
-const getCommentsForResource = function(id) {
+const getCommentsFromResource = function(id) {
   return pool.query(`SELECT comments.id as id,
                       resources.id as resource_id,
                       users.id as user_id,
@@ -32,4 +32,4 @@ const addComment= (resourceID, userID, message) => {
 };
 
 
-module.exports = { getCommentsForResource, addComment };
+module.exports = { getCommentsFromResource, addComment };
