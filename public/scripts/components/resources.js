@@ -18,10 +18,38 @@ $(() => {
     clearResources();
     for (const resourceId in resources) {
       const resource = resources[resourceId];
-      const card = window.resource.createResourceElement(resource);
-      addResource(card)
+      $.get("/api/resources/like", {resources : resource.id})
+        .then((data) => {
+          const card = window.resource.createResourceElement(resource, data);
+          addResource(card)
+        })
     }
   }
+
+  $newResources.on('click', 'i', function(event) {
+    event.stopPropagation();
+    const parentElement = $($(this).parents()[2]).find('span')[0];
+    const resourceID = parentElement.innerText;
+    if ($(this).hasClass('fa-regular')) {
+      $.post('/api/resources/like', { info : parseInt(resourceID)})
+        .then((data) => {
+          console.log(data)
+          if (data) {
+            $(this).removeClass('fa-regular');
+            $(this).addClass('fa-solid');
+          }
+        })
+    } else {
+        $.post('/api/resources/like', { info : parseInt(resourceID)})
+          .then((data) => {
+            console.log(data)
+            if (data) {
+            $(this).removeClass('fa-solid');
+            $(this).addClass('fa-regular');
+            }
+          })
+    }
+  });
 
   window.newResources.addResources = addResources;
 
@@ -31,3 +59,4 @@ $(() => {
   })
 
 });
+

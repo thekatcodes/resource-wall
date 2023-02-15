@@ -53,5 +53,18 @@ const updateUserDetails = (options, id) => {
     });
 };
 
-module.exports = { getUsersFromEmail, addUsers, updateUserDetails};
+const userLike = (userID, post) => {
+  const queryString = `
+  SELECT liked, id FROM favourites
+  WHERE user_id = $1 AND resource_id = $2
+  `;
+
+  return db.query(queryString, [userID, post])
+    .then((data) => {
+      return data.rows[0];
+    });
+};
+
+
+module.exports = { getUsersFromEmail, addUsers, updateUserDetails, userLike };
 
