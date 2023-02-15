@@ -6,7 +6,7 @@ $(() => {
 
   function createCommentElement(comment) {
     return`<div>
-              ${comment}
+              ${comment.message}
             </div>`;
   }
   window.comment.createCommentElement = createCommentElement;
@@ -37,5 +37,12 @@ $(() => {
       addComment(showComment)
     }
   }
+
   window.newComments.addComments = addComments;
+  $(document).on("click", ".resource-card", function (event) {
+    const commentsResourceId = $(this).attr("id");
+    getCommentsForResource(5).then(function (json) {
+      window.newComments.addComments(json);
+    });
+  });
 });
