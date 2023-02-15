@@ -13,6 +13,7 @@ $(() => {
     $commentForm.detach();
     $newComments.detach();
     $newUserResources.detach();
+    $newUserLikes.detach()
 
     // Add other components to append to the main content (index.html)
     switch (item) {
@@ -41,7 +42,9 @@ $(() => {
         break;
       case "userResources":
         $newUserResources.appendTo($main);
+        $newUserLikes.appendTo($main);
        break;
+
     }
   };
 });

@@ -23,7 +23,7 @@ $(() => {
   window.newUserResources.clearResources = clearResources;
 
   function addUserResources() {
-    clearUserResources($newUserResources);
+    clearResources($newUserResources);
     $newUserResources.append(`<h2>Your created resources<h2>`)
     $.get("/api/resources/user", (resources) => {
       for (const resourceId in resources) {
@@ -39,7 +39,7 @@ $(() => {
    }
 
   function addUserLikes() {
-    $newUserResources.append(`<h2>Your liked resources<h2>`)
+    $newUserLikes.append(`<h2>Your liked resources<h2>`)
     $.get("/api/resources/user/likes", (resources) => {
       for (const resourceId in resources) {
         const resource = resources[resourceId];
