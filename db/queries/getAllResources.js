@@ -49,6 +49,19 @@ const getResourceById = function (id) {
     });
 };
 
+const resourceAverageRating = (resourceID) => {
+  const queryString = `
+  SELECT ROUND(AVG(rating), 1) AS average_rating, resource_id 
+  FROM ratings
+  WHERE resource_id = $1
+  GROUP BY resource_id;
+  `;
+  return pool.query(queryString, [resourceID])
+    .then((data) => {
+      return data.rows[0];
+    });
+};
+
 const getResourcesFromUserEmail =function (email) {
   return pool
     .query(
@@ -99,7 +112,5 @@ const getLikesFromUserid =function (id) {
     });
 };
 
+module.exports = { getAllResources, getResourceById, getResourcesFromUserEmail, getLikesFromUserid, resourceAverageRating };
 
-
-
-module.exports = { getAllResources, getResourceById, getResourcesFromUserEmail, getLikesFromUserid };

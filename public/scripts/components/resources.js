@@ -30,25 +30,20 @@ $(() => {
     event.stopPropagation();
     const parentElement = $($(this).parents()[2]).find('span')[0];
     const resourceID = parentElement.innerText;
-    if ($(this).hasClass('fa-regular')) {
-      $.post('/api/resources/like', { info : parseInt(resourceID)})
-        .then((data) => {
-          console.log(data)
-          if (data) {
-            $(this).removeClass('fa-regular');
-            $(this).addClass('fa-solid');
-          }
-        })
-    } else {
-        $.post('/api/resources/like', { info : parseInt(resourceID)})
-          .then((data) => {
-            console.log(data)
-            if (data) {
-            $(this).removeClass('fa-solid');
-            $(this).addClass('fa-regular');
-            }
-          })
-    }
+    $.post('/api/resources/like', { info : parseInt(resourceID)})
+      .then((data) => {
+        if (data.liked === true) {
+          $(this).removeClass('fa-regular');
+          $(this).addClass('fa-solid');
+          let totalHearts = $($(this).parents()[1]).find('.likes')[0]
+          totalHearts.innerText = parseInt(totalHearts.innerText) + 1
+      } else if (data.liked === false) {
+          $(this).removeClass('fa-solid');
+          $(this).addClass('fa-regular');
+          let totalHearts = $($(this).parents()[1]).find('.likes')[0]
+          totalHearts.innerText = totalHearts.innerText - 1
+        }
+      });
   });
 
   window.newResources.addResources = addResources;
