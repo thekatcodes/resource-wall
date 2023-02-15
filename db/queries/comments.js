@@ -19,4 +19,17 @@ const getCommentsForResource = function(id) {
                       });
 };
 
-module.exports = getCommentsForResource;
+const addComment= (resourceID, userID, message) => {
+  const queryString = `
+  INSERT into comments (resource_id, user_id, message)
+  VALUES ($1, $2, $3)
+  RETURNING *;
+  `
+  return db.query(queryString, [resourceID, userID, message])
+    .then(data => {
+      return data.rows[0];
+    });
+};
+
+
+module.exports = { getCommentsForResource, addComment };
