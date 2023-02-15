@@ -11,8 +11,9 @@ router.use((req, res, next) => {
 });
 
 // GET /
-router.get('/', (req, res) => {
-  res.send('<div id="content"></div>');
+router.get('/logout', (req, res) => {
+  req.session.email = null;
+  res.send("logout");
 });
 
 module.exports = router;
