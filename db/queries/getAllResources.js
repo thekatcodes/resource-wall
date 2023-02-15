@@ -49,4 +49,16 @@ const getResourceById = function (id) {
     });
 };
 
-module.exports = { getAllResources, getResourceById };
+const resourceAverageRating = (resourceID) => {
+  const queryString = `
+  SELECT ROUND(AVG(rating), 1) AS average_rating, resource_id 
+  FROM ratings
+  WHERE resource_id = $1
+  GROUP BY resource_id;
+  `;
+  return pool.query(queryString, [resourceID])
+    .then((data) => {
+      return data.rows[0];
+    });
+};
+module.exports = { getAllResources, getResourceById, resourceAverageRating };
