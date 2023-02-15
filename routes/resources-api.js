@@ -4,7 +4,7 @@ const router = express.Router();
 const client = require('../db/connection.js');
 const { getUsersFromEmail ,userLike } = require('../db/queries/users');
 const { addLiked, updateLiked } = require('../db/queries/submission');
-const { getAllResources , getResourceById, getResourcesFromUserID } = require("../db/queries/getAllResources.js");
+const { getAllResources , getResourceById, getResourcesFromUserEmail, getLikesFromUserid } = require("../db/queries/getAllResources.js");
 const { serializeIntoObject } = require('../public/scripts/users-api');
 
 
@@ -28,7 +28,7 @@ router.get("/", (req, res) => {
 router.get("/user", (req, res) => {
   const userId = req.session.email;
   console.log(userId)
-  getResourcesFromUserID(userId)
+  getResourcesFromUserEmail(userId)
     .then((response) => {
       console.log(response)
       return res.json(response);
@@ -69,6 +69,19 @@ router.post('/like', (req, res) => {
         .catch((e) => {
           return res.send("");
         });
+    });
+});
+
+router.get('/user/likes', (req, res) => {
+  getUsersFromEmail(req.session.email)
+    .then((data) => getLikesFromUserid(data.id))
+    .then((response) => {
+      console.log(response)
+      return res.json(response);
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
     });
 });
 
