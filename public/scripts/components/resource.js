@@ -8,9 +8,9 @@ $(() => {
   function createResourceElement(resource, like) {
     let heartIcon;
     if (like.liked) {
-      heartIcon = `<i class="fa-solid fa-heart"></i>`
+      heartIcon = `<i class="favourites fa-solid fa-heart"></i>`
     } else {
-      heartIcon = `<i class="fa-regular fa-heart"></i>`
+      heartIcon = `<i class="favourites fa-regular fa-heart"></i>`
     }
   return `<div id=${resource.id} class="card resource-card">
        <div>
@@ -26,7 +26,7 @@ $(() => {
       <div>
         ${heartIcon}
       </div>
-      <div class="card-text">
+      <div class="card-text likes">
         ${resource.likes}
       </div>
       <div class="card-text">
