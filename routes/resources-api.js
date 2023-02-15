@@ -27,8 +27,7 @@ router.get("/", (req, res) => {
 });
 
 router.get('/like', (req, res) => {
-  getUsersFromEmail(req.session.email)
-    .then((data) => userLike(data.id, req.query.resources))
+  userLike(req.session.user, req.query.resources)
     .then((likeData) => {
       if (!likeData) {
         return res.json({liked : false});
@@ -41,15 +40,13 @@ router.get('/like', (req, res) => {
 });
 
 router.post('/like', (req, res) => {
-  getUsersFromEmail(req.session.email)
-    .then((data) => userLike(data.id, req.body.info))
+  userLike(req.session.user, req.body.info)
     .then((userLikeData) => updateLiked(userLikeData))
     .then((updatedLikes) => {
       return res.json(updatedLikes);
     })
     .catch((e) => {
-      getUsersFromEmail(req.session.email)
-        .then((userData) => addLiked(req.body.info, userData.id))
+      addLiked(req.body.info, req.session.user)
         .then((addedLike) => {
           return res.json(addedLike);
         })
@@ -61,8 +58,7 @@ router.post('/like', (req, res) => {
 
 router.post('/submission', (req, res) => {
   const info = serializeIntoObject(req.body.info);
-  getUsersFromEmail(req.session.email)
-    .then((data) => addResource(data.id, info.title, info.description, info.imageURL, info.externalURL))
+  addResource(req.session.user, info.title, info.description, info.imageURL, info.externalURL)
     .then((dataRes) => addTag(dataRes.id, info.tags))
     .then((tagData) => {
       console.log(tagData);
@@ -86,8 +82,7 @@ router.get("/resources", (req, res) => {
 });
 
 router.get("/rating", (req, res) => {
-  getUsersFromEmail(req.session.email)
-    .then((userData) => userRating(userData.id, req.query.resource))
+  userRating(req.session.user, req.query.resource)
     .then((data) => {
       return res.json(data);
     })
@@ -97,16 +92,14 @@ router.get("/rating", (req, res) => {
 });
 
 router.post("/rating", (req, res) => {
-  getUsersFromEmail(req.session.email)
-    .then((userData) => userRating(userData.id, req.body.info))
+  userRating(req.session.user, req.body.info)
     .then((userRatingData) => updateRating(req.body.rating, userRatingData.id))
     .then((ratingData) => resourceAverageRating(ratingData.resource_id))
     .then((data) => {
       return res.json(data);
     })
     .catch(() => {
-      getUsersFromEmail(req.session.email)
-        .then((userData) => addRating(req.body.info, userData.id, req.body.rating))
+      addRating(req.body.info, req.session.user, req.body.rating)
         .then((ratingData) => resourceAverageRating(ratingData.resource_id))
         .then((data) => {
           return res.json(data);

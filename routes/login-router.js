@@ -13,6 +13,7 @@ router.use((req, res, next) => {
 // GET /
 router.get('/logout', (req, res) => {
   req.session.email = null;
+  req.session.user = null;
   res.send("logout");
 });
 
