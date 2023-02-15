@@ -24,7 +24,7 @@ $(() => {
     const resourceID = commentPostresourceId;
 
       //check if input blank
-    if (formatData = 'message=') {
+    if (formData === 'message=') {
       $(".error-message").append("<h1>Please don't leave the comment blank</h1>");
       return;
     }

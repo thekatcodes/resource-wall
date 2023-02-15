@@ -1,45 +1,39 @@
 $(() => {
-
   //create single comment element
   window.comment = {};
 
-
   function createCommentElement(comment) {
-    return`<div class="card" style="width: 80rem;">
-              <div>
-                ${comment.user}
-              </div>
-              <div>
-                ${comment.message}
-              </div>
+    return `<div class="card" style="width: 80rem;">
+              <p>${comment.user}</p>
+              <p>${comment.message}</p>
             </div>`;
   }
   window.comment.createCommentElement = createCommentElement;
 
-
   //Append all comments to window//
-  const $newComments = $(`<section class="card-columns d-flex justify-content-center">
+  const $newComments =
+    $(`<section class="d-flex flex-column justify-content-center">
     <p>Loading...</p>
     </section>`);
   window.$newComments = $newComments;
-  window.newComments = {}
+  window.newComments = {};
 
   function addComment(comment) {
-    $newComments.append(comment)
+    $newComments.append(comment);
   }
 
   function clearComments(comment) {
-    $newComments.empty(comment)
+    $newComments.empty(comment);
   }
 
   window.newComments.clearComments = clearComments;
- //puts resources in object
+  //puts resources in object
   function addComments(comments) {
     clearComments();
     for (const commentId in comments) {
       const comment = comments[commentId];
       const showComment = window.comment.createCommentElement(comment);
-      addComment(showComment)
+      addComment(showComment);
     }
   }
 
