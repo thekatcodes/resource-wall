@@ -67,23 +67,9 @@ $(() => {
 
   window.header.update = updateHeader;
 
-  //Check whether or not the user is logged in
-  const isLoggedIn = $.ajax({
-    url: "/",
-    type: "GET",
-  });
-
-  isLoggedIn.done(function (response) {
-    //success code here
-    console.log("success");
-    const isLoggedIn = response;
-    updateHeader(isLoggedIn);
-  });
-
-  isLoggedIn.fail(function (error) {
-    //failure code here
-    console.log("failed");
-    updateHeader(isLoggedIn);
+  //Check for login status
+  $.get("/login/loginStatus").then((res) => {
+    res.length ? updateHeader(true) : updateHeader(false);
   });
 
   /* Search for keyword */
@@ -97,22 +83,21 @@ $(() => {
     const request = $.ajax({
       url: "/search",
       type: "GET",
-        data: { keyword: keywordSearch.val() },
-        contentType: "application/json; charset=utf-8",
+      data: { keyword: keywordSearch.val() },
+      contentType: "application/json; charset=utf-8",
     });
 
-      request.done(function(data) {
-          window.newResources.clearResources();
-          //Loop through data from searcg request and display related cards
-          for (const item in data) {
-              console.log(data[item]);
-              window.newResources.addResources(data[item]);
-          }
-          views_manager.show('resources');
+    request.done(function (data) {
+      window.newResources.clearResources();
+      //Loop through data from search request and display related cards
+      for (const item in data) {
+        console.log(data[item]);
+        window.newResources.addResources(data[item]);
+      }
+      views_manager.show("resources");
 
-
-        // console.log("data from search-queries:", data);
-        // console.log("get data from search-queries success!");
+      // console.log("data from search-queries:", data);
+      // console.log("get data from search-queries success!");
     });
 
     request.fail(function (error) {
@@ -147,13 +132,14 @@ $(() => {
   //Render My resources page on click
 
   //Render Logout on click
-    $("header").on("click", "#logout-btn", () => {
-    $.get('/login/logout')
-      .then(() => {
-        $("#page-header").empty();
-        updateHeader(false);
-      })
-  })
+  $("header").on("click", "#logout-btn", () => {
+    $.get("/login/logout").then(() => {
+      $("#page-header").empty();
+      updateHeader(false);
+      $(".card-columns").remove();
+      views_manager.show("loginForm");
+    });
+  });
 
   //Render Profile page on click
   $("header").on("click", "#profile-btn", () => {
