@@ -18,9 +18,9 @@ $(() => {
     event.preventDefault();
     $.post("/api/login", {info : $(this).serialize()})
         .done((response) => {
-            // Stops navbar duplication on form submit
             $("#page-header").empty();
             header.update(response);
+            views_manager.show('resources');
         if (!response) {
           $(".error-message").empty();
           $(".error-message").append("<h1>Wrong Password</h1>");
