@@ -97,14 +97,22 @@ $(() => {
     const request = $.ajax({
       url: "/search",
       type: "GET",
-      data: { keyword: keywordSearch.val() },
-      contentType: "application/json; charset=utf-8",
+        data: { keyword: keywordSearch.val() },
+        contentType: "application/json; charset=utf-8",
     });
 
-    request.done(function (data) {
-      //success code here
-      console.log("data from search-queries:", data);
-      console.log("get data from search-queries success!");
+      request.done(function(data) {
+          window.newResources.clearResources();
+          //Loop through data from searcg request and display related cards
+          for (const item in data) {
+              console.log(data[item]);
+              window.newResources.addResources(data[item]);
+          }
+          views_manager.show('resources');
+    
+    
+        // console.log("data from search-queries:", data);
+        // console.log("get data from search-queries success!");
     });
 
     request.fail(function (error) {
