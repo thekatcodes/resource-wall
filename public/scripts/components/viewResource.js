@@ -1,35 +1,34 @@
 $(() => {
   //creates resource element
-  const $viewResource = $(`<section class="card-columns">
+  const $viewResource = $(`<section class="card-columns d-flex justify-content-center">
     <p>Loading...</p>
     </section>`);
   window.$viewResource = $viewResource;
   window.viewResource = {};
 
+  const checkIfRating = (value) => {
+    return value === null ? "Not Rated" : value;
+  };
+
   function createResourceArticle(resource) {
-    return `<div id=${resource.id} class='card mb-3'>
-              <div class='article-image'>
-                <img class='card-img' src='${resource.cover_image_url}'>
-              </div>
-              <div>
-                <div>
+    return `<div id=${
+      resource.id
+    } class="card text-center" style="width: 80rem;">
+                <img class='card-img-top' src='${resource.cover_image_url}'>
+              <div class = "card-body d-flex justify-content-around">
                   <span>${resource.author}</span>
-                </div>
-                <div>
-                  <span>${resource.rating}</span>
-                </div>
+                  <span>${checkIfRating(resource.rating)}</span>
               </div>
               <div>
-                <h2>${resource.title}</h2>
+                <h2 card="card-title">${resource.title}</h2>
               </div>
-              <footer>
-                <span>Resource Link:<span>
-                <a href='${resource.url}'>${resource.url}</a>
+              <div>
+                <span class="card-text">Resource Link:<span>
+                <a class="card-text" href='${resource.url}'>${resource.url}</a>
               </footer>
             </div>`;
   }
   window.viewResource.createResourceArticle = createResourceArticle;
-
 
   function addResource(resource) {
     $viewResource.append(resource);

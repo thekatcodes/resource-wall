@@ -5,7 +5,7 @@ $(() => {
 
 
   function createCommentElement(comment) {
-    return`<div class = <comment-conainer">
+    return`<div class="card" style="width: 80rem;">
               <div>
                 ${comment.user}
               </div>
@@ -18,7 +18,7 @@ $(() => {
 
 
   //Append all comments to window//
-  const $newComments = $(`<section comments-container">
+  const $newComments = $(`<section class="card-columns d-flex justify-content-center">
     <p>Loading...</p>
     </section>`);
   window.$newComments = $newComments;
