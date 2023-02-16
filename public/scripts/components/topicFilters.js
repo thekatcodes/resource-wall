@@ -1,10 +1,10 @@
 $(() => {
   const $topicFilters = $(`
     <div class="topic-filters">
-    <button id="topic1" class="btn btn-primary" type="submit">School</button>
-    <button id="topic2" class="btn btn-primary" type="submit">Coding</button>
-    <button id="topic3" class="btn btn-primary" type="submit">Games</button>
-    <button id="see-all" class="btn btn-primary" type="submit">See everything</button>
+    <button id="topic1" class="topic-btn" type="submit">School</button>
+    <button id="topic2" class="topic-btn" type="submit">Coding</button>
+    <button id="topic3" class="topic-btn" type="submit">Games</button>
+    <button id="see-all" class="topic-btn" type="submit">See everything</button>
     </div>
     `);
 
@@ -26,6 +26,9 @@ $(() => {
           window.newResources.addResources(data[item]);
         }
         views_manager.show("resources");
+
+        $(".topic-btn").removeClass("active");
+        $("#topic1").addClass("active");
       });
   });
     
@@ -45,6 +48,9 @@ $(() => {
           window.newResources.addResources(data[item]);
         }
         views_manager.show("resources");
+
+        $(".topic-btn").removeClass("active");
+        $("#topic2").addClass("active");
       });
   });
 
@@ -64,6 +70,9 @@ $(() => {
           window.newResources.addResources(data[item]);
         }
         views_manager.show("resources");
+
+        $(".topic-btn").removeClass("active");
+        $("#topic3").addClass("active");
     });
   });
     
@@ -83,6 +92,9 @@ $(() => {
           window.newResources.addResources(data[item]);
         }
         views_manager.show("resources");
+
+        $(".topic-btn").removeClass("active");
+        $("#see-all").addClass("active");
     });
   });
 });
