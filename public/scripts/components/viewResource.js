@@ -26,8 +26,8 @@ $(() => {
                 </div>
                 <div class="d-flex justify-content-end">
                   <div class="px-2 pt-2">
-                    <span id="average"><strong>${checkIfRating(resource.rating)}</strong></span>
-                    <i class="fa-solid fa-star">
+                    <span id="average">${checkIfRating(resource.rating)}</span>
+                    <i class="fa-solid fa-star"></i>
                   </div>
                   <div class="px-2 pt-2">
                     <form>
@@ -88,7 +88,7 @@ $(() => {
       views_manager.show("resource");
       return resource;
     })
-    
+
     // loads up the number of stars the user has rated in the database
     .then((data) => {
       $.get('/api/resources/rating', {resource : data.id })
