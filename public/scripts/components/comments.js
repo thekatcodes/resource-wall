@@ -2,17 +2,20 @@ $(() => {
   //create single comment element
   window.comment = {};
 
-  function createCommentElement(comment) {
+  const createCommentElement = function(comment) {
     return `<div class="card m-auto border-0" style="width: 60rem;">
               <div class="card-body">${comment.user}</div>
-              <div class="card-body p-3 mb-2 bg-light text-dark">${comment.message}</div>
+              <div class="card-body p-3 mb-2 bg-light text-dark">
+                <div>
+                  ${comment.message}
+                </div>
             </div>`;
   }
   window.comment.createCommentElement = createCommentElement;
 
   //Append all comments to window//
   const $newComments =
-    $(`<section class="d-flex flex-column justify-content-center m-auto" style="width: 80rem;">
+    $(`<section  id="comment-list" class="d-flex flex-column justify-content-center m-auto" style="width: 80rem;">
     <p>Loading...</p>
     </section>`);
   window.$newComments = $newComments;
@@ -25,6 +28,7 @@ $(() => {
   function clearComments() {
     $newComments.empty();
   }
+
 
   window.newComments.clearComments = clearComments;
   //puts resources in object
