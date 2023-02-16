@@ -16,6 +16,10 @@ a.navbar-brand:hover {
     color: white;
 }
 
+li.nav-item {
+    margin: 10px 5px;
+}
+
 a.nav-link {
     display: inline-block;
     position: relative;
@@ -58,5 +62,13 @@ ul.navbar-nav li a {
 }
 
 input.js-keyword-search {
+    height: 40px;
     padding-right: 50px;
+}
+
+.search-btn {
+    margin: 5px -50px 5px;
+    height: 40px;
+    width: 40px;
+    z-index: 100;
 }
