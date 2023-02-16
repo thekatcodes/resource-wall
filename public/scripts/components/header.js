@@ -9,7 +9,7 @@ $(() => {
 
     if (!isLoggedIn) {
       header = `
-        <nav id="header-user-links" class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav id="header-user-links" class="navbar navbar-expand-lg">
             <a class="navbar-brand" href="#">
                 Logo
             </a>
@@ -31,7 +31,7 @@ $(() => {
     } else {
       // IF USER LOGGED IN NAVBAR
       header = `
-        <nav id="header-user-links" class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav id="header-user-links" class="navbar navbar-expand-lg">
             <a id="logo-btn" class="navbar-brand" href="#">
                 Logo
             </a>
@@ -41,14 +41,15 @@ $(() => {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a id="create-resource-btn" class="nav-link">Create resource</a>
+                <a id="create-resource-btn" class="nav-link" href="#">Create resource</a>
                 </li>
                 <li class="nav-item">
                     <a id="user-resources" class="nav-link" href="#">My resources</a>
                 </li>
                 <form action="/search" method="GET" id="search-resource-form" class="form-inline my-2 my-lg-0">
                     <input class="js-keyword-search form-control mr-sm-2" type="search" placeholder="Search resource" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                   
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
                 <li class="nav-item">
                     <a id="logout-btn" class="nav-link active" href="#">Log out</a>
