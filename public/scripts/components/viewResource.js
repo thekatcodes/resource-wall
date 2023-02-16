@@ -51,7 +51,7 @@ $(() => {
   }
   window.viewResource.createResourceArticle = createResourceArticle;
 
-
+  // function that changes the number of liked stars to the amount of liked stars from user
   const highlightStars = function(value) {
     const stars = document.querySelectorAll('.rating');
     stars.forEach((star, index) => {
@@ -83,10 +83,13 @@ $(() => {
       views_manager.show("resource");
       return resource;
     })
+    
+    // loads up the number of stars the user has rated in the database
     .then((data) => {
       $.get('/api/resources/rating', {resource : data.id })
         .then((userData) => {
           if (userData) {
+          // does not highlight stars if the data does not exist
           highlightStars(userData.rating)
           }
         });
@@ -98,9 +101,11 @@ $(() => {
     highlightStars(newRating);
     const resourcePost = $(this).parents();
     const resourceID = $(resourcePost).find('.hide-content')[0]
+    // updates or adds new rating by the user
     $.post('/api/resources/rating', {info : parseInt(resourceID.innerText), rating : newRating})
       .then((data) => {
         if (data) {
+          // changes the average of the rating based on new rating that user has given
           const resourceAverage = $(this).parents()[4];
           const averageValue = $(resourceAverage).find('#average')[0];
           averageValue.innerText = data.average_rating;
