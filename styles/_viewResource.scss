@@ -4,3 +4,7 @@
   border: none;
   border-bottom: thick solid #30323D;
 }
+
+#login-error, #empty-field-error {
+  display: none;
+}

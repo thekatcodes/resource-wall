@@ -5,8 +5,10 @@ $(() => {
         <div class="error-message"></div>
           <label for="message">Comment</label>
         </div>
+        <h4 id="login-error">You must sign in to comment</h4>
+        <h1 id="empty-field-error">Please don't leave the comment blank</h1>
         <textarea type="text" name="message" class="message-form rows=3 comment-input"  placeholder="Leave a comment"></textarea>
-        <div class="d-flex justify-content-end">
+        <div class="submit-btn d-flex justify-content-end">
           <button type="submit" class="btn btn-info m-2">Submit</button>
         </div>
       </div>
@@ -21,14 +23,36 @@ $(() => {
     commentPostresourceId = $(this).attr("id");
   });
 
+  const showMessage = (id) => {
+    $(id).slideDown("fast", () => {});
+  }
+
   const isloggedIn = () => {
     $.get("/login/loginStatus").then((res) => {
       if(!res.length) {
-        $(".error-message").append("<h1>You must sign in to comment</h1>");
+        showMessage("#login-error")
       }
       return
     });
   }
+
+  const textFieldLength = () => {
+    console.log('hi')
+    if(!$('.comment-input').val()) {
+      showMessage("#empty-field-error")
+    }
+    return
+  }
+
+
+  const addNewestComment = (user) => {
+    const $commentText = $('.comment-input').val()
+    const commentObj = {message: $commentText, user: user}
+    const comment = window.comment.createCommentElement(commentObj)
+    $('#comment-list').prepend($(comment))
+    return comment
+  }
+
 
   $commentForm.on('submit', function(event) {
     event.preventDefault();
@@ -37,21 +61,21 @@ $(() => {
 
       //check if logged in
     isloggedIn()
-
-      //check if input blank
-    if (formData === 'message=') {
-      $(".error-message").append("<h1>Please don't leave the comment blank</h1>");
-      return;
-    }
+    textFieldLength();
 
     $.post("/api/comments/submission", {info : { formData , resourceID }})
       .then((res) => {
         if (res === "") {
           console.log('error')
         } else {
-          $('.comment-input').empty().val('');
-          views_manager.show("resource")
+          addNewestComment()
+          $.get("/api/resources/user", (resources) => {
+            addNewestComment(resources[0].name)
+            $('.comment-input').empty().val('');
+          })
         }
       });
   });
+
+
 });

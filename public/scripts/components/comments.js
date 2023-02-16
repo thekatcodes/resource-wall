@@ -2,7 +2,7 @@ $(() => {
   //create single comment element
   window.comment = {};
 
-  function createCommentElement(comment) {
+  const createCommentElement = function(comment) {
     return `<div class="card m-auto border-0" style="width: 60rem;">
               <div class="card-body">${comment.user}</div>
               <div class="card-body p-3 mb-2 bg-light text-dark">
