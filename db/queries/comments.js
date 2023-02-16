@@ -5,11 +5,13 @@ const getCommentsFromResource = function(id) {
                       resources.id as resource_id,
                       users.id as user_id,
                       users.name as user,
-                      comments.message
+                      comments.message,
+                      comments.created_at
     FROM comments
     JOIN resources ON resources.id = resource_id
     JOIN users ON users.id = user_id
-    WHERE resources.id = $1`, [id])
+    WHERE resources.id = $1
+    ORDER BY created_at DESC`, [id])
                       .then((result) => {
                         console.log(result.rows)
                         return result.rows;
