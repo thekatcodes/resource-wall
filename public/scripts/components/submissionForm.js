@@ -14,7 +14,7 @@ $(() => {
       </div>
       <div class="form-group">
         <label for="imageURL">Image URL</label>
-        <input type="text" name="imageURL" class="form-control image-url-form">
+        <input type="text" name="imageURL" class="form-control image-url-form required">
       </div>
       <div class="form-group">
         <label for="externalURL">Resource URL</label>
@@ -44,7 +44,7 @@ $(() => {
         if (res === "") {
           $(".error-message").append('<div class="alert alert-danger"><h3>Details need to be filled out</h3></div>');
         } else {
-          console.log("show main page");
+          views_manager.show('resources')
         }
       });
   });

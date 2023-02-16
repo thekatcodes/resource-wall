@@ -55,13 +55,16 @@ router.post('/update', (req, res) => {
   getUsersFromEmail(req.session.email)
     .then((data) => {
       if (comparePass(formData.password, data.password)) {
-        const newUser = updateUserDetails(formData, data.id);
-        return newUser;
+        return hashPassword(formData.newPassword);
       }
     })
-    .then((newUserData) => {
-      req.session.email = newUserData.email;
-      return res.send(newUserData);
+    .then((hashedPassword) => {
+      formData.newPassword = hashedPassword;
+      return updateUserDetails(formData, req.session.user);
+    })
+    .then((data) => {
+      console.log(data);
+      return res.json(data);
     })
     .catch((e) => res.send(""));
 });

@@ -11,9 +11,11 @@ $(() => {
   };
 
   function createResourceArticle(resource) {
-    console.log(resource)
-    return `<div id="${resource.id}" class="card text-center border-0" style="width: 60rem;">
+
+    return `<div class="card text-center border-0" style="width: 60rem;">
+              <div class="hide-content">${resource.id}</div>
               <div class="pb-4">
+
                <h2 card="card-title">${resource.title}</h2>
               </div>
               <img class='card-img-top resource-page-img' src='${resource.cover_image_url}'>
@@ -24,7 +26,8 @@ $(() => {
                 </div>
                 <div class="d-flex justify-content-end">
                   <div class="px-2 pt-2">
-                    <span id="average"><strong>${checkIfRating(resource.rating)}</strong></span>
+                    <span id="average">${checkIfRating(resource.rating)}</span>
+                    <i class="fa-solid fa-star"></i>
                   </div>
                   <div class="px-2 pt-2">
                     <form>
@@ -53,7 +56,7 @@ $(() => {
   }
   window.viewResource.createResourceArticle = createResourceArticle;
 
-
+  // function that changes the number of liked stars to the amount of liked stars from user
   const highlightStars = function(value) {
     const stars = document.querySelectorAll('.rating');
     stars.forEach((star, index) => {
@@ -86,10 +89,13 @@ $(() => {
       views_manager.show("resource");
       return resource;
     })
+
+    // loads up the number of stars the user has rated in the database
     .then((data) => {
       $.get('/api/resources/rating', {resource : data.id })
         .then((userData) => {
           if (userData) {
+          // does not highlight stars if the data does not exist
           highlightStars(userData.rating)
           }
         });
@@ -99,12 +105,14 @@ $(() => {
   $(document).on("click", ".rating", function() {
     let newRating = $(this).attr('id');
     highlightStars(newRating);
-    const resourcePost = $(this).parents()[6];
-    const resourceID = $(resourcePost).find('.resource-id')[0].innerText;
-    $.post('/api/resources/rating', {info : parseInt(resourceID), rating : newRating})
+    const resourcePost = $(this).parents();
+    const resourceID = $(resourcePost).find('.hide-content')[0]
+    // updates or adds new rating by the user
+    $.post('/api/resources/rating', {info : parseInt(resourceID.innerText), rating : newRating})
       .then((data) => {
         if (data) {
-          const resourceAverage = $(this).parents()[3];
+          // changes the average of the rating based on new rating that user has given
+          const resourceAverage = $(this).parents()[4];
           const averageValue = $(resourceAverage).find('#average')[0];
           averageValue.innerText = data.average_rating;
         }

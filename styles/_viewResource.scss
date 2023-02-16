@@ -9,8 +9,25 @@
   display: none;
 }
 
+#average {
+  font-weight: 700;
+}
+
+.hide-content {
+  display: none;
+}
+
+.fa-star {
+  color: #ded309;
+}
+
 .resource-page-img {
   width: 300px;
   height: 337px;
   object-fit: cover;
 }
+
+#average {
+  font-weight: 600;
+}
+

@@ -1,5 +1,6 @@
 const db = require('../connection');
 
+//query for adding new resources
 const addResource = (ownerID, title, description, coverImageURL, externalURL) => {
   const queryString = `
   INSERT into resources (owner_id, title, description, cover_image_url, external_url)
@@ -12,6 +13,7 @@ const addResource = (ownerID, title, description, coverImageURL, externalURL) =>
     });
 };
 
+//query for adding tags to resources
 const addTag = (resourceID, tag) => {
   const queryString = `
   INSERT into tags (resource_id, topic)
@@ -24,6 +26,7 @@ const addTag = (resourceID, tag) => {
     });
 };
 
+// adds a like associated with a resource_id and user_id
 const addLiked = (resourceID, userID) => {
   const queryString = `
   INSERT into favourites (resource_id, user_id, liked)
@@ -36,6 +39,7 @@ const addLiked = (resourceID, userID) => {
     });
 };
 
+// changes the boolean liked in like table to opposite value
 const updateLiked = (likeObject) => {
   let queryString = `UPDATE favourites `;
   if (likeObject.liked) {
@@ -51,6 +55,7 @@ const updateLiked = (likeObject) => {
     });
 };
 
+// adds a new rating assocaited with resourceID and userID if they do not have a previous rating
 const addRating = (resourceID, userID, rating) => {
   const queryString = `
   INSERT into ratings (resource_id, user_id, rating)
@@ -63,6 +68,7 @@ const addRating = (resourceID, userID, rating) => {
     });
 };
 
+// updates new rating
 const updateRating = (newRating, ratingID) => {
   const queryString = `
   UPDATE ratings
