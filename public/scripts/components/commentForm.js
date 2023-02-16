@@ -30,6 +30,7 @@ $(() => {
   const isloggedIn = () => {
     $.get("/login/loginStatus").then((res) => {
       if(!res.length) {
+        $('.comment-input').empty().val('')
         showMessage("#login-error")
       }
       return
@@ -37,11 +38,11 @@ $(() => {
   }
 
   const textFieldLength = () => {
-    console.log('hi')
     if(!$('.comment-input').val()) {
       showMessage("#empty-field-error")
+      return false;
     }
-    return
+    return true
   }
 
 
@@ -59,9 +60,12 @@ $(() => {
     const formData = $(this).serialize();
     const resourceID = commentPostresourceId;
 
-      //check if logged in
+      //input error handling
     isloggedIn()
-    textFieldLength();
+    const textValue = textFieldLength()
+    if(!textValue) {
+      return;
+    }
 
     $.post("/api/comments/submission", {info : { formData , resourceID }})
       .then((res) => {
