@@ -1,9 +1,8 @@
 $(() => {
   const $commentForm = $(`
-    <form action="/api/comment" method="POST" class="card d-flex justify-content-center border-0 ml-10" style="width: 60rem;">
-     <div class="card-body">
+    <form action="/api/comment" method="POST" class="card d-flex border-0 m-auto" style="width: 60rem;">
+      <div class="card-body d-flex justify-content-start">
         <div class="error-message"></div>
-        <divc class="card-body">
           <label for="message">Comment</label>
         </div>
         <textarea type="text" name="message" class="message-form rows="3""></textarea>

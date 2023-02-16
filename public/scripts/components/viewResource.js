@@ -1,6 +1,6 @@
 $(() => {
   //creates resource element
-  const $viewResource = $(`<section class="card-columns d-flex justify-content-center">
+  const $viewResource = $(`<section class="card-columns d-flex justify-content-center m-5">
     <p>Loading...</p>
     </section>`);
   window.$viewResource = $viewResource;
@@ -11,7 +11,7 @@ $(() => {
   };
 
   function createResourceArticle(resource) {
-    return `<div id=${resource.id} class="card text-center" style="width: 60rem;">
+    return `<div id=${resource.id} class="card text-center border-0" style="width: 60rem;">
               <div>
                <h2 card="card-title">${resource.title}</h2>
               </div>
