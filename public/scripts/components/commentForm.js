@@ -26,6 +26,9 @@ $(() => {
   const showMessage = (id) => {
     $(id).slideDown("fast", () => {});
   }
+  const hideMessage = (id) => {
+    $(id).slideUp("fast", () => {});
+  }
 
   const isloggedIn = () => {
     $.get("/login/loginStatus").then((res) => {
@@ -73,6 +76,7 @@ $(() => {
           console.log('error')
         } else {
           $.get("/api/resources/user", (resources) => {
+            hideMessage("#empty-field-error")
             addNewestComment(resources[0].name)
             $('.comment-input').empty().val('');
           })
