@@ -50,12 +50,12 @@ $(() => {
           </ul>
               <form action="/search" method="GET" id="search-resource-form"
                   class="form-inline my-2 my-lg-0 search-form">
-                  <input class="js-keyword-search form-control mr-sm-2" type="search" placeholder="Search resource"
+                  <input class="js-keyword-search form-control mr-sm-2" type="search" placeholder="What are you looking for?"
                       aria-label="Search">
                   <button class="btn search-btn my-2 my-sm-0" type="submit"> <i
                           class="fa-solid fa-magnifying-glass"></i></button>
               </form>
-            <ul class="navbar-nav mr-auto justify-content-end">
+            <ul class="navbar-nav justify-content-end ml-auto">
               <div class="navbar-right">
                   <li class="nav-item">
                       <a id="logout-btn" class="nav-link" href="#">Log out</a>
