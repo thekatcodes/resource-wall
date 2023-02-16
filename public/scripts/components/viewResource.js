@@ -11,7 +11,7 @@ $(() => {
   };
 
   function createResourceArticle(resource) {
-    return `<div id=${resource.id} class="card text-center" style="width: 80rem;">
+    return `<div id=${resource.id} class="card text-center" style="width: 60rem;">
               <div>
                <h2 card="card-title">${resource.title}</h2>
               </div>
@@ -73,7 +73,7 @@ $(() => {
   }
   window.viewResource.clearResource = clearResource;
   //appends resource to dom
-  $(document).on("click", ".resource-card", function (event) {
+  $(document).on("click", ".resource-card, #comment-form-submit", function (event) {
     const resourceId = $(this).attr("id");
     getResourceById(resourceId).then(function (resource) {
       clearResource();

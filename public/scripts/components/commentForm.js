@@ -1,11 +1,13 @@
 $(() => {
   const $commentForm = $(`
   <div class="d-flex justify-content-center">
-    <form action="/api/comment" method="POST" class="card" style="width: 80rem;"">
+    <form action="/api/comment" method="POST" class="card border-0" style="width: 60rem;"">
       <div class="error-message"></div>
-      <label for="message">Write a comment</label>
-      <textarea type="text" name="message" class="message-form"></textarea>
-      <button type="submit" class="btn">Submit</button>
+      <label for="message">Comment</label>
+      <textarea type="text" name="message" class="message-form rows="3""></textarea>
+      <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-info m-2">Submit</button>
+      </div>
     </form>
   </div>
   `);

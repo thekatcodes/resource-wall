@@ -4,15 +4,15 @@ $(() => {
 
   function createCommentElement(comment) {
     return `<div class="card" style="width: 80rem;">
-              <p>${comment.user}</p>
-              <p>${comment.message}</p>
+              <div class="card-body">${comment.user}</div>
+              <div class="card-body">${comment.message}</div>
             </div>`;
   }
   window.comment.createCommentElement = createCommentElement;
 
   //Append all comments to window//
   const $newComments =
-    $(`<section class="d-flex flex-column justify-content-center">
+    $(`<section class="d-flex flex-column justify-content-center" style="width: 80rem;">
     <p>Loading...</p>
     </section>`);
   window.$newComments = $newComments;
@@ -22,8 +22,8 @@ $(() => {
     $newComments.append(comment);
   }
 
-  function clearComments(comment) {
-    $newComments.empty(comment);
+  function clearComments() {
+    $newComments.empty();
   }
 
   window.newComments.clearComments = clearComments;
