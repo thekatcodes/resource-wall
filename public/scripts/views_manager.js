@@ -12,6 +12,7 @@ $(() => {
     $submissionForm.detach();
     $commentForm.detach();
     $newComments.detach();
+    $topicFilters.detach();
     $newUserResources.detach();
     $newUserLikes.detach()
 
@@ -30,6 +31,7 @@ $(() => {
         $submissionForm.appendTo($main);
         break;
       case "resources":
+        $topicFilters.appendTo($main);
         $newResources.appendTo($main);
         break;
       case "updateProfile":
