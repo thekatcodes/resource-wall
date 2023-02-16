@@ -1,6 +1,6 @@
 $(() => {
   //creates resource element
-  const $viewResource = $(`<section class="card-columns d-flex justify-content-center">
+  const $viewResource = $(`<section class="card-columns d-flex justify-content-center m-5">
     <p>Loading...</p>
     </section>`);
   window.$viewResource = $viewResource;
@@ -11,36 +11,20 @@ $(() => {
   };
 
   function createResourceArticle(resource) {
-    return `<div id=${
-      resource.id
-    } class="card text-center" style="width: 80rem;">
-                <img class='card-img-top' src='${resource.cover_image_url}'>
-              <div class = "card-body d-flex justify-content-around">
+    return `<div id=${resource.id} class="card text-center border-0" style="width: 60rem;">
+              <div>
+               <h2 card="card-title">${resource.title}</h2>
+              </div>
+              <img class='card-img-top' src='${resource.cover_image_url}'>
+              <div class="card-body d-flex justify-content-around">
                 <div>
                   <span>${resource.author}</span>
-                  <span>${checkIfRating(resource.rating)}</span>
                 </div>
                 <div>
-                <div class="share-button sharer" style="display: block;">
-                    <button type="button" class="btn btn-success share-btn">Share</button>
-                    <div class="social top center networks-5 ">
-                        <!-- Facebook Share Button -->
-                        <a class="fbtn share facebook" href="https://www.facebook.com/sharer/sharer.php?u=url"><i class="fa-brands fa-facebook"></i></a>
-
-                        <!-- Reddit Share Button -->
-                        <a class="fbtn share reddit" href="href="https://reddit.com/submit?url=http%3A%2F%2Fyour-website.com%2F%26amp%3Btitle%3DYour%20Post%20Title""><i class="fa-brands fa-reddit"></i></a>
-
-                        <!-- Twitter Share Button -->
-                        <a class="fbtn share twitter" href="https://twitter.com/intent/tweet?text=title&amp;url=url&amp;via=creativedevs"><i class="fa-brands fa-twitter"></i></a>
-
-                        <!-- LinkedIn Share Button -->
-                        <a class="fbtn share linkedin" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=url&amp;title=title&amp;source=url/"><i class="fa-brands fa-linkedin"></i></a>
-                    </div>
-                </div>
-                  <span class="resource-id">${resource.id}</span>
+                  <button type="button" class="btn btn-success copy-btn">Copy</button>
                 </div>
                 <div>
-                  <span id="average">${resource.rating}</span>
+                  <span id="average">${checkIfRating(resource.rating)}</span>
                 </div>
                 <div>
                   <form>
@@ -55,12 +39,12 @@ $(() => {
                 </div>
               </div>
               <div>
-                <h2 card="card-title">${resource.title}</h2>
+                <h4>${resource.description}</h4>
               </div>
-              <div>
-                <span class="card-text">Resource Link:<span>
-                <a class="card-text" href='${resource.url}'>${resource.url}</a>
-              </footer>
+              <div "d-flex">
+                <div class="mr-auto p-2"">Resource Link:</div>
+                <a id="long-url" class="card-text p-2"" href='${resource.url}'>${resource.url}</a>
+              </div>
             </div>`;
   }
   window.viewResource.createResourceArticle = createResourceArticle;
@@ -107,14 +91,6 @@ $(() => {
       });
   });
 
-    //share button functionality
-  $( ".share-btn" ).click(function(e) {
-    $('.networks-5').not($(this).next( ".networks-5" )).each(function(){
-       $(this).removeClass("active");
-   });
-   $(this).next( ".networks-5" ).toggleClass( "active" );
-});
-
   $(document).on("click", ".rating", function() {
     let newRating = $(this).attr('id');
     highlightStars(newRating);
@@ -128,6 +104,23 @@ $(() => {
           averageValue.innerText = data.average_rating;
         }
     })
+  })
+
+
+  //uses copy button to copy url to clipboard
+  $(document).on("click", ".copy-btn", function() {
+    textToCopy = $('#long-url').html()
+
+    navigator.clipboard.writeText(textToCopy).then(
+      function() {
+        /* clipboard successfully set */
+       $('.copy-btn').html('Copied!')
+      },
+      function() {
+        /* clipboard write failed */
+        $('.copy-btn').html('Error')
+      }
+    )
   })
 
 

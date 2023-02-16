@@ -17,7 +17,7 @@ $(() => {
           <span class="resource-post">${resource.id}</span>
       </div>
       <div>
-       <img class="card-img-top" src='${resource.cover_image_url}'>
+       <img class="card-img-top front-page-img" src='${resource.cover_image_url}'>
       </div>
     <div class="card-body">
       ${resource.title}
@@ -35,7 +35,7 @@ $(() => {
     </footer>
   </div>`;
   }
-  
+
 
   window.resource.createResourceElement = createResourceElement;
 });
