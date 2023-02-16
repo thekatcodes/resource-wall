@@ -76,6 +76,7 @@ router.get('/user/likes', (req, res) => {
   getUsersFromEmail(req.session.email)
     .then((data) => getLikesFromUserid(data.id))
     .then((response) => {
+      console.log('likes', response)
       return res.json(response);
     })
     .catch((e) => {
