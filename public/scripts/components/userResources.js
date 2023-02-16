@@ -55,13 +55,4 @@ $(() => {
   window.newUserResources.addUserResources = addUserResources;
   window.newUserLikes.addUserLikes = addUserLikes;
 
-
-  $(document).on("click", "#user-resources", function () {
-
-    newUserResources.addUserResources()
-    newUserLikes.addUserLikes()
-    //newUserResources.addUserLikes();
-    views_manager.show("userResources")
-
-  });
 });
