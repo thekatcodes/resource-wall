@@ -33,6 +33,7 @@ router.get("/user", (req, res) => {
   console.log(userId)
   getResourcesFromUserEmail(userId)
     .then((response) => {
+      console.log('users posts', response)
       return res.json(response);
     })
     .catch((e) => {
@@ -75,6 +76,7 @@ router.get('/user/likes', (req, res) => {
   getUsersFromEmail(req.session.email)
     .then((data) => getLikesFromUserid(data.id))
     .then((response) => {
+      console.log('likes', response)
       return res.json(response);
     })
     .catch((e) => {
@@ -88,7 +90,6 @@ router.post('/submission', (req, res) => {
   addResource(req.session.user, info.title, info.description, info.imageURL, info.externalURL)
     .then((dataRes) => addTag(dataRes.id, info.tags))
     .then((tagData) => {
-      console.log(tagData);
       return res.json(tagData);
     })
     .catch((e) => {

@@ -35,10 +35,10 @@ $(() => {
         })
       }
     })
-    .done(addUserLikes())
    }
 
   function addUserLikes() {
+    clearResources($newUserLikes);
     $newUserLikes.append(`<h2>Your liked resources<h2>`)
     $.get("/api/resources/user/likes", (resources) => {
       for (const resourceId in resources) {
@@ -49,18 +49,17 @@ $(() => {
           addResource(card, $newUserLikes)
         })
       }
-      return
     })
   }
 
   window.newUserResources.addUserResources = addUserResources;
-  window.newUserResources.addUserLikes = addUserLikes;
+  window.newUserLikes.addUserLikes = addUserLikes;
 
 
   $(document).on("click", "#user-resources", function () {
 
     newUserResources.addUserResources()
-    newUserResources.addUserLikes()
+    newUserLikes.addUserLikes()
     //newUserResources.addUserLikes();
     views_manager.show("userResources")
 

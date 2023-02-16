@@ -95,6 +95,7 @@ const getLikesFromUserid =function (id) {
                   cover_image_url,
                   users.name,
                   users.email,
+                  favourites.user_id AS favourties_user_id,
                   ROUND(AVG(ratings.rating), 1) AS rating,
                   SUM(CASE WHEN favourites.liked THEN 1 ELSE 0 END) AS likes
                     FROM resources
@@ -102,7 +103,7 @@ const getLikesFromUserid =function (id) {
                     LEFT JOIN ratings ON resources.id = ratings.resource_id
                     LEFT JOIN favourites ON resources.id = favourites.resource_id
                     WHERE favourites.user_id = $1
-                    GROUP BY resources.id, title, description, cover_image_url, users.name, users.email;`, [id]
+                    GROUP BY resources.id, title, description, cover_image_url, users.name, users.email, favourties_user_id;`, [id]
     )
     .then((result) => {
       return result.rows;
