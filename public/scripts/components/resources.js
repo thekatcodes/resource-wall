@@ -26,10 +26,10 @@ $(() => {
     }
   }
 
-  $newResources.on('click', 'i', function(event) {
+  $newResources.on('click', '.favourites', function(event) {
     event.stopPropagation();
-    const parentElement = $($(this).parents()[2]).find('span')[0];
-    const resourceID = parentElement.innerText;
+    const parentElement = $(this).parents()[3];
+    const resourceID = $(parentElement).attr('id');
     $.post('/api/resources/like', { info : parseInt(resourceID)})
       .then((data) => {
         if (data.liked === true) {

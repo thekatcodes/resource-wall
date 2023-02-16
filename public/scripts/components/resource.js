@@ -14,7 +14,7 @@ $(() => {
     }
   return `<div id=${resource.id} class="card resource-card">
        <div>
-          <span class="resource-post">${resource.id}</span>
+          <span class="resource-post hide-content">${resource.id}</span>
       </div>
       <div>
        <img class="card-img-top front-page-img" src='${resource.cover_image_url}'>
@@ -23,14 +23,23 @@ $(() => {
       ${resource.title}
     </div>
     <footer class="card-footer">
-      <div>
-        ${heartIcon}
-      </div>
-      <div class="card-text likes">
-        ${resource.likes}
-      </div>
-      <div class="card-text">
-        ${checkIfRating(resource.rating)}
+      <div class="d-flex justify-content-between">
+        <div>
+          ${heartIcon}
+        </div>
+        <div class="d-flex justify-content-end">
+          <div class="card-text">
+            <div class="d-flex justify-content-end align-items-center">
+              <div class="likes">
+              ${resource.likes}
+              </div>
+              <i class="fa-solid fa-heart counts"></i>
+            </div>
+          </div>
+          <div class="card-text">
+            ${checkIfRating(resource.rating)}<i class="fa-solid fa-star counts"></i>
+          </div>
+        </div>
       </div>
     </footer>
   </div>`;
