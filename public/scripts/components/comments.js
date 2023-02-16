@@ -16,7 +16,7 @@ $(() => {
 
   //Append all comments to window//
   const $newComments =
-    $(`<section  id="comment-list" class="d-flex flex-column justify-content-center m-auto" style="width: 80rem;">
+    $(`<section  id="comment-list" class="d-flex flex-column justify-content-center m-auto" style="width: 60rem;">
     <p>Loading...</p>
     </section>`);
   window.$newComments = $newComments;
