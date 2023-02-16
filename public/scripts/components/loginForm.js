@@ -35,6 +35,8 @@ $(() => {
           $(".error-message").append('<div class="alert alert-danger"><h3>Incorrect information credentials</h3></div>');
         } else {
           // display new page here
+          $('.email-form').val('');
+          $('.password-form').val('');
           $("#page-header").empty();
           header.update(response);
           views_manager.show('resources');

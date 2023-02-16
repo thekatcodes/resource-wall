@@ -44,7 +44,11 @@ $(() => {
           $(".error-message").append('<div class="alert alert-danger"><h3>Details need to be filled out</h3></div>');
         } else {
         // this could be replaced with whatever function shows resources
-            views_manager.show('resources')
+          $('.username-form').val('');
+          $('.password-checker').val('');
+          $('.email-form').val('');
+          $('.password').val('');
+          views_manager.show('resources');
         }
       });
   });
