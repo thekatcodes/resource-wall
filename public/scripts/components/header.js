@@ -126,7 +126,9 @@ $(() => {
   /* If user is logged in*/
   //Render Home page (main content) on Logo click
   $("header").on("click", "#logo-btn", function () {
-    views_manager.show("resources");
+		views_manager.show("resources");
+		
+		$(".nav-item").removeClass("active");
   });
 
   //Render Create resource page on click
