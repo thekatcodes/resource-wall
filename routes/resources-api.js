@@ -4,7 +4,7 @@ const router = express.Router();
 const client = require('../db/connection.js');
 
 const { getUsersFromEmail ,userLike, userRating } = require('../db/queries/users');
-const { addLiked, updateLiked, addResource, addTag, updateRating, addRating } = require('../db/queries/submission');
+const { addLiked, updateLiked, addResource, addTags, updateRating, addRating } = require('../db/queries/submission');
 const { getAllResources , getResourceById, getResourcesFromUserEmail, getLikesFromUserid, resourceAverageRating } = require("../db/queries/getAllResources.js");
 
 const { serializeIntoObject } = require('../public/scripts/users-api');
@@ -90,7 +90,7 @@ router.post('/submission', (req, res) => {
   const info = serializeIntoObject(req.body.info);
   addResource(req.session.user, info.title, info.description, info.imageURL, info.externalURL)
   // adds tags seperately as it is a seperate table
-    .then((dataRes) => addTag(dataRes.id, info.tags))
+    .then((dataRes) => addTags(dataRes.id, info.tags))
     .then((tagData) => {
       return res.json(tagData);
     })

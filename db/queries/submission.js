@@ -14,13 +14,25 @@ const addResource = (ownerID, title, description, coverImageURL, externalURL) =>
 };
 
 //query for adding tags to resources
-const addTag = (resourceID, tag) => {
+const addTags = (resourceID, tag) => {
+  const lowercaseTag = tag.toLowerCase();
+  const noCommas = lowercaseTag.replaceAll(',', ' ');
+  const listSeperatedBySpaces = noCommas.split(' ');
+  for (const element of listSeperatedBySpaces) {
+    if (element.length > 1) {
+      addTag(resourceID, element);
+    }
+  }
+  return true;
+};
+
+const addTag = (resourceID, topic) => {
   const queryString = `
   INSERT into tags (resource_id, topic)
   VALUES ($1, $2)
   RETURNING *;
   `;
-  return db.query(queryString, [resourceID, tag])
+  return db.query(queryString, [resourceID, topic])
     .then((data) => {
       return data.rows[0];
     });
@@ -82,4 +94,4 @@ const updateRating = (newRating, ratingID) => {
     });
 };
 
-module.exports = { addResource, addTag, addLiked, updateLiked, addRating, updateRating };
+module.exports = { addResource, addTags, addLiked, updateLiked, addRating, updateRating };
