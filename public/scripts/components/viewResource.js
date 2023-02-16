@@ -11,19 +11,18 @@ $(() => {
   };
 
   function createResourceArticle(resource) {
-    return `<div id=${
-      resource.id
-    } <class="card text-center" style="width: 80rem;">
-                <img class='card-img-top' src='${resource.cover_image_url}'>
-              <div class = "card-body d-flex justify-content-around">
+    return `<div id=${resource.id} class="card text-center" style="width: 80rem;">
+              <div>
+               <h2 card="card-title">${resource.title}</h2>
+              </div>
+              <img class='card-img-top' src='${resource.cover_image_url}'>
+              <div class="card-body d-flex justify-content-around">
                 <div>
                   <span>${resource.author}</span>
                   <span>${checkIfRating(resource.rating)}</span>
                 </div>
                 <div>
                   <button type="button" class="btn btn-success copy-btn">Copy</button>
-                </div>
-                  <span class="resource-id">${resource.id}</span>
                 </div>
                 <div>
                   <span id="average">${resource.rating}</span>
@@ -41,12 +40,12 @@ $(() => {
                 </div>
               </div>
               <div>
-                <h2 card="card-title">${resource.title}</h2>
+                <h4>${resource.description}</h4>
               </div>
-              <div>
-                <span class="card-text">Resource Link:<span>
-                <a id="long-url" class="card-text" href='${resource.url}'>${resource.url}</a>
-              </footer>
+              <div "d-flex">
+                <div class="mr-auto p-2"">Resource Link:</div>
+                <a id="long-url" class="card-text p-2"" href='${resource.url}'>${resource.url}</a>
+              </div>
             </div>`;
   }
   window.viewResource.createResourceArticle = createResourceArticle;
