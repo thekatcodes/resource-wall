@@ -2,11 +2,11 @@ $(() => {
   //create single comment element
   window.comment = {};
 
-  const createCommentElement = function(comment) {
+  function createCommentElement(comment) {
     return `<div class="card m-auto border-0" style="width: 60rem;">
               <div class="card-body">${comment.user}</div>
-              <div class="card-body p-3 mb-2 bg-light text-dark">
-                <div>
+              <div class="card-body mb-2 bg-light text-dark">
+                <div class="lead">
                   ${comment.message}
                 </div>
             </div>`;

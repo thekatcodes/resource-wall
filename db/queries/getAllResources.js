@@ -6,6 +6,7 @@ const getAllResources = function () {
       `SELECT resources.id, title,
                   description,
                   cover_image_url,
+                  created_date,
                   users.name,
                   ROUND(AVG(ratings.rating), 1) AS rating,
                   SUM(CASE WHEN favourites.liked THEN 1 ELSE 0 END) AS likes
@@ -13,7 +14,7 @@ const getAllResources = function () {
                     JOIN users ON users.id = owner_id
                     LEFT JOIN ratings ON resources.id = ratings.resource_id
                     LEFT JOIN favourites ON resources.id = favourites.resource_id
-                    GROUP BY resources.id, title, description, cover_image_url, users.name;`
+                    GROUP BY resources.id, title, description, cover_image_url, created_date, users.name;`
     )
     .then((result) => {
       return result.rows;
@@ -31,6 +32,7 @@ const getResourceById = function (id) {
                   cover_image_url,
                   external_url AS url,
                   users.name AS author,
+                  created_date,
                   ROUND(AVG(ratings.rating), 1) AS rating,
                   SUM(CASE WHEN favourites.liked THEN 1 ELSE 0 END) AS likes
                     FROM resources
@@ -38,10 +40,11 @@ const getResourceById = function (id) {
                     LEFT JOIN ratings ON resources.id = ratings.resource_id
                     LEFT JOIN favourites ON resources.id = favourites.resource_id
                     WHERE resources.id = $1
-                    GROUP BY resources.id, title, description, cover_image_url, url, author`,
+                    GROUP BY resources.id, title, description, cover_image_url, url, author, created_date`,
       [id]
     )
     .then((result) => {
+      console.log(result.rows[0])
       return result.rows[0];
     })
     .catch((err) => {
@@ -51,7 +54,7 @@ const getResourceById = function (id) {
 
 const resourceAverageRating = (resourceID) => {
   const queryString = `
-  SELECT ROUND(AVG(rating), 1) AS average_rating, resource_id 
+  SELECT ROUND(AVG(rating), 1) AS average_rating, resource_id
   FROM ratings
   WHERE resource_id = $1
   GROUP BY resource_id;
