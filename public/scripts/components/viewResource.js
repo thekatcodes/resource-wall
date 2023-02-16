@@ -19,7 +19,7 @@ $(() => {
               <img class='card-img-top resource-page-img' src='${resource.cover_image_url}'>
               <div class="card-body d-flex justify-content-between class="mt-4"">
                 <div class="d-flex">
-                  <h6 class="text-muted px-2 pt-2">${resource.author}</h6>
+                  <h6 class="text-muted px-2 pt-2">By ${resource.author}</h6>
                   <h6 class="text-muted px-5 pt-2">${resource.created_date.slice(0,10)}</h6>
                 </div>
                 <div class="d-flex justify-content-end">
@@ -74,6 +74,7 @@ $(() => {
   function clearResource(resource) {
     $viewResource.empty(resource);
   }
+
   window.viewResource.clearResource = clearResource;
   //appends resource to dom
   $(document).on("click", ".resource-card", function (event) {
