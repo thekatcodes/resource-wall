@@ -25,7 +25,7 @@ $(() => {
         <textarea name="description" rows="5" cols="80" class="form-text form-control description-form"></textarea>
       </div>
       <div class="form-group">
-        <label for="tags">Tags</label>
+        <label for="tags">Tags (Seperate tags by spaces or commas) </label>
         <textarea name="tags" rows="5" cols="80" class="form-text form-control tag-form" required></textarea>
       </div>
       <div class="d-flex align-items-center justify-content-center form-title">
