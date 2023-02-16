@@ -4,62 +4,66 @@ $(() => {
   const $pageHeader = $("#page-header");
 
   function updateHeader(isLoggedIn) {
-    // console.log("test header");
     let header;
 
     if (!isLoggedIn) {
       header = `
         <nav id="header-user-links" class="navbar navbar-expand-lg">
             <a class="navbar-brand" href="#">
-                Logo
+                R
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                <li  class="nav-item">
-                    <a id="login-btn" class="nav-link active" href="#">Log in</a>
+                <li id="login-click" class="nav-item">
+                    <a id="login-btn" class="nav-link" href="#">Log in</a>
                 </li>
-                <li class="nav-item">
-                    <a id="register-btn" class="nav-link active" href="#">Register</a>
+                <li id="register-click" class="nav-item">
+                    <a id="register-btn" class="nav-link" href="#">Register</a>
                 </li>
                 </ul>
             </div>
         </nav>
     `;
     } else {
-      // IF USER LOGGED IN NAVBAR
       header = `
-        <nav id="header-user-links" class="navbar navbar-expand-lg">
-            <a id="logo-btn" class="navbar-brand" href="#">
-                Logo
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                <a id="create-resource-btn" class="nav-link" href="#">Create resource</a>
-                </li>
-                <li class="nav-item">
-                    <a id="user-resources" class="nav-link" href="#">My resources</a>
-                </li>
-                <form action="/search" method="GET" id="search-resource-form" class="form-inline my-2 my-lg-0">
-                    <input class="js-keyword-search form-control mr-sm-2" type="search" placeholder="Search resource" aria-label="Search">
-                   
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
-                </form>
-                <li class="nav-item">
-                    <a id="logout-btn" class="nav-link active" href="#">Log out</a>
-                </li>
-                <li class="nav-item">
-                    <a id="profile-btn" class="nav-link active" href="#">Profile</a>
-                </li>
-                </ul>
-            </div>
-        </nav>
+			<nav id="header-user-links" class="navbar navbar-expand-lg">
+				<a id="logo-btn" class="navbar-brand" href="#">
+					R
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<i class="fa-solid fa-bars"></i>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto d-flex align-items-center justify-content-between w-100">
+						<div>
+							<li id="create-resource-click" class="nav-item nav-underline">
+								<a id="create-resource-btn" class="nav-link " href="#">Create resource</a>
+							</li>
+							<li id="user-resources-click" class="nav-item">
+								<a id="user-resources" class="nav-link" href="#">My resources</a>
+							</li>
+						</div>
+						<form action="/search" method="GET" id="search-resource-form"
+							class="form-inline my-2 my-lg-0 justify-content-center">
+							<input class="js-keyword-search form-control mr-sm-2" type="search" placeholder="Search resource"
+								aria-label="Search">
+							<button class="btn btn-outline-success my-2 my-sm-0" type="submit"> <i
+									class="fa-solid fa-magnifying-glass"></i></button>
+						</form>
+						<div>
+							<li class="nav-item">
+								<a id="logout-btn" class="nav-link" href="#">Log out</a>
+							</li>
+							<li id="profile-click" class="nav-item">
+								<a id="profile-btn" class="nav-link" href="#">Profile</a>
+							</li>
+						</div>
+				</div>
+			</nav>
     `;
     }
 
@@ -96,27 +100,27 @@ $(() => {
         window.newResources.addResources(data[item]);
       }
       views_manager.show("resources");
-
-      // console.log("data from search-queries:", data);
-      // console.log("get data from search-queries success!");
     });
 
     request.fail(function (error) {
-      //failure code here
-      console.log("get data from search-queries failed");
+      res.send(error);
     });
   });
-
-  //TO DO: add on click events for navbar options which allows for views_manager.show('component')
 
   /* If user is NOT logged in*/
   //Render Log in page on click
   $("header").on("click", "#login-btn", function () {
     views_manager.show("loginForm");
+
+    $(".nav-item").removeClass("active");
+    $("#login-click").addClass("active");
   });
   //Render register on click
   $("header").on("click", "#register-btn", function () {
     views_manager.show("registerForm");
+
+    $(".nav-item").removeClass("active");
+    $("#register-click").addClass("active");
   });
 
   /* If user is logged in*/
@@ -128,22 +132,39 @@ $(() => {
   //Render Create resource page on click
   $("header").on("click", "#create-resource-btn", () => {
     views_manager.show("submissionForm");
+
+    $(".nav-item").removeClass("active");
+    $("#create-resource-click").addClass("active");
   });
 
-  //Render My resources page on click
+	//Render My resources on click
+  $("header").on("click", "#user-resources", function () {
+    newUserResources.addUserResources();
+    newUserLikes.addUserLikes();
+    //newUserResources.addUserLikes();
+    views_manager.show("userResources");
 
-  //Render Logout on click
+    $(".nav-item").removeClass("active");
+    $("#user-resources-click").addClass("active");
+  });
+
+  //Render Log out on click
   $("header").on("click", "#logout-btn", () => {
     $.get("/login/logout").then(() => {
       $("#page-header").empty();
       updateHeader(false);
       $(".card-columns").remove();
       views_manager.show("loginForm");
+
+      $("#login-click").addClass("active");
     });
   });
 
   //Render Profile page on click
   $("header").on("click", "#profile-btn", () => {
     views_manager.show("updateProfile");
+
+    $(".nav-item").removeClass("active");
+    $("#profile-click").addClass("active");
   });
 });
