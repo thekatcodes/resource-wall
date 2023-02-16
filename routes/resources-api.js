@@ -2,10 +2,13 @@ const express = require("express");
 
 const router = express.Router();
 const client = require('../db/connection.js');
-const { getUsersFromEmail ,userLike } = require('../db/queries/users');
-const { addLiked, updateLiked } = require('../db/queries/submission');
-const { getAllResources , getResourceById } = require("../db/queries/getAllResources.js");
+
+const { getUsersFromEmail ,userLike, userRating } = require('../db/queries/users');
+const { addLiked, updateLiked, addResource, addTag, updateRating, addRating } = require('../db/queries/submission');
+const { getAllResources , getResourceById, getResourcesFromUserEmail, getLikesFromUserid, resourceAverageRating } = require("../db/queries/getAllResources.js");
+
 const { serializeIntoObject } = require('../public/scripts/users-api');
+const getCommentsForResource = require("../db/queries/comments");
 
 
 router.use((req, res, next) => {
@@ -25,9 +28,21 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/user", (req, res) => {
+  const userId = req.session.email;
+  console.log(userId)
+  getResourcesFromUserEmail(userId)
+    .then((response) => {
+      return res.json(response);
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
+});
+
 router.get('/like', (req, res) => {
-  getUsersFromEmail(req.session.email)
-    .then((data) => userLike(data.id, req.query.resources))
+  userLike(req.session.user, req.query.resources)
     .then((likeData) => {
       if (!likeData) {
         return res.json({liked : false});
@@ -40,15 +55,13 @@ router.get('/like', (req, res) => {
 });
 
 router.post('/like', (req, res) => {
-  getUsersFromEmail(req.session.email)
-    .then((data) => userLike(data.id, req.body.info))
+  userLike(req.session.user, req.body.info)
     .then((userLikeData) => updateLiked(userLikeData))
     .then((updatedLikes) => {
       return res.json(updatedLikes);
     })
     .catch((e) => {
-      getUsersFromEmail(req.session.email)
-        .then((userData) => addLiked(req.body.info, userData.id))
+      addLiked(req.body.info, req.session.user)
         .then((addedLike) => {
           return res.json(addedLike);
         })
@@ -58,10 +71,21 @@ router.post('/like', (req, res) => {
     });
 });
 
+router.get('/user/likes', (req, res) => {
+  getUsersFromEmail(req.session.email)
+    .then((data) => getLikesFromUserid(data.id))
+    .then((response) => {
+      return res.json(response);
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
+});
+
 router.post('/submission', (req, res) => {
   const info = serializeIntoObject(req.body.info);
-  getUsersFromEmail(req.session.email)
-    .then((data) => addResource(data.id, info.title, info.description, info.imageURL, info.externalURL))
+  addResource(req.session.user, info.title, info.description, info.imageURL, info.externalURL)
     .then((dataRes) => addTag(dataRes.id, info.tags))
     .then((tagData) => {
       console.log(tagData);
@@ -81,6 +105,35 @@ router.get("/resources", (req, res) => {
     .catch((e) => {
       console.error(e);
       res.send(e);
+    });
+});
+
+router.get("/rating", (req, res) => {
+  userRating(req.session.user, req.query.resource)
+    .then((data) => {
+      return res.json(data);
+    })
+    .catch((e) => {
+      res.send('');
+    })
+});
+
+router.post("/rating", (req, res) => {
+  userRating(req.session.user, req.body.info)
+    .then((userRatingData) => updateRating(req.body.rating, userRatingData.id))
+    .then((ratingData) => resourceAverageRating(ratingData.resource_id))
+    .then((data) => {
+      return res.json(data);
+    })
+    .catch(() => {
+      addRating(req.body.info, req.session.user, req.body.rating)
+        .then((ratingData) => resourceAverageRating(ratingData.resource_id))
+        .then((data) => {
+          return res.json(data);
+        })
+        .catch((e) => {
+          res.send("");
+        });
     });
 });
 

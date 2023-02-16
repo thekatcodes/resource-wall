@@ -56,7 +56,7 @@ const updateUserDetails = (options, id) => {
 const userLike = (userID, post) => {
   const queryString = `
   SELECT liked, id FROM favourites
-  WHERE user_id = $1 AND resource_id = $2
+  WHERE user_id = $1 AND resource_id = $2;
   `;
 
   return db.query(queryString, [userID, post])
@@ -65,6 +65,17 @@ const userLike = (userID, post) => {
     });
 };
 
+const userRating = (userID, post) => {
+  const queryString = `
+  SELECT id, rating FROM ratings
+  WHERE user_id = $1 AND resource_id = $2;
+  `;
 
-module.exports = { getUsersFromEmail, addUsers, updateUserDetails, userLike };
+  return db.query(queryString, [userID, post])
+    .then((data) => {
+      return data.rows[0];
+    });
+};
+
+module.exports = { getUsersFromEmail, addUsers, updateUserDetails, userLike, userRating };
 

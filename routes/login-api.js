@@ -22,6 +22,7 @@ router.post('/', (req, res) => {
          * sends the user data to the document if the password and email matches
          */
         req.session.email = info.email;
+        req.session.user = jRes.id;
         res.json(jRes);
       } else {
         res.send("");
@@ -40,6 +41,7 @@ router.post('/account', (req, res) => {
           .then((jRes) => {
             // adds the user then sends user back to the document
             req.session.email = info.email;
+            req.session.user =  jRes.id;
             return res.json(jRes);
           });
       } else {
