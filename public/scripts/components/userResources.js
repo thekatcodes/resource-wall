@@ -1,6 +1,6 @@
 $(() => {
 
-  const $newUserResources = $(`<section class="card-columns">
+  const $newUserResources = $(`<section class="card-columns m-5">
   <p>Loading...</p>
   </section>`);
   window.$newUserResources = $newUserResources;

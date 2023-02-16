@@ -73,7 +73,7 @@ $(() => {
   }
   window.viewResource.clearResource = clearResource;
   //appends resource to dom
-  $(document).on("click", ".resource-card, #comment-form-submit", function (event) {
+  $(document).on("click", ".resource-card", function (event) {
     const resourceId = $(this).attr("id");
     getResourceById(resourceId).then(function (resource) {
       clearResource();
