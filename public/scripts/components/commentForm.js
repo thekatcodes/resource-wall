@@ -1,15 +1,15 @@
 $(() => {
   const $commentForm = $(`
-  <div class="d-flex justify-content-center">
     <form action="/api/comment" method="POST" class="card border-0" style="width: 60rem;"">
-      <div class="error-message"></div>
-      <label for="message">Comment</label>
-      <textarea type="text" name="message" class="message-form rows="3""></textarea>
-      <div class="d-flex justify-content-end">
-        <button type="submit" class="btn btn-info m-2">Submit</button>
+      <div>
+        <div class="error-message"></div>
+        <label for="message">Comment</label>
+        <textarea type="text" name="message" class="message-form rows="3""></textarea>
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn btn-info m-2">Submit</button>
+        </div>
       </div>
     </form>
-  </div>
   `);
 
   window.$commentForm = $commentForm;
@@ -22,9 +22,9 @@ $(() => {
 
   $commentForm.on('submit', function(event) {
     event.preventDefault();
+    consolevar = $(this)
     const formData = $(this).serialize();
     const resourceID = commentPostresourceId;
-
       //check if input blank
     if (formData === 'message=') {
       $(".error-message").append("<h1>Please don't leave the comment blank</h1>");
