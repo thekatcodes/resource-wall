@@ -29,7 +29,7 @@ const updateUserDetails = (options, id) => {
   let queryString = `
   UPDATE users
   SET `;
-
+  
   if (options.email) {
     queryParams.push(`${options.email}`);
     queryString += `email = $${queryParams.length} `;
@@ -41,7 +41,7 @@ const updateUserDetails = (options, id) => {
   }
   
   if (options.newPassword) {
-    queryParams.push(`${hashPassword(options.newPassword)}`);
+    queryParams.push(`${options.newPassword}`);
     queryString += `password = $${queryParams.length} `;
   }
 
