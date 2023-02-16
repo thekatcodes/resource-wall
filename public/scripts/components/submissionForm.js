@@ -14,7 +14,7 @@ $(() => {
       </div>
       <div class="form-group">
         <label for="imageURL">Image URL</label>
-        <input type="text" name="imageURL" class="form-control image-url-form">
+        <input type="text" name="imageURL" class="form-control image-url-form required">
       </div>
       <div class="form-group">
         <label for="externalURL">Resource URL</label>

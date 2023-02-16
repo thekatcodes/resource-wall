@@ -26,8 +26,10 @@ $(() => {
                 </div>
                 <div class="d-flex justify-content-end">
                   <div class="px-2 pt-2">
-                    <span id="average"><strong>${checkIfRating(resource.rating)}</strong></span>
-                    <i class="fa-solid fa-star">
+                    <div>
+                      <span id="average">${checkIfRating(resource.rating)}</span>
+                      <i class="fa-solid fa-star"></i>
+                    </div>
                   </div>
                   <div class="px-2 pt-2">
                     <form>
