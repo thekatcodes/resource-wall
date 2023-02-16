@@ -5,7 +5,7 @@ $(() => {
         <div class="error-message"></div>
           <label for="message">Comment</label>
         </div>
-        <textarea type="text" name="message" class="message-form rows="3""></textarea>
+        <textarea type="text" name="message" class="message-form rows="3"  placeholder="Leave a comment"></textarea>
         <div class="d-flex justify-content-end">
           <button type="submit" class="btn btn-info m-2">Submit</button>
         </div>

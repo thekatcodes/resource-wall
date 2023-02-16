@@ -19,13 +19,12 @@ $(() => {
               <div class="card-body d-flex justify-content-around">
                 <div>
                   <span>${resource.author}</span>
-                  <span>${checkIfRating(resource.rating)}</span>
                 </div>
                 <div>
                   <button type="button" class="btn btn-success copy-btn">Copy</button>
                 </div>
                 <div>
-                  <span id="average">${resource.rating}</span>
+                  <span id="average">${checkIfRating(resource.rating)}</span>
                 </div>
                 <div>
                   <form>
