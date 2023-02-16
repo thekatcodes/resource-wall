@@ -51,7 +51,7 @@ $(() => {
 							class="form-inline my-2 my-lg-0 justify-content-center">
 							<input class="js-keyword-search form-control mr-sm-2" type="search" placeholder="Search resource"
 								aria-label="Search">
-							<button class="btn btn-outline-success my-2 my-sm-0" type="submit"> <i
+							<button class="btn search-btn my-2 my-sm-0" type="submit"> <i
 									class="fa-solid fa-magnifying-glass"></i></button>
 						</form>
 						<div>
