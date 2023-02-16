@@ -9,7 +9,9 @@ header.page-header {
 
 a.navbar-brand {
     font-family: 'Pacifico', cursive;
+    font-size: 25px;
     color: white;
+    padding: 0;
 }
 
 a.navbar-brand:hover {
@@ -71,4 +73,29 @@ input.js-keyword-search {
     height: 40px;
     width: 40px;
     z-index: 100;
+}
+
+$breakpoint-responsive: 991px;
+
+@media (max-width: $breakpoint-responsive) {
+.navbar-left, .navbar-right, .search-form{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.search-btn {
+    margin: 5px -8px 5px;
+    padding: 0;
+}
+.fa-magnifying-glass {
+    color: white;
+    font-size: 20px;
+}
+#search-resource-form input.js-keyword-search {
+    width: auto;
+}
+
+
 }
