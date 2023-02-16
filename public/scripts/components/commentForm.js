@@ -64,8 +64,7 @@ $(() => {
     const resourceID = commentPostresourceId;
 
       //input error handling
-    // isloggedIn()
-    // console.log(isloggedIn())
+    isloggedIn()
     const textValue = textFieldLength()
     if(!textValue) {
       return;
