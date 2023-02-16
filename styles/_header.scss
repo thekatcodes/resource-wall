@@ -3,8 +3,22 @@ header.page-header {
     font-family: 'Roboto', sans-serif;
 }
 
+nav#header-user-links {
+    padding-top: 0;
+    padding-bottom: 0;
+}
 .fa-bars {
     color: white;
+}
+
+.navbar-left,
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+#search-resource-form input.js-keyword-search {
+    width: 300px;
 }
 
 a.navbar-brand {
@@ -64,7 +78,6 @@ ul.navbar-nav li a {
 }
 
 input.js-keyword-search {
-    height: 40px;
     padding-right: 50px;
 }
 
@@ -78,24 +91,30 @@ input.js-keyword-search {
 $breakpoint-responsive: 991px;
 
 @media (max-width: $breakpoint-responsive) {
-.navbar-left, .navbar-right, .search-form{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: flex-end;
-}
 
-.search-btn {
-    margin: 5px -8px 5px;
-    padding: 0;
-}
-.fa-magnifying-glass {
-    color: white;
-    font-size: 20px;
-}
-#search-resource-form input.js-keyword-search {
-    width: auto;
-}
+    .navbar-left,
+    .navbar-right,
+    .search-form {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-end;
+    }
+    .nav-link {
+        padding: 0;
+    }
+    button.search-btn {
+        margin: 5px -8px 5px;
+        padding-right: 33px;
+        padding-left: 17px;
+    }
 
+    .fa-magnifying-glass {
+        color: white;
+        font-size: 20px;
+    }
 
+    #search-resource-form input.js-keyword-search {
+        width: 250px;
+    }
 }
