@@ -30,15 +30,15 @@ $(() => {
     $(id).slideUp("fast", () => {});
   }
 
-  const isloggedIn = () => {
-    $.get("/login/loginStatus").then((res) => {
-      if(!res.length) {
-        $('.comment-input').empty().val('')
-        showMessage("#login-error")
-      }
-      return
-    });
-  }
+  // const isloggedIn = () => {
+  //   $.get("/login/loginStatus").then((res) => {
+  //     if(!res.length) {
+  //       $('.comment-input').empty().val('')
+  //       showMessage("#login-error")
+  //     }
+  //     return
+  //   });
+  // }
 
   const textFieldLength = () => {
     if(!$('.comment-input').val()) {
@@ -64,7 +64,8 @@ $(() => {
     const resourceID = commentPostresourceId;
 
       //input error handling
-    isloggedIn()
+    // isloggedIn()
+    // console.log(isloggedIn())
     const textValue = textFieldLength()
     if(!textValue) {
       return;
@@ -77,6 +78,7 @@ $(() => {
         } else {
           $.get("/api/resources/user", (resources) => {
             hideMessage("#empty-field-error")
+            hideMessage("#login-error")
             addNewestComment(resources[0].name)
             $('.comment-input').empty().val('');
           })
