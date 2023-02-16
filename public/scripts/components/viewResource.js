@@ -11,7 +11,8 @@ $(() => {
   };
 
   function createResourceArticle(resource) {
-    return `<div id="${resource.id}" class="card text-center border-0" style="width: 60rem;">
+    return `<div class="card text-center border-0" style="width: 60rem;">
+              <div class="hide-content">${resource.id}</div>
               <div>
                <h2 card="card-title">${resource.title}</h2>
               </div>
@@ -25,6 +26,7 @@ $(() => {
                 </div>
                 <div>
                   <span id="average">${checkIfRating(resource.rating)}</span>
+                  <i class="fa-solid fa-star"></i>
                 </div>
                 <div>
                   <form>
@@ -94,12 +96,12 @@ $(() => {
   $(document).on("click", ".rating", function() {
     let newRating = $(this).attr('id');
     highlightStars(newRating);
-    const resourcePost = $(this).parents()[6];
-    const resourceID = $(resourcePost).find('.resource-id')[0].innerText;
-    $.post('/api/resources/rating', {info : parseInt(resourceID), rating : newRating})
+    const resourcePost = $(this).parents();
+    const resourceID = $(resourcePost).find('.hide-content')[0]
+    $.post('/api/resources/rating', {info : parseInt(resourceID.innerText), rating : newRating})
       .then((data) => {
         if (data) {
-          const resourceAverage = $(this).parents()[3];
+          const resourceAverage = $(this).parents()[4];
           const averageValue = $(resourceAverage).find('#average')[0];
           averageValue.innerText = data.average_rating;
         }

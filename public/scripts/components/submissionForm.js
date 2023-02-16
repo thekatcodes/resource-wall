@@ -44,7 +44,7 @@ $(() => {
         if (res === "") {
           $(".error-message").append('<div class="alert alert-danger"><h3>Details need to be filled out</h3></div>');
         } else {
-          console.log("show main page");
+          views_manager.show('resources')
         }
       });
   });

@@ -42,7 +42,9 @@ $(() => {
           $(".error-message").append('<div class="alert alert-danger"><h3>Duplicate Email</h3></div>');
         } else {
         // this could be replaced with whatever function shows resources
-          console.log("load something");
+          $("#page-header").empty();
+          header.update(response);
+          views_manager.show('resources');
         }
       });
   });
