@@ -15,7 +15,6 @@ $(() => {
     return `<div class="card text-center border-0" style="width: 60rem;">
               <div class="hide-content">${resource.id}</div>
               <div class="pb-4">
-
                <h2 card="card-title">${resource.title}</h2>
               </div>
               <img class='card-img-top resource-page-img' src='${resource.cover_image_url}'>
@@ -77,6 +76,7 @@ $(() => {
   function clearResource(resource) {
     $viewResource.empty(resource);
   }
+
   window.viewResource.clearResource = clearResource;
   //appends resource to dom
   $(document).on("click", ".resource-card", function (event) {

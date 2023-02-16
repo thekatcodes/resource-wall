@@ -27,7 +27,29 @@
   object-fit: cover;
 }
 
+.comment-form {
+  width: 60vw;
+}
+
 #average {
   font-weight: 600;
 }
 
+#comment-list {
+  width: 60vw;
+}
+$breakpoint-responsive: 800px;
+
+@media (max-width: $breakpoint-responsive) {
+    .form {
+    width: 100vw;
+  }
+
+  .comment-form {
+    width: 100vw;
+  }
+
+  #comment-list {
+    width: 100vw;
+  }
+}
