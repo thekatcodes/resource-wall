@@ -1,6 +1,7 @@
 const db = require('../connection');
 const { hashPassword } = require('../../public/scripts/users-api');
 
+// function for finding userID from user table from emails incase cookie is not set
 const getUsersFromEmail = (email) => {
   const queryString = `
   SELECT * FROM users
@@ -12,6 +13,7 @@ const getUsersFromEmail = (email) => {
     });
 };
 
+// registration db query
 const addUsers = (name, email, password) => {
   const queryString = `
   INSERT into users (name, email, password)
@@ -24,12 +26,16 @@ const addUsers = (name, email, password) => {
     });
 };
 
+/* Updates the the user table with the according user id with
+ * new values for emails, password, username as long as they are not null
+ * if all are null then this will return error
+ */ 
 const updateUserDetails = (options, id) => {
   let queryParams = [];
   let queryString = `
   UPDATE users
   SET `;
-
+  
   if (options.email) {
     queryParams.push(`${options.email}`);
     queryString += `email = $${queryParams.length} `;
@@ -41,7 +47,7 @@ const updateUserDetails = (options, id) => {
   }
   
   if (options.newPassword) {
-    queryParams.push(`${hashPassword(options.newPassword)}`);
+    queryParams.push(`${options.newPassword}`);
     queryString += `password = $${queryParams.length} `;
   }
 
@@ -53,6 +59,7 @@ const updateUserDetails = (options, id) => {
     });
 };
 
+// gets user like value to display on resource wall
 const userLike = (userID, post) => {
   const queryString = `
   SELECT liked, id FROM favourites
@@ -65,6 +72,7 @@ const userLike = (userID, post) => {
     });
 };
 
+// gets user rating to display on resources page
 const userRating = (userID, post) => {
   const queryString = `
   SELECT id, rating FROM ratings
