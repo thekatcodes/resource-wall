@@ -1,6 +1,6 @@
 $(() => {
   const $commentForm = $(`
-    <form action="/api/comment" method="POST" class="card d-flex border-0 m-auto" style="width: 60rem;">
+    <form action="/api/comment" method="POST" class="card comment-form d-flex border-0 m-auto">
       <div class="card-body d-flex justify-content-start">
         <div class="error-message"></div>
           <label for="message"></label>

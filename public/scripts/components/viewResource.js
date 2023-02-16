@@ -15,13 +15,12 @@ $(() => {
     return `<div class="card text-center border-0" style="width: 60rem;">
               <div class="hide-content">${resource.id}</div>
               <div class="pb-4">
-
                <h2 card="card-title">${resource.title}</h2>
               </div>
               <img class='card-img-top resource-page-img' src='${resource.cover_image_url}'>
               <div class="card-body d-flex justify-content-between class="mt-4"">
                 <div class="d-flex">
-                  <h6 class="text-muted px-2 pt-2">By ${resource.author}</h6>
+                  <h6 class="text-muted px-2 pt-2">${resource.author}</h6>
                   <h6 class="text-muted px-5 pt-2">${resource.created_date.slice(0,10)}</h6>
                 </div>
                 <div class="d-flex justify-content-end">
