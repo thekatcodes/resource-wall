@@ -33,7 +33,6 @@ router.get("/user", (req, res) => {
   console.log(userId)
   getResourcesFromUserEmail(userId)
     .then((response) => {
-      console.log('users posts', response)
       return res.json(response);
     })
     .catch((e) => {

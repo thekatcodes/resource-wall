@@ -11,42 +11,47 @@ $(() => {
   };
 
   function createResourceArticle(resource) {
+
     return `<div class="card text-center border-0" style="width: 60rem;">
               <div class="hide-content">${resource.id}</div>
-              <div>
+              <div class="pb-4">
+
                <h2 card="card-title">${resource.title}</h2>
               </div>
-              <img class='card-img-top' src='${resource.cover_image_url}'>
-              <div class="card-body d-flex justify-content-around">
-                <div>
-                  <span>${resource.author}</span>
+              <img class='card-img-top resource-page-img' src='${resource.cover_image_url}'>
+              <div class="card-body d-flex justify-content-between class="mt-4"">
+                <div class="d-flex">
+                  <h6 class="text-muted px-2 pt-2">${resource.author}</h6>
+                  <h6 class="text-muted px-5 pt-2">${resource.created_date.slice(0,10)}</h6>
                 </div>
-                <div>
-                  <button type="button" class="btn btn-success copy-btn">Copy</button>
-                </div>
-                <div>
-                  <span id="average">${checkIfRating(resource.rating)}</span>
-                  <i class="fa-solid fa-star"></i>
-                </div>
-                <div>
-                  <form>
-                    <div class=”rating”>
-                      <i class="rating fa-regular fa-star" id="1"></i>
-                      <i class="rating fa-regular fa-star" id="2"></i>
-                      <i class="rating fa-regular fa-star" id="3"></i>
-                      <i class="rating fa-regular fa-star" id="4"></i>
-                      <i class="rating fa-regular fa-star" id="5"></i>
-                    </div>
-                  </form>
+                <div class="d-flex justify-content-end">
+                  <div class="px-2 pt-2">
+                    <span id="average"><strong>${checkIfRating(resource.rating)}</strong></span>
+                    <i class="fa-solid fa-star">
+                  </div>
+                  <div class="px-2 pt-2">
+                    <form>
+                      <div class=”rating”>
+                        <i class="rating fa-regular fa-star" id="1"></i>
+                        <i class="rating fa-regular fa-star" id="2"></i>
+                        <i class="rating fa-regular fa-star" id="3"></i>
+                        <i class="rating fa-regular fa-star" id="4"></i>
+                        <i class="rating fa-regular fa-star" id="5"></i>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="px-2">
+                    <button type="button" class="btn btn-success copy-btn">Copy</button>
+                  </div>
                 </div>
               </div>
               <div>
                 <h4>${resource.description}</h4>
               </div>
-              <div "d-flex">
-                <div class="mr-auto p-2"">Resource Link:</div>
-                <a id="long-url" class="card-text p-2"" href='${resource.url}'>${resource.url}</a>
-              </div>
+              <dl class="row p-4">
+                <dt class="col-sm-3 offset-md-2">Resource Link:</dt>
+                <dd><a id="long-url" class="col-sm-6" href='${resource.url}'>${resource.url}</a></dd>
+              </dl>
             </div>`;
   }
   window.viewResource.createResourceArticle = createResourceArticle;

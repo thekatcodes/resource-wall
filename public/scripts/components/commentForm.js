@@ -3,7 +3,7 @@ $(() => {
     <form action="/api/comment" method="POST" class="card d-flex border-0 m-auto" style="width: 60rem;">
       <div class="card-body d-flex justify-content-start">
         <div class="error-message"></div>
-          <label for="message">Comment</label>
+          <label for="message"></label>
         </div>
         <h4 id="login-error">You must sign in to comment</h4>
         <h1 id="empty-field-error">Please don't leave the comment blank</h1>
@@ -30,6 +30,7 @@ $(() => {
   const isloggedIn = () => {
     $.get("/login/loginStatus").then((res) => {
       if(!res.length) {
+        $('.comment-input').empty().val('')
         showMessage("#login-error")
       }
       return
@@ -37,11 +38,11 @@ $(() => {
   }
 
   const textFieldLength = () => {
-    console.log('hi')
     if(!$('.comment-input').val()) {
       showMessage("#empty-field-error")
+      return false;
     }
-    return
+    return true
   }
 
 
@@ -59,9 +60,12 @@ $(() => {
     const formData = $(this).serialize();
     const resourceID = commentPostresourceId;
 
-      //check if logged in
+      //input error handling
     isloggedIn()
-    textFieldLength();
+    const textValue = textFieldLength()
+    if(!textValue) {
+      return;
+    }
 
     $.post("/api/comments/submission", {info : { formData , resourceID }})
       .then((res) => {
