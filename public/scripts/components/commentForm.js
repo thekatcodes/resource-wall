@@ -68,7 +68,6 @@ $(() => {
         if (res === "") {
           console.log('error')
         } else {
-          addNewestComment()
           $.get("/api/resources/user", (resources) => {
             addNewestComment(resources[0].name)
             $('.comment-input').empty().val('');
