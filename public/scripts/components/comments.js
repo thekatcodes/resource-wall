@@ -3,9 +3,10 @@ $(() => {
   window.comment = {};
 
   function createCommentElement(comment) {
+    console.log(comment)
     return `<div class="card m-auto border-0" style="width: 60rem;">
               <div class="card-body">${comment.user}</div>
-              <div class="card-body mb-2 bg-light text-dark">
+              <div class="card-body mb-4 bg-light text-dark">
                 <div class="lead">
                   ${comment.message}
                 </div>
@@ -28,7 +29,6 @@ $(() => {
   function clearComments() {
     $newComments.empty();
   }
-
 
   window.newComments.clearComments = clearComments;
   //puts resources in object
