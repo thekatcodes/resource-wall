@@ -18,13 +18,13 @@ Created in collaboration with [Jason Mac](https://github.com/JasonSnow123) and [
 - Users can view all their own and all liked resources on one page ("My resources")
 - Users can register, log in, log out and update their profile
 
-ADD DEMO VIDEO HERE
+https://user-images.githubusercontent.com/83685887/219568976-08e4e217-2ef1-4aaa-9f30-0cb644f8d0e2.mov
 
 ### Tablet/Mobile
 
 - Responsive design using Bootstrap and media query to switch from desktop to tablet/mobile format.
 
-ADD DEMO VIDEO HERE
+https://user-images.githubusercontent.com/83685887/219569051-492797f0-9c1d-410b-a007-7c5a9543d483.mov
 
 ## Future Improvements
 
