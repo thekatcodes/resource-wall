@@ -39,17 +39,15 @@ $(() => {
                       </div>
                     </form>
                   </div>
-                  <div class="px-2">
-                    <button type="button" class="btn btn-success copy-btn">Copy</button>
-                  </div>
+                 </div>
                 </div>
-              </div>
-              <div>
+                <div>
                 <h4>${resource.description}</h4>
-              </div>
-              <dl class="row p-4">
-                <dt class="col-sm-3 offset-md-2">Resource Link:</dt>
-                <dd><a id="long-url" class="col-sm-6" href='${resource.url}'>${resource.url}</a></dd>
+                  </div>
+              <dl class="row p-4 d-flex align-items-center">
+                <dt class="resource-link-text col-sm-3 offset-md-2">Resource Link:</dt>
+                <dd class="long-url-link"><a id="long-url" class="col-sm-6" href='${resource.url}'>${resource.url}</a></dd>
+                <button id="copy-btn" class="btn btn-success copy-btn" type="button">Copy</button>
               </dl>
             </div>`;
   }
