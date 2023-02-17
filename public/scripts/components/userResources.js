@@ -25,7 +25,8 @@ $(() => {
   function addUserResources() {
     clearResources($newUserResources);
     $newUserResources.append(`<h2>Your created resources<h2>`)
-    $.get("/api/resources/user", (resources) => {
+    $.get("/api/resources/user/posts", (resources) => {
+      console.log('yo', console.log(resources))
       for (const resourceId in resources) {
         const resource = resources[resourceId];
       /* gets data if the user likes the resource or not
@@ -48,7 +49,7 @@ $(() => {
         const resource = resources[resourceId];
       /* gets data if the user likes the resource or not
        * then appends the liked symbol or unliked symbol into the post
-       */
+       */console.log(resource)
         $.get("/api/resources/like", {resources : resource.id})
         .then((data) => {
           const card = window.resource.createResourceElement(resource, data);

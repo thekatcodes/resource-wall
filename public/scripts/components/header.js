@@ -148,7 +148,7 @@ $(() => {
   $("header").on("click", "#logo-btn", function () {
     clearInputFields();
 		views_manager.show("resources");
-		
+
 		$(".nav-item").removeClass("active");
   });
 
@@ -164,6 +164,7 @@ $(() => {
 	//Render My resources on click
   $("header").on("click", "#user-resources", function () {
     clearInputFields();
+    console.log('hello')
     newUserResources.addUserResources();
     newUserLikes.addUserLikes();
     //newUserResources.addUserLikes();
