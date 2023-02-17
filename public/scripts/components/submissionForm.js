@@ -50,6 +50,7 @@ $(() => {
           $('.description-form').val('');
           $('.tag-form').val('');
           views_manager.show('resources');
+          $(".nav-item").removeClass("active");
         }
       });
   });
