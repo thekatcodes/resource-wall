@@ -87,6 +87,18 @@ router.get('/user/likes', (req, res) => {
     });
 });
 
+router.get("/user/posts", (req, res) => {
+  const userEmail= req.session.email;
+  getResourcesFromUserEmail(userEmail)
+    .then((response) => {
+      return res.json(response);
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
+});
+
 router.post('/submission', (req, res) => {
   const info = serializeIntoObject(req.body.info);
   addResource(req.session.user, info.title, info.description, info.imageURL, info.externalURL)
