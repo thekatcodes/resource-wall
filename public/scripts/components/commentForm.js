@@ -30,15 +30,6 @@ $(() => {
     $(id).slideUp("fast", () => {});
   }
 
-  // const isloggedIn = () => {
-  //   $.get("/login/loginStatus").then((res) => {
-  //     if(!res.length) {
-  //       $('.comment-input').empty().val('')
-  //       showMessage("#login-error")
-  //     }
-  //     return
-  //   });
-  // }
 
   const textFieldLength = () => {
     if(!$('.comment-input').val()) {
@@ -74,6 +65,7 @@ $(() => {
       .then((res) => {
         if (res === "") {
           console.log('error')
+          $('.comment-input').empty().val('')
         } else {
           $.get("/api/resources/user", (res) => {
             hideMessage("#empty-field-error")
