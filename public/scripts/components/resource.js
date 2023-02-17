@@ -5,6 +5,8 @@ $(() => {
     return value === null ? 'Not Rated' : value;
   }
 
+
+
   function createResourceElement(resource, like) {
     let heartIcon;
     if (like.liked) {
@@ -12,6 +14,7 @@ $(() => {
     } else {
       heartIcon = `<i class="favourites fa-regular fa-heart"></i>`
     }
+    console.log(resource)
   return `<div id=${resource.id} class="card resource-card">
        <div>
           <span class="resource-post hide-content">${resource.id}</span>

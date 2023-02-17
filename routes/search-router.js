@@ -14,6 +14,7 @@ router.use((req, res, next) => {
 //GET
 router.get("/", (req, res) => {
   console.log("get request here");
+  console.log(req.query);
 
   //req.query is passed as a parameter to getSearchResources which retrieves the corresponding resources from the databse
   searchQueries

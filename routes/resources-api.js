@@ -1,3 +1,4 @@
+
 const express = require("express");
 
 const router = express.Router();
@@ -77,6 +78,18 @@ router.post('/like', (req, res) => {
 router.get('/user/likes', (req, res) => {
   getUsersFromEmail(req.session.email)
     .then((data) => getLikesFromUserid(data.id))
+    .then((response) => {
+      return res.json(response);
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
+});
+
+router.get("/user/posts", (req, res) => {
+  const userEmail= req.session.email;
+  getResourcesFromUserEmail(userEmail)
     .then((response) => {
       return res.json(response);
     })

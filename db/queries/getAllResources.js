@@ -109,6 +109,7 @@ const getLikesFromUserid =function (id) {
                     GROUP BY resources.id, title, description, cover_image_url, users.name, users.email, favourties_user_id;`, [id]
     )
     .then((result) => {
+      console.log(result.rows)
       return result.rows;
     })
     .catch((err) => {

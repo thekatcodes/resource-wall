@@ -1,12 +1,18 @@
 $(() => {
 
-  const $newUserResources = $(`<section class="card-columns m-5">
+  const $newUserResourcesTitle = $(`<h2 class="d-flex justify-content-center pt-4">Your Created Resources<h2>`)
+  window.$newUserResourcesTitle =$newUserResourcesTitle;
+
+  const $newUserResources = $(`<section class="card-columns py-3 mx-3">
   <p>Loading...</p>
   </section>`);
   window.$newUserResources = $newUserResources;
   window.newUserResources = {};
 
-  const $newUserLikes = $(`<section class="card-columns">
+  const $newUserLikesTitle = $(`<h2 class="d-flex justify-content-center pt-4">Your Favourited Resources<h2>`)
+  window.$newUserLikesTitle =$newUserLikesTitle;
+
+  const $newUserLikes = $(`<section class="card-columns py-3 mx-3">
   <p>Loading...</p>
   </section>`);
   window.$newUserLikes = $newUserLikes;
@@ -24,8 +30,7 @@ $(() => {
 
   function addUserResources() {
     clearResources($newUserResources);
-    $newUserResources.append(`<h2>Your created resources<h2>`)
-    $.get("/api/resources/user", (resources) => {
+    $.get("/api/resources/user/posts", (resources) => {
       for (const resourceId in resources) {
         const resource = resources[resourceId];
       /* gets data if the user likes the resource or not
@@ -42,13 +47,12 @@ $(() => {
 
   function addUserLikes() {
     clearResources($newUserLikes);
-    $newUserLikes.append(`<h2>Your liked resources<h2>`)
     $.get("/api/resources/user/likes", (resources) => {
       for (const resourceId in resources) {
         const resource = resources[resourceId];
       /* gets data if the user likes the resource or not
        * then appends the liked symbol or unliked symbol into the post
-       */
+       */console.log(resource)
         $.get("/api/resources/like", {resources : resource.id})
         .then((data) => {
           const card = window.resource.createResourceElement(resource, data);

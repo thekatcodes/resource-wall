@@ -13,8 +13,10 @@ $(() => {
     $commentForm.detach();
     $newComments.detach();
     $topicFilters.detach();
+    $newUserResourcesTitle.detach();
     $newUserResources.detach();
-    $newUserLikes.detach()
+    $newUserLikesTitle.detach();
+    $newUserLikes.detach();
 
     // Add other components to append to the main content (index.html)
     switch (item) {
@@ -43,7 +45,9 @@ $(() => {
         $newComments.appendTo($main);
         break;
       case "userResources":
+        $newUserResourcesTitle.appendTo($main)
         $newUserResources.appendTo($main);
+        $newUserLikesTitle.appendTo($main);
         $newUserLikes.appendTo($main);
        break;
 
