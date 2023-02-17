@@ -63,7 +63,6 @@ router.post('/update', (req, res) => {
       return updateUserDetails(formData, req.session.user);
     })
     .then((data) => {
-      console.log(data);
       return res.json(data);
     })
     .catch((e) => res.send(""));
