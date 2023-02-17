@@ -57,5 +57,5 @@ https://user-images.githubusercontent.com/83685887/219569051-492797f0-9c1d-410b-
 - Cookie-session
 - Body-parser
 - Express
-- Jquery
+- jQuery
 - SCSS 
