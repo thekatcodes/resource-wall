@@ -30,8 +30,7 @@ router.get("/", (req, res) => {
 
 router.get("/user", (req, res) => {
   const userId = req.session.email;
-  console.log(userId)
-  getResourcesFromUserEmail(userId)
+  getUsersFromEmail(userId)
     .then((response) => {
       return res.json(response);
     })
@@ -40,6 +39,8 @@ router.get("/user", (req, res) => {
       res.send(e);
     });
 });
+
+
 
 router.get('/like', (req, res) => {
   userLike(req.session.user, req.query.resources)
@@ -77,7 +78,6 @@ router.get('/user/likes', (req, res) => {
   getUsersFromEmail(req.session.email)
     .then((data) => getLikesFromUserid(data.id))
     .then((response) => {
-      console.log('likes', response)
       return res.json(response);
     })
     .catch((e) => {
