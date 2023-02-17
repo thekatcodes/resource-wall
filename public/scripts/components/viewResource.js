@@ -23,12 +23,13 @@ $(() => {
                   <h6 class="text-muted px-2 pt-2">${resource.author}</h6>
                   <h6 class="text-muted px-5 pt-2">${resource.created_date.slice(0,10)}</h6>
                 </div>
-                <div class="d-flex justify-content-end">
+                <div class="d-flex justify-content-end flex-row">
                   <div class="px-2 pt-2">
-                    <span id="average">${checkIfRating(resource.rating)}</span>
+                    Average rating: <span id="average"> ${checkIfRating(resource.rating)}</span>
                     <i class="fa-solid fa-star"></i>
                   </div>
-                  <div class="px-2 pt-2">
+                  <div class="px-2 pt-2 d-flex flex-row">
+                  <p>My rating: </p>
                     <form>
                       <div class=”rating”>
                         <i class="rating fa-regular fa-star" id="1"></i>
