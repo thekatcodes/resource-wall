@@ -33,20 +33,23 @@ router.post('/', (req, res) => {
 
 router.post('/account', (req, res) => {
   const info = serializeIntoObject(req.body.info);
-  const password = hashPassword(info.password);
   getUsersFromEmail(info.email)
     .then((dataRes) => {
       if (!dataRes) {
-        addUsers(info.username, info.email, password)
-          .then((jRes) => {
-            // adds the user then sends user back to the document
-            req.session.email = info.email;
-            req.session.user =  jRes.id;
-            return res.json(jRes);
-          });
-      } else {
-        res.send("");
+        return hashPassword(info.password);
       }
+    })
+    .then((password) => {
+      addUsers(info.username, info.email, password)
+        .then((jRes) => {
+          // adds the user then sends user back to the document
+          req.session.email = info.email;
+          req.session.user =  jRes.id;
+          return res.json(jRes);
+        });
+    })
+    .catch((e) => {
+      return res.send("");
     });
 });
 
