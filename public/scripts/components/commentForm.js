@@ -30,15 +30,6 @@ $(() => {
     $(id).slideUp("fast", () => {});
   }
 
-  // const isloggedIn = () => {
-  //   $.get("/login/loginStatus").then((res) => {
-  //     if(!res.length) {
-  //       $('.comment-input').empty().val('')
-  //       showMessage("#login-error")
-  //     }
-  //     return
-  //   });
-  // }
 
   const textFieldLength = () => {
     if(!$('.comment-input').val()) {
@@ -50,7 +41,6 @@ $(() => {
 
 
   const addNewestComment = (user) => {
-    console.log(user)
     const $commentText = $('.comment-input').val()
     const commentObj = {message: $commentText, user: user}
     const comment = window.comment.createCommentElement(commentObj)
@@ -70,17 +60,17 @@ $(() => {
     if(!textValue) {
       return;
     }
-    console.log('enter submit')
 
     $.post("/api/comments/submission", {info : { formData , resourceID }})
       .then((res) => {
         if (res === "") {
           console.log('error')
+          $('.comment-input').empty().val('')
         } else {
-          $.get("/api/resources/user", (resources) => {
+          $.get("/api/resources/user", (res) => {
             hideMessage("#empty-field-error")
             hideMessage("#login-error")
-            addNewestComment(resources[0].name)
+            addNewestComment(res.name)
             $('.comment-input').empty().val('');
           })
         }
