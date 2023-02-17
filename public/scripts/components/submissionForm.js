@@ -1,6 +1,6 @@
 $(() => {
   const $submissionForm = $(`
-  <form action="/api/resource" method="POST" class="resource-submission">
+  <form action="/api/resources/submission" method="POST" class="resource-submission">
     <div class="form">
       <div class="d-flex align-items-center justify-content-center form-title">
         <h1>Submit a new resource</h1>
@@ -14,7 +14,7 @@ $(() => {
       </div>
       <div class="form-group">
         <label for="imageURL">Image URL</label>
-        <input type="text" name="imageURL" class="form-control image-url-form">
+        <input type="text" name="imageURL" class="form-control image-url-form" required">
       </div>
       <div class="form-group">
         <label for="externalURL">Resource URL</label>
@@ -25,7 +25,7 @@ $(() => {
         <textarea name="description" rows="5" cols="80" class="form-text form-control description-form"></textarea>
       </div>
       <div class="form-group">
-        <label for="tags">Tags</label>
+        <label for="tags">Tags (Seperate tags by spaces or commas) </label>
         <textarea name="tags" rows="5" cols="80" class="form-text form-control tag-form" required></textarea>
       </div>
       <div class="d-flex align-items-center justify-content-center form-title">
@@ -44,7 +44,12 @@ $(() => {
         if (res === "") {
           $(".error-message").append('<div class="alert alert-danger"><h3>Details need to be filled out</h3></div>');
         } else {
-          console.log("show main page");
+          $('.title-form').val('');
+          $('.image-url-form').val('');
+          $('.resource-url-form').val('');
+          $('.description-form').val('');
+          $('.tag-form').val('');
+          views_manager.show('resources');
         }
       });
   });

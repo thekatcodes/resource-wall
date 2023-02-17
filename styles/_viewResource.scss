@@ -9,8 +9,53 @@
   display: none;
 }
 
+#average {
+  font-weight: 700;
+}
+
+.hide-content {
+  display: none;
+}
+
+.fa-star {
+  color: #ded309;
+}
+
 .resource-page-img {
   width: 300px;
   height: 337px;
   object-fit: cover;
+}
+
+.resource-title {
+  width: 100%;
+  margin: auto
+}
+
+.comment-form {
+  width: 60vw;
+}
+
+#average {
+  font-weight: 600;
+}
+
+#comment-list {
+  width: 60vw;
+}
+
+$breakpoint-responsive: 800px;
+
+@media (max-width: $breakpoint-responsive) {
+    .form {
+    width: 100vw;
+  }
+
+  .comment-form {
+    width: 100vw;
+  }
+
+  #comment-list {
+    width: 100vw;
+  }
 }

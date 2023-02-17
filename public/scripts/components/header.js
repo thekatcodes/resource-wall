@@ -75,6 +75,21 @@ $(() => {
 
   window.header.update = updateHeader;
 
+  const clearInputFields = () => {
+
+    $('.username-form').val('');
+    $('.password-checker').val('');
+    $('.email-form').val('');
+    $('.password').val('');
+    $('.title-form').val('');
+    $('.image-url-form').val('');
+    $('.resource-url-form').val('');
+    $('.description-form').val('');
+    $('.tag-form').val('');
+    $('.email-form').val('');
+    $('.password-form').val('');
+  }
+
   //Check for login status
   $.get("/login/loginStatus").then((res) => {
     res.length ? updateHeader(true) : updateHeader(false);
@@ -113,6 +128,7 @@ $(() => {
   /* If user is NOT logged in*/
   //Render Log in page on click
   $("header").on("click", "#login-btn", function () {
+    clearInputFields();
     views_manager.show("loginForm");
 
     $(".nav-item").removeClass("active");
@@ -120,6 +136,7 @@ $(() => {
   });
   //Render register on click
   $("header").on("click", "#register-btn", function () {
+    clearInputFields();
     views_manager.show("registerForm");
 
     $(".nav-item").removeClass("active");
@@ -129,6 +146,7 @@ $(() => {
   /* If user is logged in*/
   //Render Home page (main content) on Logo click
   $("header").on("click", "#logo-btn", function () {
+    clearInputFields();
 		views_manager.show("resources");
 		
 		$(".nav-item").removeClass("active");
@@ -136,6 +154,7 @@ $(() => {
 
   //Render Create resource page on click
   $("header").on("click", "#create-resource-btn", () => {
+    clearInputFields();
     views_manager.show("submissionForm");
 
     $(".nav-item").removeClass("active");
@@ -144,6 +163,7 @@ $(() => {
 
 	//Render My resources on click
   $("header").on("click", "#user-resources", function () {
+    clearInputFields();
     newUserResources.addUserResources();
     newUserLikes.addUserLikes();
     //newUserResources.addUserLikes();
@@ -155,6 +175,7 @@ $(() => {
 
   //Render Log out on click
   $("header").on("click", "#logout-btn", () => {
+    clearInputFields();
     $.get("/login/logout").then(() => {
       $("#page-header").empty();
       updateHeader(false);
@@ -167,6 +188,7 @@ $(() => {
 
   //Render Profile page on click
   $("header").on("click", "#profile-btn", () => {
+    clearInputFields();
     views_manager.show("updateProfile");
 
     $(".nav-item").removeClass("active");

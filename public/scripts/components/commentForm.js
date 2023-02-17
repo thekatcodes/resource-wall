@@ -1,6 +1,6 @@
 $(() => {
   const $commentForm = $(`
-    <form action="/api/comment" method="POST" class="card d-flex border-0 m-auto" style="width: 60rem;">
+    <form action="/api/comment" method="POST" class="card comment-form d-flex border-0 m-auto">
       <div class="card-body d-flex justify-content-start">
         <div class="error-message"></div>
           <label for="message"></label>
@@ -50,6 +50,7 @@ $(() => {
 
 
   const addNewestComment = (user) => {
+    console.log(user)
     const $commentText = $('.comment-input').val()
     const commentObj = {message: $commentText, user: user}
     const comment = window.comment.createCommentElement(commentObj)
@@ -64,11 +65,12 @@ $(() => {
     const resourceID = commentPostresourceId;
 
       //input error handling
-    isloggedIn()
+    // isloggedIn()
     const textValue = textFieldLength()
     if(!textValue) {
       return;
     }
+    console.log('enter submit')
 
     $.post("/api/comments/submission", {info : { formData , resourceID }})
       .then((res) => {

@@ -4,7 +4,7 @@ const router = express.Router();
 const client = require('../db/connection.js');
 
 const { getUsersFromEmail ,userLike, userRating } = require('../db/queries/users');
-const { addLiked, updateLiked, addResource, addTag, updateRating, addRating } = require('../db/queries/submission');
+const { addLiked, updateLiked, addResource, addTags, updateRating, addRating } = require('../db/queries/submission');
 const { getAllResources , getResourceById, getResourcesFromUserEmail, getLikesFromUserid, resourceAverageRating } = require("../db/queries/getAllResources.js");
 
 const { serializeIntoObject } = require('../public/scripts/users-api');
@@ -55,6 +55,8 @@ router.get('/like', (req, res) => {
 });
 
 router.post('/like', (req, res) => {
+  // finds if the user has liked the post and updates
+  // or creates a new like post if it does not find any history of user liking the post
   userLike(req.session.user, req.body.info)
     .then((userLikeData) => updateLiked(userLikeData))
     .then((updatedLikes) => {
@@ -87,7 +89,8 @@ router.get('/user/likes', (req, res) => {
 router.post('/submission', (req, res) => {
   const info = serializeIntoObject(req.body.info);
   addResource(req.session.user, info.title, info.description, info.imageURL, info.externalURL)
-    .then((dataRes) => addTag(dataRes.id, info.tags))
+  // adds tags seperately as it is a seperate table
+    .then((dataRes) => addTags(dataRes.id, info.tags))
     .then((tagData) => {
       return res.json(tagData);
     })
@@ -109,6 +112,7 @@ router.get("/resources", (req, res) => {
 });
 
 router.get("/rating", (req, res) => {
+  // gets user history of liking post or sends falsey value
   userRating(req.session.user, req.query.resource)
     .then((data) => {
       return res.json(data);
@@ -119,6 +123,8 @@ router.get("/rating", (req, res) => {
 });
 
 router.post("/rating", (req, res) => {
+  // updates previous user rating of the resource
+  // or creates a new user rating post in the ratings table
   userRating(req.session.user, req.body.info)
     .then((userRatingData) => updateRating(req.body.rating, userRatingData.id))
     .then((ratingData) => resourceAverageRating(ratingData.resource_id))

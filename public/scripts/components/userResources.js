@@ -28,6 +28,9 @@ $(() => {
     $.get("/api/resources/user", (resources) => {
       for (const resourceId in resources) {
         const resource = resources[resourceId];
+      /* gets data if the user likes the resource or not
+       * then appends the liked symbol or unliked symbol into the post
+       */
         $.get("/api/resources/like", {resources : resource.id})
         .then((data) => {
           const card = window.resource.createResourceElement(resource, data);
@@ -43,6 +46,9 @@ $(() => {
     $.get("/api/resources/user/likes", (resources) => {
       for (const resourceId in resources) {
         const resource = resources[resourceId];
+      /* gets data if the user likes the resource or not
+       * then appends the liked symbol or unliked symbol into the post
+       */
         $.get("/api/resources/like", {resources : resource.id})
         .then((data) => {
           const card = window.resource.createResourceElement(resource, data);
