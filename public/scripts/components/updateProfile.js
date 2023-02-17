@@ -6,7 +6,7 @@ $(() => {
         <h1>Update Profile</h1>
       </div>
       <div class="d-flex align-items-center justify-content-center form-title">
-        <h2>Leave fields blank if you do not wish to update it</h2>
+        <h2 class="profile-note">Leave fields blank if you do not wish to update it</h2>
       </div>
       <div class="d-flex align-items-center justify-content-center">
         <div class="error-message"></div>     
