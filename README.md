@@ -14,6 +14,7 @@ Created in collaboration with [Jason Mac](https://github.com/JasonSnow123) and [
 - Users can comment on any resource
 - Users can rate any resource
 - Users can like any resource
+- Users can copy the link of a resource to their clipboard with a button
 - Users can view all their own and all liked resources on one page ("My resources")
 - Users can register, log in, log out and update their profile
 
