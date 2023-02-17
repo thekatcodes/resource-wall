@@ -6,7 +6,7 @@ $(() => {
           <label for="message"></label>
         </div>
         <h4 id="login-error">You must sign in to comment</h4>
-        <h1 id="empty-field-error">Please don't leave the comment blank</h1>
+        <p id="empty-field-error">Please don't leave the comment blank</p>
         <textarea type="text" name="message" class="message-form rows=3 comment-input"  placeholder="Leave a comment"></textarea>
         <div class="submit-btn d-flex justify-content-end">
           <button type="submit" class="btn btn-info m-2">Submit</button>
