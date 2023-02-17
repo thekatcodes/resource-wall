@@ -5,6 +5,8 @@ $(() => {
     return value === null ? 'Not Rated' : value;
   }
 
+
+
   function createResourceElement(resource, like) {
     let heartIcon;
     if (like.liked) {
