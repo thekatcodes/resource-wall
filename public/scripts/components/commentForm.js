@@ -50,6 +50,7 @@ $(() => {
 
 
   const addNewestComment = (user) => {
+    console.log(user)
     const $commentText = $('.comment-input').val()
     const commentObj = {message: $commentText, user: user}
     const comment = window.comment.createCommentElement(commentObj)
@@ -69,16 +70,17 @@ $(() => {
     if(!textValue) {
       return;
     }
+    console.log('enter submit')
 
     $.post("/api/comments/submission", {info : { formData , resourceID }})
       .then((res) => {
         if (res === "") {
           console.log('error')
         } else {
-          $.get("/api/resources/user", (res) => {
+          $.get("/api/resources/user", (resources) => {
             hideMessage("#empty-field-error")
             hideMessage("#login-error")
-            addNewestComment(res.name)
+            addNewestComment(resources[0].name)
             $('.comment-input').empty().val('');
           })
         }
