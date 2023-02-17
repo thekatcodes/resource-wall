@@ -27,6 +27,11 @@
   object-fit: cover;
 }
 
+.resource-title {
+  width: 100%;
+  margin: auto
+}
+
 .comment-form {
   width: 60vw;
 }
@@ -38,6 +43,7 @@
 #comment-list {
   width: 60vw;
 }
+
 $breakpoint-responsive: 800px;
 
 @media (max-width: $breakpoint-responsive) {

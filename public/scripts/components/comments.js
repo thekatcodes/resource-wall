@@ -3,7 +3,6 @@ $(() => {
   window.comment = {};
 
   function createCommentElement(comment) {
-    console.log(comment)
     return `<div class="card border-0">
               <div class="card-body">${comment.user}</div>
               <div class="card-body mb-4 bg-light text-dark">
