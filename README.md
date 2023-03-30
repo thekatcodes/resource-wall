@@ -2,7 +2,7 @@
 
 Resource Wall is a single-page app that allows users to save external resources in a central place that is publicly available to any user. Posts include a title, description, image and link. Users have the ability to like, comment, and rate other posts. The likes and comments are linked to the currently logged in user. Likes are responsive. There is also a search feature and filter buttons based on resource topics.
 
-Created in collaboration with [Jason Mac](https://github.com/JasonSnow123) and [Katie Liu](https://github.com/thekatcodes).
+Created in collaboration with [Jason Mac](https://github.com/JasonSnow123) and [Giordano Temple](https://github.com/gtemple).
 
 ## Final Product
 
